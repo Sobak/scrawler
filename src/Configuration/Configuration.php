@@ -17,6 +17,9 @@ class Configuration
         return $this;
     }
 
+    /**
+     * @return LogWriterInterface[]
+     */
     public function getLogWriters()
     {
         return $this->logWriters;

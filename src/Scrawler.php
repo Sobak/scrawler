@@ -10,6 +10,9 @@ class Scrawler
 {
     const VERSION = '0.1.0';
 
+    /** @var Configuration */
+    protected $configuration;
+
     protected $configurationPath;
 
     public function __construct($configurationPath)
@@ -19,16 +22,18 @@ class Scrawler
 
     public function run()
     {
-        $configuration = $this->loadConfiguration();
-        $configurationCheck = $this->checkConfiguration($configuration);
+        $this->configuration = $this->loadConfiguration();
+        $configurationCheck = $this->checkConfiguration($this->configuration);
 
         if ($configurationCheck === false) {
             die('configuration check failed');
         }
 
+        $this->info('Attempting basic request');
+
         $client = new Client();
 
-        $response = $client->request('GET', $configuration->getBaseUrl());
+        $response = $client->request('GET', $this->configuration->getBaseUrl());
 
         dd($response);
 
@@ -52,5 +57,12 @@ class Scrawler
         $configurationChecker = new ConfigurationChecker();
 
         return $configurationChecker->checkConfiguration($configuration);
+    }
+
+    protected function info($string)
+    {
+        foreach ($this->configuration->getLogWriters() as $logWriter) {
+            $logWriter->info($string);
+        }
     }
 }

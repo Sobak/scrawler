@@ -58,22 +58,4 @@ class ConfigurationChecker
 
         return true;
     }
-
-    protected function validateBaseUrl($value, Configuration $configuration): bool
-    {
-        if ($value !== 'test') {
-            throw new ConfigurationException('test');
-        }
-
-        return true;
-    }
-
-    protected function validateLogWriters($value, Configuration $configuration): bool
-    {
-//        if (empty($value)) {
-//            throw new ConfigurationException('Log writers array must not be empty');
-//        }
-
-        return true;
-    }
 }
