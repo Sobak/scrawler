@@ -3,15 +3,24 @@
 namespace Sobak\Scrawler\Support;
 
 use Sobak\Scrawler\Block\LogWriter\LogWriterInterface;
+use Sobak\Scrawler\Output\Outputter;
+use Sobak\Scrawler\Output\OutputWriterInterface;
 
 class LogWriter implements LogWriterInterface
 {
     /** @var LogWriterInterface[] */
     protected $logWriters;
 
-    public function __construct(array $logWriters)
+    public function __construct(array $logWriters, Outputter $outputter)
     {
         $this->logWriters = $logWriters;
+
+        // Set Outputter for log writers that require it
+        foreach ($this->logWriters as $logWriter) {
+            if ($logWriter instanceof OutputWriterInterface) {
+                $logWriter->setOutputter($outputter);
+            }
+        }
     }
 
     public function debug($string)

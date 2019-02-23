@@ -5,7 +5,9 @@ namespace Sobak\Scrawler;
 use GuzzleHttp\Client;
 use Sobak\Scrawler\Configuration\Configuration;
 use Sobak\Scrawler\Configuration\ConfigurationChecker;
+use Sobak\Scrawler\Output\Outputter;
 use Sobak\Scrawler\Support\LogWriter;
+use Sobak\Scrawler\Support\Utils;
 
 class Scrawler
 {
@@ -16,17 +18,20 @@ class Scrawler
 
     protected $logWriter;
 
+    protected $output;
+
     public function __construct($configurationPath)
     {
         $this->configuration = $this->loadConfiguration($configurationPath);
         $this->checkConfiguration($this->configuration);
 
-        $this->logWriter = new LogWriter($this->configuration->getLogWriters());
+        $this->output = new Outputter(Utils::slugify($this->configuration->getOperationName()));
+        $this->logWriter = new LogWriter($this->configuration->getLogWriters(), $this->output);
     }
 
     public function run()
     {
-        $this->logWriter->info('Attempting basic request');
+        $this->logWriter->info('Running "' . $this->configuration->getOperationName() . '" operation');
 
         $client = new Client();
 

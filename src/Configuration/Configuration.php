@@ -8,6 +8,8 @@ class Configuration
 {
     protected $baseUrl = null;
 
+    protected $operationName = null;
+
     protected $logWriters = [];
 
     public function addLogWriter(LogWriterInterface $logWriter)
@@ -40,6 +42,18 @@ class Configuration
     public function setBaseUrl($baseUrl)
     {
         $this->baseUrl = $baseUrl;
+
+        return $this;
+    }
+
+    public function getOperationName()
+    {
+        return $this->operationName;
+    }
+
+    public function setOperationName($operationName)
+    {
+        $this->operationName = $operationName;
 
         return $this;
     }

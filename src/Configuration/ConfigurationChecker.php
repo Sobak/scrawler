@@ -28,6 +28,7 @@ class ConfigurationChecker
     {
         return [
             'baseUrl',
+            'operationName',
         ];
     }
 
