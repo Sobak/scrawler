@@ -10,7 +10,6 @@ class Scrawler
 {
     const VERSION = '0.1.0';
 
-    protected $configuration;
     protected $configurationPath;
 
     public function __construct($configurationPath)
@@ -20,7 +19,7 @@ class Scrawler
 
     public function run()
     {
-        $this->configuration = $configuration = $this->loadConfiguration();
+        $configuration = $this->loadConfiguration();
         $configurationCheck = $this->checkConfiguration($configuration);
 
         if ($configurationCheck === false) {
