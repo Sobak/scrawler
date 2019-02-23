@@ -1,0 +1,14 @@
+#!/usr/bin/env php
+<?php
+
+if (file_exists(__DIR__ . '/../../../autoload.php')) {
+    /** @noinspection PhpIncludeInspection */
+    require __DIR__ . '/../../../autoload.php';
+} else {
+    require __DIR__.'/../vendor/autoload.php';
+}
+
+$application = new \Sobak\Scrawler\Application\Application();
+$exitCode = $application->run();
+
+exit($exitCode);

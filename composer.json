@@ -1,0 +1,17 @@
+{
+    "name": "sobak/scrawler",
+    "require": {
+        "symfony/console": "^4.2"
+    },
+    "autoload": {
+        "psr-4": {
+            "Sobak\\Scrawler\\": "src/"
+        }
+    },
+    "bin": [
+        "bin/scrapper"
+    ],
+    "config": {
+        "sort-packages": true
+    }
+}
