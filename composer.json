@@ -1,6 +1,8 @@
 {
     "name": "sobak/scrawler",
     "require": {
+        "php": ">=7.2",
+        "guzzlehttp/guzzle": "^6.3",
         "symfony/console": "^4.2"
     },
     "autoload": {
@@ -13,5 +15,8 @@
     ],
     "config": {
         "sort-packages": true
+    },
+    "require-dev": {
+        "symfony/var-dumper": "^4.2"
     }
 }
