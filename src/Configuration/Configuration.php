@@ -2,15 +2,39 @@
 
 namespace Sobak\Scrawler\Configuration;
 
+use Sobak\Scrawler\Block\ClientConfigurationProvider\ClientConfigurationProviderInterface;
 use Sobak\Scrawler\Block\LogWriter\LogWriterInterface;
 
 class Configuration
 {
     protected $baseUrl = null;
 
+    /** @var ClientConfigurationProviderInterface[] */
+    protected $clientConfigurationProviders = [];
+
     protected $operationName = null;
 
+    /** @var LogWriterInterface[] */
     protected $logWriters = [];
+
+    public function addClientConfigurationProvider(ClientConfigurationProviderInterface $clientConfigurationProvider)
+    {
+        $this->clientConfigurationProviders[get_class($clientConfigurationProvider)] = $clientConfigurationProvider;
+
+        return $this;
+    }
+
+    public function getClientConfigurationProviders()
+    {
+        return $this->clientConfigurationProviders;
+    }
+
+    public function removeClientConfigurationProvider(string $clientConfigurationProvider)
+    {
+        unset($this->clientConfigurationProviders[$clientConfigurationProvider]);
+
+        return $this;
+    }
 
     public function addLogWriter(LogWriterInterface $logWriter)
     {
@@ -19,9 +43,6 @@ class Configuration
         return $this;
     }
 
-    /**
-     * @return LogWriterInterface[]
-     */
     public function getLogWriters()
     {
         return $this->logWriters;

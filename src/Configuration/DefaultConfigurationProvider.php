@@ -2,6 +2,7 @@
 
 namespace Sobak\Scrawler\Configuration;
 
+use Sobak\Scrawler\Block\ClientConfigurationProvider\ScrawlerUserAgentProvider;
 use Sobak\Scrawler\Block\LogWriter\ConsoleLogWriter;
 use Sobak\Scrawler\Block\LogWriter\TextfileLogWriter;
 
@@ -12,6 +13,7 @@ class DefaultConfigurationProvider
         $configuration
             ->addLogWriter(new ConsoleLogWriter())
             ->addLogWriter(new TextfileLogWriter())
+            ->addClientConfigurationProvider(new ScrawlerUserAgentProvider())
         ;
 
         return $configuration;

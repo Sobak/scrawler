@@ -2,7 +2,7 @@
 
 namespace Sobak\Scrawler;
 
-use GuzzleHttp\Client;
+use Sobak\Scrawler\Client\ClientFactory;
 use Sobak\Scrawler\Configuration\Configuration;
 use Sobak\Scrawler\Configuration\ConfigurationChecker;
 use Sobak\Scrawler\Output\Outputter;
@@ -33,7 +33,7 @@ class Scrawler
     {
         $this->logWriter->info('Running "' . $this->configuration->getOperationName() . '" operation');
 
-        $client = new Client();
+        $client = ClientFactory::applyCustomConfiguration($this->configuration->getClientConfigurationProviders());
 
         $response = $client->request('GET', $this->configuration->getBaseUrl());
 
