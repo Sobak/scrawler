@@ -1,7 +1,9 @@
 {
     "name": "sobak/scrawler",
+    "description": "Scrawler is an extensible, declarative web robot and scrapper",
+    "type": "library",
     "require": {
-        "php": ">=7.2",
+        "php": ">=7.2.0",
         "guzzlehttp/guzzle": "^6.3",
         "symfony/console": "^4.2",
         "symfony/css-selector": "^4.2",
