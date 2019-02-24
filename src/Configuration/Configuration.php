@@ -5,6 +5,7 @@ namespace Sobak\Scrawler\Configuration;
 use Sobak\Scrawler\Block\ClientConfigurationProvider\ClientConfigurationProviderInterface;
 use Sobak\Scrawler\Block\FieldDefinition\FieldDefinitionInterface;
 use Sobak\Scrawler\Block\LogWriter\LogWriterInterface;
+
 class Configuration
 {
     protected $baseUrl = null;
@@ -19,6 +20,18 @@ class Configuration
 
     /** @var LogWriterInterface[] */
     protected $logWriters = [];
+
+    public function getBaseUrl()
+    {
+        return $this->baseUrl;
+    }
+
+    public function setBaseUrl($baseUrl)
+    {
+        $this->baseUrl = $baseUrl;
+
+        return $this;
+    }
 
     public function addClientConfigurationProvider(ClientConfigurationProviderInterface $clientConfigurationProvider)
     {
@@ -86,18 +99,6 @@ class Configuration
     public function removeLogWriter(string $logWriter)
     {
         unset($this->logWriters[$logWriter]);
-
-        return $this;
-    }
-
-    public function getBaseUrl()
-    {
-        return $this->baseUrl;
-    }
-
-    public function setBaseUrl($baseUrl)
-    {
-        $this->baseUrl = $baseUrl;
 
         return $this;
     }
