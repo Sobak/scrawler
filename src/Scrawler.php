@@ -37,7 +37,14 @@ class Scrawler
 
         $response = $client->request('GET', $this->configuration->getBaseUrl());
 
-        dd($response);
+        $result = [];
+        foreach ($this->configuration->getFields() as $name => $fieldDefinition) {
+            $fieldDefinition->getMatcher()->setResponse($response);
+
+            $result[$name] = $fieldDefinition->serializeValue();
+        }
+
+        dd($result);
 
         return 0;
     }

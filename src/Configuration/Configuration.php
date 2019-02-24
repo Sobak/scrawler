@@ -3,14 +3,17 @@
 namespace Sobak\Scrawler\Configuration;
 
 use Sobak\Scrawler\Block\ClientConfigurationProvider\ClientConfigurationProviderInterface;
+use Sobak\Scrawler\Block\FieldDefinition\FieldDefinitionInterface;
 use Sobak\Scrawler\Block\LogWriter\LogWriterInterface;
-
 class Configuration
 {
     protected $baseUrl = null;
 
     /** @var ClientConfigurationProviderInterface[] */
     protected $clientConfigurationProviders = [];
+
+    /** @var FieldDefinitionInterface[] */
+    protected $fields;
 
     protected $operationName = null;
 
@@ -32,6 +35,38 @@ class Configuration
     public function removeClientConfigurationProvider(string $clientConfigurationProvider)
     {
         unset($this->clientConfigurationProviders[$clientConfigurationProvider]);
+
+        return $this;
+    }
+
+    public function addField(string $name, FieldDefinitionInterface $fieldDefinition)
+    {
+        $this->fields[$name] = $fieldDefinition;
+
+        return $this;
+    }
+
+    /**
+     * @param FieldDefinitionInterface[] $fields
+     * @return self
+     */
+    public function addFields(array $fields)
+    {
+        foreach ($fields as $name => $fieldDefinition) {
+            $this->addField($name, $fieldDefinition);
+        }
+
+        return $this;
+    }
+
+    public function getFields()
+    {
+        return $this->fields;
+    }
+
+    public function removeField(string $name)
+    {
+        unset ($this->fields[$name]);
 
         return $this;
     }
