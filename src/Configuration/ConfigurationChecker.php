@@ -20,6 +20,7 @@ class ConfigurationChecker
     protected function getArrayOptions(): array
     {
         return [
+            'fields',
             'logWriters',
         ];
     }
