@@ -44,6 +44,12 @@ class Scrawler
             $result[$name] = $fieldDefinition->serializeValue();
         }
 
+        foreach ($this->configuration->getResultWriters() as $resultWriter) {
+            $resultWriter->setResults($result);
+            $resultWriter->mapResultsToEntity();
+
+            dd($resultWriter->getEntity());
+        }
         dd($result);
 
         return 0;
