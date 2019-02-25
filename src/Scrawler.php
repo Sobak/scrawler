@@ -48,10 +48,8 @@ class Scrawler
 
         foreach ($this->configuration->getObjectDefinitions() as $objectListName => $objectDefinition) {
             $objectDefinition->getMatcher()->setCrawler(new Crawler($responseBody));
+            $matchesList = $objectDefinition->serializeValue();
 
-            $matchesList = $objectDefinition->getMatcher()->match();
-            // @todo throw exception on type other than ArrayIterator, later replace with typehint
-            // @todo on ObjectDefinition's serializeValue() method
             foreach ($matchesList as $match) {
                 $listElementResult = [];
                 foreach ($objectDefinition->getFieldDefinitions() as $fieldName => $fieldDefinition) {

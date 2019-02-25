@@ -2,29 +2,18 @@
 
 namespace Sobak\Scrawler\Configuration;
 
+use ArrayIterator;
+use Sobak\Scrawler\Block\FieldDefinition\AbstractFieldDefinition;
 use Sobak\Scrawler\Block\FieldDefinition\FieldDefinitionInterface;
 use Sobak\Scrawler\Block\ResultWriter\ResultWriterInterface;
-use Sobak\Scrawler\Matcher\MatcherInterface;
 
-class ObjectConfiguration
+class ObjectConfiguration extends AbstractFieldDefinition
 {
     /** @var FieldDefinitionInterface[] */
     protected $fieldDefinitions;
 
-    protected $matcher;
-
     /** @var ResultWriterInterface[] */
     protected $resultWriters = [];
-
-    public function __construct(MatcherInterface $matcher)
-    {
-        $this->matcher = $matcher;
-    }
-
-    public function getMatcher(): MatcherInterface
-    {
-        return $this->matcher;
-    }
 
     public function addFieldDefinition(string $name, FieldDefinitionInterface $fieldDefinition)
     {
@@ -62,5 +51,15 @@ class ObjectConfiguration
         unset($this->resultWriters[$name]);
 
         return $this;
+    }
+
+    public function serializeValue(): ArrayIterator
+    {
+        return $this->serializer($this->matcher->match());
+    }
+
+    public function serializer($value)
+    {
+        return $value;
     }
 }
