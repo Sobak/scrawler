@@ -5,6 +5,7 @@ namespace Sobak\Scrawler;
 use Sobak\Scrawler\Client\ClientFactory;
 use Sobak\Scrawler\Configuration\Configuration;
 use Sobak\Scrawler\Configuration\ConfigurationChecker;
+use Sobak\Scrawler\Entity\EntityMapper;
 use Sobak\Scrawler\Output\Outputter;
 use Sobak\Scrawler\Support\LogWriter;
 use Sobak\Scrawler\Support\Utils;
@@ -39,30 +40,31 @@ class Scrawler
         $response = $client->request('GET', $this->configuration->getBaseUrl());
         $responseBody = $response->getBody()->getContents();
 
-        $result = [];
-
-//        foreach ($this->configuration->getResultWriters() as $resultWriter) {
-//            $resultWriter->setResults($result);
-//            $resultWriter->mapResultsToEntity();
-//        }
-
         foreach ($this->configuration->getObjectDefinitions() as $objectListName => $objectDefinition) {
             $objectDefinition->getMatcher()->setCrawler(new Crawler($responseBody));
             $matchesList = $objectDefinition->serializeValue();
 
+            // Iterate over single found object
             foreach ($matchesList as $match) {
-                $listElementResult = [];
+                $objectResult = [];
                 foreach ($objectDefinition->getFieldDefinitions() as $fieldName => $fieldDefinition) {
                     $fieldDefinition->getMatcher()->setCrawler(new Crawler($match));
 
-                    $listElementResult[$fieldName] = $fieldDefinition->serializeValue();
+                    $objectResult[$fieldName] = $fieldDefinition->serializeValue();
                 }
 
-                $result[$objectListName][] = $listElementResult;
+                // Map object result to entities and write them
+                foreach ($objectDefinition->getEntityMappings() as $entityClass) {
+                    $entity = EntityMapper::mapResultToEntity($objectResult, $entityClass);
+
+                    $resultWriters = $objectDefinition->getResultWriters();
+                    if (isset($resultWriters[$entityClass])) {
+                        $resultWriter = $resultWriters[$entityClass];
+                        $resultWriter->write($entity);
+                    }
+                }
             }
         }
-
-        dd($result);
 
         return 0;
     }

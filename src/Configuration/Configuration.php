@@ -4,7 +4,6 @@ namespace Sobak\Scrawler\Configuration;
 
 use Sobak\Scrawler\Block\ClientConfigurationProvider\ClientConfigurationProviderInterface;
 use Sobak\Scrawler\Block\LogWriter\LogWriterInterface;
-use Sobak\Scrawler\Block\ResultWriter\ResultWriterInterface;
 use Sobak\Scrawler\Matcher\MatcherInterface;
 
 class Configuration
@@ -21,9 +20,6 @@ class Configuration
 
     /** @var ObjectConfiguration[] */
     protected $objectDefinitions = [];
-
-    /** @var ResultWriterInterface[] */
-    protected $resultWriters = [];
 
     public function getBaseUrl()
     {
@@ -105,25 +101,6 @@ class Configuration
     public function setOperationName($operationName)
     {
         $this->operationName = $operationName;
-
-        return $this;
-    }
-
-    public function addResultWriter(string $name, ResultWriterInterface $resultWriter)
-    {
-        $this->resultWriters[$name] = $resultWriter;
-
-        return $this;
-    }
-
-    public function getResultWriters()
-    {
-        return $this->resultWriters;
-    }
-
-    public function removeResultWriter(string $name)
-    {
-        unset($this->resultWriters[$name]);
 
         return $this;
     }

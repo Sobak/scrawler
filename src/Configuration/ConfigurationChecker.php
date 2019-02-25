@@ -22,7 +22,6 @@ class ConfigurationChecker
         return [
             'logWriters',
             'objectDefinitions',
-            'resultWriters',
         ];
     }
 
@@ -57,15 +56,6 @@ class ConfigurationChecker
 
         if ($result === null) {
             throw new ConfigurationException("Required configuration option '$optionName' not set");
-        }
-
-        return true;
-    }
-
-    public function validateResultWriters(array $resultWriters, Configuration $configuration)
-    {
-        if (count($resultWriters) === 0) {
-            throw new ConfigurationException('At least one result writer must be defined');
         }
 
         return true;

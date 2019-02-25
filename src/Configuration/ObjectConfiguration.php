@@ -9,11 +9,32 @@ use Sobak\Scrawler\Block\ResultWriter\ResultWriterInterface;
 
 class ObjectConfiguration extends AbstractFieldDefinition
 {
+    protected $entityMappings = [];
+
     /** @var FieldDefinitionInterface[] */
     protected $fieldDefinitions;
 
     /** @var ResultWriterInterface[] */
     protected $resultWriters = [];
+
+    public function addEntityMapping(string $entityClass)
+    {
+        $this->entityMappings[$entityClass] = $entityClass;
+
+        return $this;
+    }
+
+    public function getEntityMappings()
+    {
+        return $this->entityMappings;
+    }
+
+    public function removeEntityMapping(string $entityClass)
+    {
+        unset($this->entityMappings[$entityClass]);
+
+        return $this;
+    }
 
     public function addFieldDefinition(string $name, FieldDefinitionInterface $fieldDefinition)
     {
@@ -34,9 +55,9 @@ class ObjectConfiguration extends AbstractFieldDefinition
         return $this;
     }
 
-    public function addResultWriter(string $name, ResultWriterInterface $resultWriter)
+    public function addResultWriter(string $entityClass, ResultWriterInterface $resultWriter)
     {
-        $this->resultWriters[$name] = $resultWriter;
+        $this->resultWriters[$entityClass] = $resultWriter;
 
         return $this;
     }
@@ -46,9 +67,9 @@ class ObjectConfiguration extends AbstractFieldDefinition
         return $this->resultWriters;
     }
 
-    public function removeResultWriter(string $name)
+    public function removeResultWriter(string $entityClass)
     {
-        unset($this->resultWriters[$name]);
+        unset($this->resultWriters[$entityClass]);
 
         return $this;
     }
