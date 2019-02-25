@@ -6,6 +6,6 @@ class NullableStringField extends AbstractFieldDefinition
 {
     public function serializer($value): ?string
     {
-        return !empty($string) ? (string) $value : null;
+        return !empty($value) ? (string) $value : null;
     }
 }

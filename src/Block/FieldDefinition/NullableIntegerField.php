@@ -6,6 +6,6 @@ class NullableIntegerField extends AbstractFieldDefinition
 {
     public function serializer($value): ?string
     {
-        return !empty($string) ? (int) $value : null;
+        return !empty($value) ? (int) $value : null;
     }
 }
