@@ -29,7 +29,7 @@ class ObjectConfiguration extends AbstractFieldDefinition
 
     public function removeFieldDefinition(string $name)
     {
-        unset ($this->fieldDefinitions[$name]);
+        unset($this->fieldDefinitions[$name]);
 
         return $this;
     }
