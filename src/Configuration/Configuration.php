@@ -63,19 +63,6 @@ class Configuration
         return $this;
     }
 
-    /**
-     * @param FieldDefinitionInterface[] $fields
-     * @return self
-     */
-    public function addFields(array $fields)
-    {
-        foreach ($fields as $name => $fieldDefinition) {
-            $this->addField($name, $fieldDefinition);
-        }
-
-        return $this;
-    }
-
     public function getFields()
     {
         return $this->fields;
