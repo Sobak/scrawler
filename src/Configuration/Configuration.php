@@ -4,8 +4,6 @@ namespace Sobak\Scrawler\Configuration;
 
 use Sobak\Scrawler\Block\ClientConfigurationProvider\ClientConfigurationProviderInterface;
 use Sobak\Scrawler\Block\LogWriter\LogWriterInterface;
-use Sobak\Scrawler\Block\ObjectDefinition\ObjectDefinition;
-use Sobak\Scrawler\Block\ObjectDefinition\ObjectDefinitionInterface;
 use Sobak\Scrawler\Block\ResultWriter\ResultWriterInterface;
 use Sobak\Scrawler\Matcher\MatcherInterface;
 
@@ -21,7 +19,7 @@ class Configuration
     /** @var LogWriterInterface[] */
     protected $logWriters = [];
 
-    /** @var ObjectDefinitionInterface[] */
+    /** @var ObjectConfiguration[] */
     protected $objectDefinitions = [];
 
     /** @var ResultWriterInterface[] */
@@ -79,7 +77,7 @@ class Configuration
 
     public function addObjectDefinition(string $name, MatcherInterface $matcher, callable $configuration)
     {
-        $objectDefinition = new ObjectDefinition($matcher);
+        $objectDefinition = new ObjectConfiguration($matcher);
         $configuration($objectDefinition);
 
         $this->objectDefinitions[$name] = $objectDefinition;

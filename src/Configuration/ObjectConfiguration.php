@@ -1,12 +1,12 @@
 <?php
 
-namespace Sobak\Scrawler\Block\ObjectDefinition;
+namespace Sobak\Scrawler\Configuration;
 
 use Sobak\Scrawler\Block\FieldDefinition\FieldDefinitionInterface;
 use Sobak\Scrawler\Block\ResultWriter\ResultWriterInterface;
 use Sobak\Scrawler\Matcher\MatcherInterface;
 
-class ObjectDefinition implements ObjectDefinitionInterface
+class ObjectConfiguration
 {
     /** @var FieldDefinitionInterface[] */
     protected $fieldDefinitions;
