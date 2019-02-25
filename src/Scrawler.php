@@ -8,6 +8,7 @@ use Sobak\Scrawler\Configuration\ConfigurationChecker;
 use Sobak\Scrawler\Output\Outputter;
 use Sobak\Scrawler\Support\LogWriter;
 use Sobak\Scrawler\Support\Utils;
+use Symfony\Component\DomCrawler\Crawler;
 
 class Scrawler
 {
@@ -36,10 +37,11 @@ class Scrawler
         $client = ClientFactory::applyCustomConfiguration($this->configuration->getClientConfigurationProviders());
 
         $response = $client->request('GET', $this->configuration->getBaseUrl());
+        $responseBody = $response->getBody()->getContents();
 
         $result = [];
-        foreach ($this->configuration->getFields() as $name => $fieldDefinition) {
-            $fieldDefinition->getMatcher()->setResponse($response);
+        foreach ($this->configuration->getFieldDefinitions() as $name => $fieldDefinition) {
+            $fieldDefinition->getMatcher()->setCrawler(new Crawler($responseBody));
 
             $result[$name] = $fieldDefinition->serializeValue();
         }
@@ -47,9 +49,26 @@ class Scrawler
         foreach ($this->configuration->getResultWriters() as $resultWriter) {
             $resultWriter->setResults($result);
             $resultWriter->mapResultsToEntity();
-
-            dd($resultWriter->getEntity());
         }
+
+        foreach ($this->configuration->getObjectDefinitions() as $objectListName => $objectDefinition) {
+            $objectDefinition->getMatcher()->setCrawler(new Crawler($responseBody));
+
+            $matchesList = $objectDefinition->getMatcher()->match();
+            // @todo throw exception on type other than ArrayIterator, later replace with typehint
+            // @todo on ObjectDefinition's serializeValue() method
+            foreach ($matchesList as $match) {
+                $listElementResult = [];
+                foreach ($objectDefinition->getFieldDefinitions() as $fieldName => $fieldDefinition) {
+                    $fieldDefinition->getMatcher()->setCrawler(new Crawler($match));
+
+                    $listElementResult[$fieldName] = $fieldDefinition->serializeValue();
+                }
+
+                $result[$objectListName][] = $listElementResult;
+            }
+        }
+
         dd($result);
 
         return 0;

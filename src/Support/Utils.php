@@ -38,4 +38,9 @@ class Utils
 
         return trim($slug, $separator);
     }
+
+    public static function trimWhitespace(string $string): string
+    {
+        return trim($string, "\n\t ");
+    }
 }

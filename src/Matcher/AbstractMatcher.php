@@ -2,31 +2,31 @@
 
 namespace Sobak\Scrawler\Matcher;
 
-use GuzzleHttp\Psr7\Response;
+use Symfony\Component\DomCrawler\Crawler;
 
 abstract class AbstractMatcher implements MatcherInterface
 {
-    protected $matchBy;
+    protected $crawler;
 
-    protected $response;
+    protected $matchBy;
 
     public function __construct(string $matchBy)
     {
         $this->matchBy = $matchBy;
     }
 
+    public function getCrawler(): Crawler
+    {
+        return $this->crawler;
+    }
+
+    public function setCrawler(Crawler $crawler)
+    {
+        $this->crawler = $crawler;
+    }
+
     public function getMatchBy(): string
     {
         return $this->matchBy;
-    }
-
-    public function getResponse(): Response
-    {
-        return $this->response;
-    }
-
-    public function setResponse(Response $response)
-    {
-        $this->response = $response;
     }
 }

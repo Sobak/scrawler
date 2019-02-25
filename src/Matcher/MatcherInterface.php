@@ -2,17 +2,17 @@
 
 namespace Sobak\Scrawler\Matcher;
 
-use GuzzleHttp\Psr7\Response;
+use Symfony\Component\DomCrawler\Crawler;
 
 interface MatcherInterface
 {
     public function __construct(string $matchBy);
 
+    public function getCrawler(): Crawler;
+
+    public function setCrawler(Crawler $crawler);
+
     public function getMatchBy(): string;
-
-    public function getResponse(): Response;
-
-    public function setResponse(Response $response);
 
     public function match();
 }

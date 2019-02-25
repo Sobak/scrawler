@@ -5,7 +5,10 @@ namespace Sobak\Scrawler\Configuration;
 use Sobak\Scrawler\Block\ClientConfigurationProvider\ClientConfigurationProviderInterface;
 use Sobak\Scrawler\Block\FieldDefinition\FieldDefinitionInterface;
 use Sobak\Scrawler\Block\LogWriter\LogWriterInterface;
+use Sobak\Scrawler\Block\ObjectDefinition\ObjectDefinition;
+use Sobak\Scrawler\Block\ObjectDefinition\ObjectDefinitionInterface;
 use Sobak\Scrawler\Block\ResultWriter\ResultWriterInterface;
+use Sobak\Scrawler\Matcher\MatcherInterface;
 
 class Configuration
 {
@@ -15,12 +18,15 @@ class Configuration
     protected $clientConfigurationProviders = [];
 
     /** @var FieldDefinitionInterface[] */
-    protected $fields;
+    protected $fieldDefinitions = [];
 
     protected $operationName = null;
 
     /** @var LogWriterInterface[] */
     protected $logWriters = [];
+
+    /** @var ObjectDefinitionInterface[] */
+    protected $objectDefinitions = [];
 
     /** @var ResultWriterInterface[] */
     protected $resultWriters = [];
@@ -56,21 +62,21 @@ class Configuration
         return $this;
     }
 
-    public function addField(string $name, FieldDefinitionInterface $fieldDefinition)
+    public function addFieldDefinition(string $name, FieldDefinitionInterface $fieldDefinition)
     {
-        $this->fields[$name] = $fieldDefinition;
+        $this->fieldDefinitions[$name] = $fieldDefinition;
 
         return $this;
     }
 
-    public function getFields()
+    public function getFieldDefinitions()
     {
-        return $this->fields;
+        return $this->fieldDefinitions;
     }
 
-    public function removeField(string $name)
+    public function removeFieldDefinition(string $name)
     {
-        unset ($this->fields[$name]);
+        unset ($this->fieldDefinitions[$name]);
 
         return $this;
     }
@@ -90,6 +96,28 @@ class Configuration
     public function removeLogWriter(string $logWriter)
     {
         unset($this->logWriters[$logWriter]);
+
+        return $this;
+    }
+
+    public function addObjectDefinition(string $name, MatcherInterface $matcher, callable $configuration)
+    {
+        $objectDefinition = new ObjectDefinition($matcher);
+        $configuration($objectDefinition);
+
+        $this->objectDefinitions[$name] = $objectDefinition;
+
+        return $this;
+    }
+
+    public function getObjectDefinitions()
+    {
+        return $this->objectDefinitions;
+    }
+
+    public function removeObjectDefinition(string $name)
+    {
+        unset($this->objectDefinitions[$name]);
 
         return $this;
     }
