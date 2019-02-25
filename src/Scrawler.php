@@ -40,16 +40,11 @@ class Scrawler
         $responseBody = $response->getBody()->getContents();
 
         $result = [];
-        foreach ($this->configuration->getFieldDefinitions() as $name => $fieldDefinition) {
-            $fieldDefinition->getMatcher()->setCrawler(new Crawler($responseBody));
 
-            $result[$name] = $fieldDefinition->serializeValue();
-        }
-
-        foreach ($this->configuration->getResultWriters() as $resultWriter) {
-            $resultWriter->setResults($result);
-            $resultWriter->mapResultsToEntity();
-        }
+//        foreach ($this->configuration->getResultWriters() as $resultWriter) {
+//            $resultWriter->setResults($result);
+//            $resultWriter->mapResultsToEntity();
+//        }
 
         foreach ($this->configuration->getObjectDefinitions() as $objectListName => $objectDefinition) {
             $objectDefinition->getMatcher()->setCrawler(new Crawler($responseBody));

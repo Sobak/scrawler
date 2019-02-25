@@ -20,7 +20,6 @@ class ConfigurationChecker
     protected function getArrayOptions(): array
     {
         return [
-            'fieldDefinitions',
             'logWriters',
             'objectDefinitions',
             'resultWriters',
@@ -59,13 +58,6 @@ class ConfigurationChecker
         if ($result === null) {
             throw new ConfigurationException("Required configuration option '$optionName' not set");
         }
-
-        return true;
-    }
-
-    public function validateObjectDefinitions(array $objectDefinitions, Configuration $configuration)
-    {
-        // @todo validate name existence among fields and objects
 
         return true;
     }
