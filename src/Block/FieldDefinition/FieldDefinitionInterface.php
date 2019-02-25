@@ -10,7 +10,7 @@ interface FieldDefinitionInterface
 
     public function getMatcher(): MatcherInterface;
 
-    public function serializer($value);
-
     public function serializeValue();
+
+    public function serializer($value);
 }
