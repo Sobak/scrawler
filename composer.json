@@ -13,7 +13,10 @@
     "autoload": {
         "psr-4": {
             "Sobak\\Scrawler\\": "src/"
-        }
+        },
+        "files": [
+            "src/Support/functions.php"
+        ]
     },
     "autoload-dev": {
         "psr-4": {
