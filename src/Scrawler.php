@@ -7,6 +7,7 @@ use Sobak\Scrawler\Configuration\Configuration;
 use Sobak\Scrawler\Configuration\ConfigurationChecker;
 use Sobak\Scrawler\Entity\EntityMapper;
 use Sobak\Scrawler\Output\Outputter;
+use Sobak\Scrawler\Output\OutputWriterInterface;
 use Sobak\Scrawler\Support\LogWriter;
 use Sobak\Scrawler\Support\Utils;
 use Symfony\Component\DomCrawler\Crawler;
@@ -60,6 +61,12 @@ class Scrawler
                     $resultWriters = $objectDefinition->getResultWriters();
                     if (isset($resultWriters[$entityClass])) {
                         $resultWriter = $resultWriters[$entityClass];
+
+                        // Set Outputter for result writers that require it
+                        if ($resultWriter instanceof OutputWriterInterface) {
+                            $resultWriter->setOutputter($this->output);
+                        }
+
                         $resultWriter->write($entity);
                     }
                 }

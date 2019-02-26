@@ -2,11 +2,13 @@
 
 namespace Sobak\Scrawler\Block\ResultWriter;
 
+use Sobak\Scrawler\Entity\EntityInterface;
+
 interface ResultWriterInterface
 {
     public function __construct(array $configuration = []);
 
     public function getConfiguration(): array;
 
-    public function write(object $entity): bool;
+    public function write(EntityInterface $entity): bool;
 }
