@@ -53,6 +53,17 @@ class Outputter
         unlink($this->directoryName . $filename);
     }
 
+    public function createDirectory($name, $nested = false)
+    {
+        if (is_file($this->directoryName . $name)) {
+            throw new \Exception("Cannot create directory '$name', name already taken by the file'");
+        }
+
+        if (file_exists($this->directoryName . $name) === false) {
+            mkdir($this->directoryName . $name, 0777, $nested);
+        }
+    }
+
     public function deleteOutput()
     {
         Utils::removeDirectoryRecursively($this->directoryName);
