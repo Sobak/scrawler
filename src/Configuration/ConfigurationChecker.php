@@ -22,6 +22,7 @@ class ConfigurationChecker
         return [
             'logWriters',
             'objectDefinitions',
+            'urlListProviders',
         ];
     }
 
@@ -56,6 +57,19 @@ class ConfigurationChecker
 
         if ($result === null) {
             throw new ConfigurationException("Required configuration option '$optionName' not set");
+        }
+
+        return true;
+    }
+
+    protected function validateUrlListProviders(array $urlListProviders, Configuration $configuration)
+    {
+        if (count($urlListProviders) === 0) {
+            throw new ConfigurationException('At least one UrlListProvider must be set');
+        }
+
+        if (count($urlListProviders) > 1) {
+            throw new ConfigurationException('Having more than one UrlList provider is not supported yet');
         }
 
         return true;

@@ -4,6 +4,7 @@ namespace Sobak\Scrawler\Configuration;
 
 use Sobak\Scrawler\Block\ClientConfigurationProvider\ClientConfigurationProviderInterface;
 use Sobak\Scrawler\Block\LogWriter\LogWriterInterface;
+use Sobak\Scrawler\Block\UrlListProvider\UrlListProviderInterface;
 use Sobak\Scrawler\Matcher\MatcherInterface;
 
 class Configuration
@@ -20,6 +21,9 @@ class Configuration
 
     /** @var ObjectConfiguration[] */
     protected $objectDefinitions = [];
+
+    /** @var UrlListProviderInterface[] */
+    protected $urlListProviders = [];
 
     public function getBaseUrl()
     {
@@ -101,6 +105,25 @@ class Configuration
     public function setOperationName($operationName)
     {
         $this->operationName = $operationName;
+
+        return $this;
+    }
+
+    public function addUrlListProvider(UrlListProviderInterface $urlListProvider)
+    {
+        $this->urlListProviders[get_class($urlListProvider)] = $urlListProvider;
+
+        return $this;
+    }
+
+    public function getUrlListProviders()
+    {
+        return $this->urlListProviders;
+    }
+
+    public function removeUrlListProvider(string $name)
+    {
+        unset($this->urlListProviders[$name]);
 
         return $this;
     }

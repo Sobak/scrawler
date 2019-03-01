@@ -5,6 +5,7 @@ namespace Tests\Functional;
 use ReflectionClass;
 use RuntimeException;
 use PHPUnit\Framework\TestCase;
+use Sobak\Scrawler\Block\ResultWriter\InMemoryResultWriter;
 use Symfony\Component\Process\PhpExecutableFinder;
 use Symfony\Component\Process\Process;
 
@@ -19,21 +20,27 @@ abstract class ServerBasedTest extends TestCase
     {
         $phpBinary = (new PhpExecutableFinder())->find();
         self::$phpServerPort = $port = $_ENV['PHP_SERVER_PORT'];
-        $directory = self::getChildClassPath() . DIRECTORY_SEPARATOR . 'server';
+        $directory = static::getChildClassPath() . DIRECTORY_SEPARATOR . 'server';
 
-        self::$process = new Process([$phpBinary, '-S', "127.0.0.1:{$port}", '-t', "{$directory}"]);
-        self::$process->start();
+        static::$process = new Process([$phpBinary, '-S', "127.0.0.1:{$port}", '-t', "{$directory}"]);
+        static::$process->start();
 
         usleep(500000); // Wait 0.5s for the server to start
 
-        if (self::$process->isRunning() === false) {
-            throw new RuntimeException('Could not start PHP server: ' . self::$process->getErrorOutput());
+        if (static::$process->isRunning() === false) {
+            throw new RuntimeException('Could not start PHP server: ' . static::$process->getErrorOutput());
         }
     }
 
     public static function tearDownAfterClass(): void
     {
-        self::$process->stop();
+        static::$process->stop();
+    }
+
+    protected function tearDown(): void
+    {
+        // Cleanup dangling results
+        InMemoryResultWriter::$results = [];
     }
 
     protected static function getChildClassPath(): string
