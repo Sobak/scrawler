@@ -14,10 +14,7 @@ class Outputter
     {
         $this->directoryName = self::OUTPUT_DIRECTORY  . '/' . trim($directoryName, '/') . '/';
 
-        if (
-            (file_exists(self::OUTPUT_DIRECTORY) && is_dir(self::OUTPUT_DIRECTORY) === false) ||
-            (file_exists($this->directoryName) && is_dir($this->directoryName) === false)
-        ) {
+        if (is_file(self::OUTPUT_DIRECTORY) || is_file($this->directoryName)) {
             throw new \Exception('Output directory name taken by a file');
         }
 
