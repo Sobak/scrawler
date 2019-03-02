@@ -10,16 +10,18 @@ class Outputter
 
     protected $directoryName;
 
-    public function __construct($directoryName)
+    public function __construct(string $basePath, string $directoryName)
     {
-        $this->directoryName = self::OUTPUT_DIRECTORY  . '/' . trim($directoryName, '/') . '/';
+        $outputDirectory = $basePath . '/' . self::OUTPUT_DIRECTORY;
 
-        if (is_file(self::OUTPUT_DIRECTORY) || is_file($this->directoryName)) {
+        $this->directoryName = $outputDirectory  . '/' . trim($directoryName, '/') . '/';
+
+        if (is_file($outputDirectory) || is_file($this->directoryName)) {
             throw new \Exception('Output directory name taken by a file');
         }
 
-        if (file_exists(self::OUTPUT_DIRECTORY) === false) {
-            mkdir(self::OUTPUT_DIRECTORY);
+        if (file_exists($outputDirectory) === false) {
+            mkdir($outputDirectory);
         }
 
 

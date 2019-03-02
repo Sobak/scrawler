@@ -27,7 +27,10 @@ class Scrawler
         $this->configuration = $this->loadConfiguration($configurationPath);
         $this->checkConfiguration($this->configuration);
 
-        $this->output = new Outputter(Utils::slugify($this->configuration->getOperationName()));
+        $this->output = new Outputter(
+            dirname(realpath($configurationPath)),
+            Utils::slugify($this->configuration->getOperationName())
+        );
         $this->logWriter = new LogWriter($this->configuration->getLogWriters(), $this->output);
     }
 
