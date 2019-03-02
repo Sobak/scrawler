@@ -8,7 +8,7 @@ use Tests\Functional\ServerBasedTest;
 
 class CssSelectorTextMatcherTest extends ServerBasedTest
 {
-    public function testClassMatching()
+    public function testClassMatching(): void
     {
         $scrawler = new Scrawler(__DIR__ . '/css-selector-text-matcher.php');
         $scrawler->run();

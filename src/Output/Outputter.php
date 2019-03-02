@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Sobak\Scrawler\Output;
 
 use Sobak\Scrawler\Support\Utils;
@@ -32,27 +34,27 @@ class Outputter
         mkdir($this->directoryName);
     }
 
-    public function getDirectoryName()
+    public function getDirectoryName(): string
     {
         return $this->directoryName;
     }
 
-    public function appendToFile($filename, $contents)
+    public function appendToFile($filename, $contents): void
     {
         file_put_contents($this->directoryName . $filename, $contents, FILE_APPEND);
     }
 
-    public function writeToFile($filename, $contents)
+    public function writeToFile($filename, $contents): void
     {
         file_put_contents($this->directoryName . $filename, $contents);
     }
 
-    public function deleteFile($filename)
+    public function deleteFile($filename): void
     {
         unlink($this->directoryName . $filename);
     }
 
-    public function createDirectory($name, $nested = false)
+    public function createDirectory($name, $nested = false): void
     {
         if (is_file($this->directoryName . $name)) {
             throw new \Exception("Cannot create directory '$name', name already taken by the file'");
@@ -63,7 +65,7 @@ class Outputter
         }
     }
 
-    public function deleteOutput()
+    public function deleteOutput(): void
     {
         Utils::removeDirectoryRecursively($this->directoryName);
     }

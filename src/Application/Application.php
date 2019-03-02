@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Sobak\Scrawler\Application;
 
 use Sobak\Scrawler\Application\Commands\CrawlCommand;
@@ -17,12 +19,12 @@ class Application
         $this->registerCommands();
     }
 
-    public function run()
+    public function run(): int
     {
         return $this->application->run();
     }
 
-    protected function registerCommands()
+    protected function registerCommands(): void
     {
         $this->application->add(new CrawlCommand());
     }

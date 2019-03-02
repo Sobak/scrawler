@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Sobak\Scrawler\Block\ResultWriter;
 
 use Sobak\Scrawler\Output\Outputter;
@@ -10,12 +12,12 @@ abstract class FileResultWriter extends AbstractResultWriter implements OutputWr
     /** @var Outputter */
     protected $outputter;
 
-    public function getOutputter()
+    public function getOutputter(): Outputter
     {
         return $this->outputter;
     }
 
-    public function setOutputter(Outputter $outputter)
+    public function setOutputter(Outputter $outputter): void
     {
         $this->outputter = $outputter;
     }

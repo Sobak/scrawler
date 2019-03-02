@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Tests\Functional\ConfigurationRequired;
 
 use Exception;
@@ -9,7 +11,7 @@ use Sobak\Scrawler\Scrawler;
 
 class ConfigurationTest extends TestCase
 {
-    public function testConfigurationObjectTypeChecking()
+    public function testConfigurationObjectTypeChecking(): void
     {
         $this->expectException(Exception::class);
         $this->expectExceptionMessage('Application must return the Configuration instance');
@@ -18,7 +20,7 @@ class ConfigurationTest extends TestCase
         $scrawler->run();
     }
 
-    public function testEmptyConfigurationThrowsValidException()
+    public function testEmptyConfigurationThrowsValidException(): void
     {
         // Makes sure that all configuration getters (which are used during
         // configuration checking process) were actually implemented
@@ -29,7 +31,7 @@ class ConfigurationTest extends TestCase
         $scrawler->run();
     }
 
-    public function testMissingConfigurationFile()
+    public function testMissingConfigurationFile(): void
     {
         $this->expectException(Exception::class);
         $this->expectExceptionMessageRegExp('#^Could not find configuration at (.+)$#');

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Sobak\Scrawler\Matcher;
 
 use Symfony\Component\DomCrawler\Crawler;
@@ -20,7 +22,7 @@ abstract class AbstractMatcher implements MatcherInterface
         return $this->crawler;
     }
 
-    public function setCrawler(Crawler $crawler)
+    public function setCrawler(Crawler $crawler): void
     {
         $this->crawler = $crawler;
     }

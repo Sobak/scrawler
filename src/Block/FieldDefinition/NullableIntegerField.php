@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Sobak\Scrawler\Block\FieldDefinition;
 
 class NullableIntegerField extends AbstractFieldDefinition

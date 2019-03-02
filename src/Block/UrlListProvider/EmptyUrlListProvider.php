@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Sobak\Scrawler\Block\UrlListProvider;
 
 use GuzzleHttp\Psr7\Response;
@@ -12,12 +14,12 @@ class EmptyUrlListProvider implements UrlListProviderInterface
         return [];
     }
 
-    public function setCurrentUrl(Url $url)
+    public function setCurrentUrl(Url $url): void
     {
         // Do nothing...
     }
 
-    public function setResponse(Response $response)
+    public function setResponse(Response $response): void
     {
         // Do nothing...
     }

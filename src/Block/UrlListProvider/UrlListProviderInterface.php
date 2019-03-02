@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Sobak\Scrawler\Block\UrlListProvider;
 
 use GuzzleHttp\Psr7\Response;
@@ -12,7 +14,7 @@ interface UrlListProviderInterface
      */
     public function getUrls(): array;
 
-    public function setCurrentUrl(Url $url);
+    public function setCurrentUrl(Url $url): void;
 
-    public function setResponse(Response $response);
+    public function setResponse(Response $response): void;
 }

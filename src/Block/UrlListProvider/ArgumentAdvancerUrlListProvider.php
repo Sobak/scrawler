@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Sobak\Scrawler\Block\UrlListProvider;
 
 use Sobak\Scrawler\Client\Response\Elements\Url;
@@ -16,7 +18,7 @@ class ArgumentAdvancerUrlListProvider extends AbstractUrlListProvider
 
     protected $template;
 
-    public function __construct($template, $start = 1, $step = 1, $stop = null)
+    public function __construct(string $template, int $start = 1, int $step = 1, ?int $stop = null)
     {
         $this->template = $template;
         $this->start = $start;

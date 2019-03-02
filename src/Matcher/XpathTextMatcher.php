@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Sobak\Scrawler\Matcher;
 
 use Sobak\Scrawler\Support\Utils;

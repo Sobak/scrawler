@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Sobak\Scrawler\Block\ClientConfigurationProvider;
 
 class AbstractClientConfigurationProvider implements ClientConfigurationProviderInterface
@@ -11,7 +13,7 @@ class AbstractClientConfigurationProvider implements ClientConfigurationProvider
         return $this->configuration;
     }
 
-    public function setConfiguration(array $configuration)
+    public function setConfiguration(array $configuration): void
     {
         $this->configuration = $configuration;
     }

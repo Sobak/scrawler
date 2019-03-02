@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Sobak\Scrawler\Configuration;
 
 use Sobak\Scrawler\Block\ClientConfigurationProvider\ClientConfigurationProviderInterface;
@@ -30,14 +32,14 @@ class Configuration
         return $this->baseUrl;
     }
 
-    public function setBaseUrl($baseUrl)
+    public function setBaseUrl(string $baseUrl)
     {
         $this->baseUrl = $baseUrl;
 
         return $this;
     }
 
-    public function addClientConfigurationProvider(ClientConfigurationProviderInterface $clientConfigurationProvider)
+    public function addClientConfigurationProvider(ClientConfigurationProviderInterface $clientConfigurationProvider): self
     {
         $this->clientConfigurationProviders[get_class($clientConfigurationProvider)] = $clientConfigurationProvider;
 
@@ -49,14 +51,14 @@ class Configuration
         return $this->clientConfigurationProviders;
     }
 
-    public function removeClientConfigurationProvider(string $clientConfigurationProvider)
+    public function removeClientConfigurationProvider(string $clientConfigurationProvider): self
     {
         unset($this->clientConfigurationProviders[$clientConfigurationProvider]);
 
         return $this;
     }
 
-    public function addLogWriter(LogWriterInterface $logWriter)
+    public function addLogWriter(LogWriterInterface $logWriter): self
     {
         $this->logWriters[get_class($logWriter)] = $logWriter;
 
@@ -68,14 +70,14 @@ class Configuration
         return $this->logWriters;
     }
 
-    public function removeLogWriter(string $logWriter)
+    public function removeLogWriter(string $logWriter): self
     {
         unset($this->logWriters[$logWriter]);
 
         return $this;
     }
 
-    public function addObjectDefinition(string $name, MatcherInterface $matcher, callable $configuration)
+    public function addObjectDefinition(string $name, MatcherInterface $matcher, callable $configuration): self
     {
         $objectDefinition = new ObjectConfiguration($matcher);
         $configuration($objectDefinition);
@@ -90,7 +92,7 @@ class Configuration
         return $this->objectDefinitions;
     }
 
-    public function removeObjectDefinition(string $name)
+    public function removeObjectDefinition(string $name): self
     {
         unset($this->objectDefinitions[$name]);
 
@@ -102,14 +104,14 @@ class Configuration
         return $this->operationName;
     }
 
-    public function setOperationName($operationName)
+    public function setOperationName(string $operationName): self
     {
         $this->operationName = $operationName;
 
         return $this;
     }
 
-    public function addUrlListProvider(UrlListProviderInterface $urlListProvider)
+    public function addUrlListProvider(UrlListProviderInterface $urlListProvider): self
     {
         $this->urlListProviders[get_class($urlListProvider)] = $urlListProvider;
 
@@ -121,7 +123,7 @@ class Configuration
         return $this->urlListProviders;
     }
 
-    public function removeUrlListProvider(string $name)
+    public function removeUrlListProvider(string $name): self
     {
         unset($this->urlListProviders[$name]);
 

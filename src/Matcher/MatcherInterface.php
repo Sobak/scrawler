@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Sobak\Scrawler\Matcher;
 
 use Symfony\Component\DomCrawler\Crawler;
@@ -10,7 +12,7 @@ interface MatcherInterface
 
     public function getCrawler(): Crawler;
 
-    public function setCrawler(Crawler $crawler);
+    public function setCrawler(Crawler $crawler): void;
 
     public function getMatchBy(): string;
 

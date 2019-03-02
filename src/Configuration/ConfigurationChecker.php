@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Sobak\Scrawler\Configuration;
 
 class ConfigurationChecker
@@ -62,7 +64,7 @@ class ConfigurationChecker
         return true;
     }
 
-    protected function validateUrlListProviders(array $urlListProviders, Configuration $configuration)
+    protected function validateUrlListProviders(array $urlListProviders, Configuration $configuration): bool
     {
         if (count($urlListProviders) === 0) {
             throw new ConfigurationException('At least one UrlListProvider must be set');

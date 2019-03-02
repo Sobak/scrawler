@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Sobak\Scrawler\Support;
 
 use FilesystemIterator;
@@ -8,7 +10,7 @@ use RecursiveIteratorIterator;
 
 class Utils
 {
-    public static function removeDirectoryRecursively($directoryPath)
+    public static function removeDirectoryRecursively(string $directoryPath): void
     {
         $iterator = new RecursiveIteratorIterator(
             new RecursiveDirectoryIterator($directoryPath, FilesystemIterator::SKIP_DOTS),
@@ -21,7 +23,7 @@ class Utils
         rmdir($directoryPath);
     }
 
-    public static function slugify(string $string, $separator = '-'): string
+    public static function slugify(string $string, string $separator = '-'): string
     {
         // Remove all non-ASCII characters
         $slug = preg_replace('/[^\x20-\x7E]/u', '', $string);

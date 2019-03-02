@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Sobak\Scrawler\Client\Response\Elements;
 
 class Url
@@ -12,7 +14,7 @@ class Url
 
     protected $url;
 
-    public function __construct($url, $currentUrl = null, $method = 'GET')
+    public function __construct(string $url, ?string $currentUrl = null, string $method = 'GET')
     {
         $this->url = $this->normalizeUrl($url, $currentUrl);
         $this->currentUrl = $currentUrl;

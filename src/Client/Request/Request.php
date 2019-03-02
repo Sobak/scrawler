@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Sobak\Scrawler\Client\Request;
 
 use GuzzleHttp\Client;
@@ -30,7 +32,7 @@ class Request
         return $this->client;
     }
 
-    public function makeRequest(Url $url, array $visitedUrls)
+    public function makeRequest(Url $url, array $visitedUrls): void
     {
         $response = $this->client->request('GET', $url->getUrl());
         $responseBody = $response->getBody()->getContents();

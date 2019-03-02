@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Sobak\Scrawler\Configuration;
 
 use Sobak\Scrawler\Block\ClientConfigurationProvider\ScrawlerUserAgentProvider;

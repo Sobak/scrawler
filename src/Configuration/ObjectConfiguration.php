@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Sobak\Scrawler\Configuration;
 
 use ArrayIterator;
@@ -17,7 +19,7 @@ class ObjectConfiguration extends AbstractFieldDefinition
     /** @var ResultWriterInterface[] */
     protected $resultWriters = [];
 
-    public function addEntityMapping(string $entityClass)
+    public function addEntityMapping(string $entityClass): self
     {
         $this->entityMappings[$entityClass] = $entityClass;
 
@@ -29,14 +31,14 @@ class ObjectConfiguration extends AbstractFieldDefinition
         return $this->entityMappings;
     }
 
-    public function removeEntityMapping(string $entityClass)
+    public function removeEntityMapping(string $entityClass): self
     {
         unset($this->entityMappings[$entityClass]);
 
         return $this;
     }
 
-    public function addFieldDefinition(string $name, FieldDefinitionInterface $fieldDefinition)
+    public function addFieldDefinition(string $name, FieldDefinitionInterface $fieldDefinition): self
     {
         $this->fieldDefinitions[$name] = $fieldDefinition;
 
@@ -48,14 +50,14 @@ class ObjectConfiguration extends AbstractFieldDefinition
         return $this->fieldDefinitions;
     }
 
-    public function removeFieldDefinition(string $name)
+    public function removeFieldDefinition(string $name): self
     {
         unset($this->fieldDefinitions[$name]);
 
         return $this;
     }
 
-    public function addResultWriter(string $entityClass, ResultWriterInterface $resultWriter)
+    public function addResultWriter(string $entityClass, ResultWriterInterface $resultWriter): self
     {
         $this->resultWriters[$entityClass] = $resultWriter;
 
@@ -67,7 +69,7 @@ class ObjectConfiguration extends AbstractFieldDefinition
         return $this->resultWriters;
     }
 
-    public function removeResultWriter(string $entityClass)
+    public function removeResultWriter(string $entityClass): self
     {
         unset($this->resultWriters[$entityClass]);
 

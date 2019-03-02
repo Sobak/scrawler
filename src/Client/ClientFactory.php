@@ -1,14 +1,17 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Sobak\Scrawler\Client;
 
 use GuzzleHttp\Client;
+use Sobak\Scrawler\Block\ClientConfigurationProvider\ClientConfigurationProviderInterface;
 
 class ClientFactory
 {
     public static function applyCustomConfiguration(array $clientConfiguration): Client
     {
-        $customConfiguration = array_map(function ($value) {
+        $customConfiguration = array_map(function (ClientConfigurationProviderInterface $value) {
             return $value->getConfiguration();
         }, $clientConfiguration);
 

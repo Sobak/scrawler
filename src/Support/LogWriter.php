@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Sobak\Scrawler\Support;
 
 use Sobak\Scrawler\Block\LogWriter\LogWriterInterface;
@@ -23,28 +25,28 @@ class LogWriter implements LogWriterInterface
         }
     }
 
-    public function debug($string)
+    public function debug($string): void
     {
         foreach ($this->logWriters as $logWriter) {
             $logWriter->debug($string);
         }
     }
 
-    public function error($string)
+    public function error($string): void
     {
         foreach ($this->logWriters as $logWriter) {
             $logWriter->error($string);
         }
     }
 
-    public function info($string)
+    public function info($string): void
     {
         foreach ($this->logWriters as $logWriter) {
             $logWriter->info($string);
         }
     }
 
-    public function warning($string)
+    public function warning($string): void
     {
         foreach ($this->logWriters as $logWriter) {
             $logWriter->warning($string);
