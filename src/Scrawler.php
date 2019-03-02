@@ -46,6 +46,10 @@ class Scrawler
 
     protected function loadConfiguration($configurationPath): Configuration
     {
+        if (is_file($configurationPath) === false) {
+            throw new \Exception("Could not find configuration at '{$configurationPath}'");
+        }
+
         /** @noinspection PhpIncludeInspection */
         $configuration = require $configurationPath;
 

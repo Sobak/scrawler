@@ -28,4 +28,13 @@ class ConfigurationTest extends TestCase
         $scrawler = new Scrawler(__DIR__ . '/config-empty.php');
         $scrawler->run();
     }
+
+    public function testMissingConfigurationFile()
+    {
+        $this->expectException(Exception::class);
+        $this->expectExceptionMessageRegExp('#^Could not find configuration at (.+)$#');
+
+        $scrawler = new Scrawler(__DIR__ . '/missing-file.php');
+        $scrawler->run();
+    }
 }
