@@ -5,6 +5,8 @@ declare(strict_types=1);
 namespace Sobak\Scrawler\Client\Request;
 
 use GuzzleHttp\Client;
+use Sobak\Scrawler\Block\ResultWriter\FilenameProvider\FilenameProviderInterface;
+use Sobak\Scrawler\Block\ResultWriter\FileResultWriterInterface;
 use Sobak\Scrawler\Client\Response\Elements\Url;
 use Sobak\Scrawler\Configuration\Configuration;
 use Sobak\Scrawler\Entity\EntityMapper;
@@ -57,6 +59,14 @@ class Request
                     $resultWriters = $objectDefinition->getResultWriters();
                     if (isset($resultWriters[$entityClass])) {
                         $resultWriter = $resultWriters[$entityClass];
+
+                        // Generate the filename for FileResultWriters
+                        if ($resultWriter instanceof FileResultWriterInterface) {
+                            /** @var FilenameProviderInterface $filenameProvider */
+                            $filenameProvider = $resultWriter->getConfiguration()['filename'];
+                            $filename = $filenameProvider->generateFilename($entity);
+                            $resultWriter->setFilename($filename);
+                        }
 
                         // Set Outputter for result writers that require it
                         if ($resultWriter instanceof OutputWriterInterface) {
