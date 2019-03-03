@@ -31,7 +31,7 @@
         }
     },
     "bin": [
-        "bin/scrapper"
+        "bin/scrawler"
     ],
     "scripts": {
         "tests": "phpunit"
