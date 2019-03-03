@@ -11,9 +11,10 @@ use Sobak\Scrawler\Configuration\Configuration;
 use Sobak\Scrawler\Configuration\ObjectConfiguration;
 use Sobak\Scrawler\Matcher\CssSelectorListMatcher;
 use Sobak\Scrawler\Matcher\CssSelectorTextMatcher;
+use Tests\Functional\ServerBasedTest;
 use Tests\Utils\SimpleMatchEntity;
 
-$host = 'http://127.0.0.1:' . getenv('PHP_SERVER_PORT');
+$host = ServerBasedTest::getHostUrl();
 
 $scrawler = new Configuration();
 

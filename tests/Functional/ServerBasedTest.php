@@ -21,10 +21,9 @@ abstract class ServerBasedTest extends TestCase
     public static function setUpBeforeClass(): void
     {
         $phpBinary = (new PhpExecutableFinder())->find();
-        self::$phpServerPort = $port = $_ENV['PHP_SERVER_PORT'];
         $directory = static::getChildClassPath() . DIRECTORY_SEPARATOR . 'server';
 
-        static::$process = new Process([$phpBinary, '-S', "127.0.0.1:{$port}", '-t', "{$directory}"]);
+        static::$process = new Process([$phpBinary, '-S', self::getHost(), '-t', "{$directory}"]);
         static::$process->start();
 
         usleep(500000); // Wait 0.5s for the server to start
@@ -37,6 +36,16 @@ abstract class ServerBasedTest extends TestCase
     public static function tearDownAfterClass(): void
     {
         static::$process->stop();
+    }
+
+    public static function getHost()
+    {
+        return sprintf('127.0.0.1:%s', $_ENV['PHP_SERVER_PORT']);
+    }
+
+    public static function getHostUrl()
+    {
+        return 'http://' . self::getHost();
     }
 
     protected function tearDown(): void
