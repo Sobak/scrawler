@@ -23,18 +23,18 @@ Version: Version number or commit hash if using develop - preferably `git descri
 
 ## Pull Requests
 - **[PSR-2 Coding Standard][psr-2]** - The easiest way to apply the conventions
-  is to install [PHP Code Sniffer][php-cs]
-- **Add tests!** - Plese try to provide at least basic code coverage for your
+  is by using the [PHP Code Sniffer][php-cs]
+- **Add tests** - Plese try to provide at least basic code coverage for your
   change, don't forget about checking if already existing tests still pass
   with your changes applied
-- **Document any changes in behaviour** - Make sure that `README.md` and the
+- **Document any changes in behavior** - Make sure that `README.md` and the
   `docs/` are kept up-to-date. If you submit new code within `\Scrawler\Blocks`
   having proper documentation is a must
-- **Consider our release cycle** - The project follows [SemVer v2.0.0][semver].
+- **Mind the release cycle** - The project follows [SemVer v2.0.0][semver].
   Having random breaks in public APIs is not an option
 - **Create feature branches** - Don't submit changes from your `master` branch
 - **One pull request per feature** - If you want to do more than one thing, send
-  multiple pull requests.
+  multiple pull requests
 - **Send coherent history** - Make sure each individual commit in your pull request
   is meaningful. If you had to make multiple intermediate commits while developing,
   please [squash them][squashing] before submitting.
@@ -43,8 +43,12 @@ Version: Version number or commit hash if using develop - preferably `git descri
 Please don't forget to run the test suite before submitting a pull request.
 
 ``` bash
-$ ./vendor/bin/phpunit
+./vendor/bin/phpunit
 ```
+
+Functional tests will run PHP server process (the crawler will then connect to)
+on a port `9394`. Make sure to keep it open or change the value in `phpunit.xml`
+before you run the tests.
 
 **Happy tinkering**, I appreciate your help!
 
