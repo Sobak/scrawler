@@ -6,12 +6,14 @@ the desired format.
 Configuration is based on the building _blocks_, for which you can provide your
 own implementations allowing for further customization of the process.
 
-## Usage
+## Install
 As usual, start by installing the library with Composer:
 
 ```bash
 composer require sobak/scrawler
 ```
+
+## Usage
 
 ```php
 <?php
