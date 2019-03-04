@@ -15,22 +15,22 @@ class ConsoleLogWriter implements LogWriterInterface
         $this->output = new ConsoleOutput();
     }
 
-    public function debug($string): void
+    public function debug(string $string): void
     {
         $this->output->writeln($string);
     }
 
-    public function error($string): void
+    public function error(string $string): void
     {
         $this->output->writeln("<error>$string</error>");
     }
 
-    public function info($string): void
+    public function info(string $string): void
     {
         $this->output->writeln("<info>$string</info>");
     }
 
-    public function warning($string): void
+    public function warning(string $string): void
     {
         $this->output->writeln("<comment>$string</comment>");
     }

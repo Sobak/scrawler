@@ -12,26 +12,26 @@ interface LogWriterInterface
      *
      * @param string $string
      */
-    public function debug($string): void;
+    public function debug(string $string): void;
 
     /**
      * Broadcasts an error message.
      *
      * @param string $string
      */
-    public function error($string): void;
+    public function error(string $string): void;
 
     /**
      * Broadcasts an informational message.
      *
      * @param string $string
      */
-    public function info($string): void;
+    public function info(string $string): void;
 
     /**
      * Broadcasts a warning message.
      *
      * @param string $string
      */
-    public function warning($string): void;
+    public function warning(string $string): void;
 }

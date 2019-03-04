@@ -12,22 +12,22 @@ class TextfileLogWriter implements LogWriterInterface, OutputWriterInterface
     /** @var Outputter */
     protected $outputter;
 
-    public function debug($string): void
+    public function debug(string $string): void
     {
         $this->writeLine('debug', $string);
     }
 
-    public function error($string): void
+    public function error(string $string): void
     {
         $this->writeLine('error', $string);
     }
 
-    public function info($string): void
+    public function info(string $string): void
     {
         $this->writeLine('info', $string);
     }
 
-    public function warning($string): void
+    public function warning(string $string): void
     {
         $this->writeLine('warning', $string);
     }
