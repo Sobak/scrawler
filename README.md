@@ -34,7 +34,7 @@ $scrawler = new Configuration();
 
 $scrawler
     ->setOperationName('Sobakowy Blog')
-    ->setBaseUrl('htt://sobak.pl')
+    ->setBaseUrl('http://sobak.pl')
     ->addUrlListProvider(new ArgumentAdvancerUrlListProvider('http://sobak.pl/page/%u', 2, 1, 17))
     ->addObjectDefinition('post', new CssSelectorListMatcher('article.hentry'), function (ObjectConfiguration $object) {
         $object
