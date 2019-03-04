@@ -11,11 +11,12 @@ class ScrawlerUserAgentProvider extends AbstractClientConfigurationProvider
     public function __construct()
     {
         $phpVersion = PHP_VERSION;
+        $repositoryUrl = 'https://github.com/Sobak/scrawler';
         $scrawlerVersion = Scrawler::VERSION;
 
         $this->setConfiguration([
             'headers' => [
-                'User-Agent' => "Scrawler/{$scrawlerVersion} PHP/{$phpVersion}",
+                'User-Agent' => "Scrawler/{$scrawlerVersion} PHP/{$phpVersion} <{$repositoryUrl}>",
             ],
         ]);
     }
