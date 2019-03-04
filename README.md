@@ -55,10 +55,11 @@ $scrawler
 return $scrawler;
 ```
 
-After saving the configuration file all you have to do is execute this command:
+After saving the configuration file (perhaps as a `config.php`) all you have to
+do is execute this command:
 
 ```bash
-php vendor/bin/scrawler crawl
+php vendor/bin/scrawler crawl config.php
 ```
 
 The example shown above will fetch [http://sobak.pl]() page, then it will iterate
