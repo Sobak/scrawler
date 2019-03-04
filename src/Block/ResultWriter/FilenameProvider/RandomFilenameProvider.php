@@ -8,7 +8,7 @@ use Sobak\Scrawler\Entity\EntityInterface;
 
 class RandomFilenameProvider extends AbstractFilenameProvider
 {
-    public function generateFilename(EntityInterface $entity)
+    public function generateFilename(EntityInterface $entity): string
     {
         return uniqid();
     }

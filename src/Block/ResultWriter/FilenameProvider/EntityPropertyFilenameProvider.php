@@ -18,7 +18,7 @@ class EntityPropertyFilenameProvider extends AbstractFilenameProvider
         parent::__construct($configuration);
     }
 
-    public function generateFilename(EntityInterface $entity)
+    public function generateFilename(EntityInterface $entity): string
     {
         $methodName = 'get' . ucfirst($this->configuration['property']);
 
