@@ -39,11 +39,18 @@ Version: Version number or commit hash if using develop - preferably `git descri
   is meaningful. If you had to make multiple intermediate commits while developing,
   please [squash them][squashing] before submitting.
 
+## Development tip
+There is a dev-only autoloading rule defined in `composer.json` that maps `/dev`
+directory to the `App\` namespace so you don't have to create second project and
+configure Composer to symlink Scrawler into its directory. Simply drop a config
+file there, same for any custom implementations or e.g. entities and you're
+reday to go.
+
 ## Running Tests
 Please don't forget to run the test suite before submitting a pull request.
 
 ``` bash
-./vendor/bin/phpunit
+composer tests
 ```
 
 Functional tests will run PHP server process (the crawler will then connect to)
