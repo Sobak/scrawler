@@ -11,12 +11,12 @@ use Sobak\Scrawler\Matcher\MatcherInterface;
 
 class Configuration
 {
-    protected $baseUrl = null;
+    protected $baseUrl = '';
 
     /** @var ClientConfigurationProviderInterface[] */
     protected $clientConfigurationProviders = [];
 
-    protected $operationName = null;
+    protected $operationName = '';
 
     /** @var LogWriterInterface[] */
     protected $logWriters = [];

@@ -57,7 +57,7 @@ class ConfigurationChecker
 
         $result = $configuration->$methodName();
 
-        if ($result === null) {
+        if ($result === null || empty($result)) {
             throw new ConfigurationException("Required configuration option '$optionName' not set");
         }
 
