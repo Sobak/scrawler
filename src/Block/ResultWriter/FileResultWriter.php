@@ -13,6 +13,8 @@ abstract class FileResultWriter extends AbstractResultWriter implements
     FileResultWriterInterface,
     OutputWriterInterface
 {
+    protected $directory;
+
     protected $filename;
 
     /** @var Outputter */
@@ -55,7 +57,7 @@ abstract class FileResultWriter extends AbstractResultWriter implements
         $this->outputter = $outputter;
     }
 
-    protected function writeToFile(string $contents, string $extension): bool
+    public function initializeResultWrites(): void
     {
         $directory = '';
         if (isset($this->configuration['directory'])) {
@@ -64,7 +66,12 @@ abstract class FileResultWriter extends AbstractResultWriter implements
             $this->outputter->createDirectory($directory, true);
         }
 
-        $filename = $directory . $this->filename . '.' . $extension;
+        $this->directory = $directory;
+    }
+
+    protected function writeToFile(string $contents, string $extension): bool
+    {
+        $filename = $this->directory . $this->filename . '.' . $extension;
         $this->outputter->writeToFile($filename, $contents);
 
         return true;

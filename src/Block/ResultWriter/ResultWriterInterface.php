@@ -18,6 +18,14 @@ interface ResultWriterInterface
     public function getConfiguration(): array;
 
     /**
+     * Fires once before calling write() on any of the entities found for single result writer.
+     *
+     * Might be useul to prepare result storage in any way, like create a directory,
+     * perform initial checks, caching something to improve performance and so on...
+     */
+    public function initializeResultWrites(): void;
+
+    /**
      * Writes single entitty and returns the operation status.
      *
      * @param  EntityInterface $entity

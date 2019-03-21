@@ -22,6 +22,8 @@ class Request
 
     protected $outputter;
 
+    protected $initializedResultWrites;
+
     public function __construct(Client $client, Configuration $configuration, Outputter $outputter)
     {
         $this->client = $client;
@@ -71,6 +73,14 @@ class Request
                         // Set Outputter for result writers that require it
                         if ($resultWriter instanceof OutputWriterInterface) {
                             $resultWriter->setOutputter($this->outputter);
+                        }
+
+                        if (
+                            isset($this->initializedResultWrites[get_class($entity)][get_class($resultWriter)]) === false
+                            || $this->initializedResultWrites[get_class($entity)][get_class($resultWriter)] !== true
+                        ) {
+                            $resultWriter->initializeResultWrites();
+                            $this->initializedResultWrites[get_class($entity)][get_class($resultWriter)] = true;
                         }
 
                         $resultWriter->write($entity);

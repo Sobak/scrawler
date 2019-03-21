@@ -17,4 +17,9 @@ abstract class AbstractResultWriter implements ResultWriterInterface
     {
         return $this->configuration;
     }
+
+    public function initializeResultWrites(): void
+    {
+        //
+    }
 }
