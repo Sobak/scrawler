@@ -8,7 +8,14 @@ use Sobak\Scrawler\Entity\EntityInterface;
 
 interface ResultWriterInterface
 {
-    public function __construct(array $configuration = []);
+    /**
+     * ResultWriterInterface constructor.
+     *
+     * @param string $entityName Fully qualified name of entity class being
+     *                           written by this ResultWriter instance.
+     * @param array $configuration
+     */
+    public function __construct(string $entityName, array $configuration = []);
 
     /**
      * Returns implementation-specific configuration provided by the user.
