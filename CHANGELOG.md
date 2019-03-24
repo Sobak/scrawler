@@ -12,6 +12,7 @@ All notable changes to Scrawler will be documented in this file.
   hooking with any kind of preparation logic for every result writer.
 - `Scrawler` now accepts `Configuration` object plus the output directory instead
   of configuration path
+- `ScrawlerUserAgentProvider` now requires final bot name and contact URL
 
 ### Fixed
 - Fixed misleading default values for required configuration options which confused
