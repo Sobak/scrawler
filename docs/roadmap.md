@@ -7,7 +7,7 @@ are going to be implemented in a foreseeable future.
 - support for multiple UrlList providers
 - support for multiple ResultWriters per entity
 - performance improvements
-- database result writer
+- support for writing results into SQLite database
 - refactoring of Result class
 - defining manual steps before/after the crawling
 - support for scrapping non-HTML/XML responses

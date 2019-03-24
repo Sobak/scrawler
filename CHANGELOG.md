@@ -3,6 +3,7 @@ All notable changes to Scrawler will be documented in this file.
 
 ## [Unreleased]
 ### Added
+- Added database result writer
 - Added `getEntity` and `setEntity` methods to the `ResultWriterInterface` to
   set the entity context for the result writer to use.
 - Added `initializeResultWrites` method to the `ResultWriterInterface` to allow

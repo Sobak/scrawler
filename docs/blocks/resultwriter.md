@@ -23,6 +23,45 @@ Second, they _need_ to accept a filename provider object under the
 [dedicated documentation section](filenameprovider.md) and choose one
 suitable to your needs.
 
+## DatabaseResultWriter
+Saves results into almost any of the databases supported by PDO.
+
+> **Note:** This writer depends on Doctrine, install it with
+> `composer require doctrine/orm "^2.6"` first
+
+In order to configure the database result writer pass connection parameters
+parameters as `connection` key, accordingly to the
+[Doctrine documentation][doctrine-connection]. Please note that the URL
+connection string is not supported, you need to use an array.
+
+> **Note:** SQLite support is not available yet.
+
+There is an additional parameter `simple_annotations` which when set to
+`true` parses Doctrine annotations without importing their namespace.
+
+Sample configuration for the database result writer might then look like so:
+
+```php
+->addResultWriter(PostEntity::class, new DatabaseResultWriter([
+    'connection' => [
+        'driver'   => 'pdo_mysql',
+        'user'     => 'root',
+        'password' => '',
+        'dbname'   => 'scrawler',
+    ],
+    'simple_annotations' => false,
+]))
+```
+
+To use this writer you need to describe all entities used by it with
+Doctrine [annotation mappings][doctrine-mapping]. Relationships are
+not supported at the time of writing.
+
+The database will be created if it doesn't exist and the user specified
+in the connection has permissions to add new database. When running
+Scrawler, all tables described by the entities assigned to this result
+writer will be **dropped** and created from scratch with fresh data.
+
 ## DumpResultWriter
 This is probably the simplest result writer available. All it does is
 dumping the entity into the console. It tries to use the [VarDumper][vardumper]
@@ -54,4 +93,6 @@ resulting file.
 This result writer does not define any additional configuration options
 aside from ones specific to all file result writers.
 
+[doctrine-connection]: https://www.doctrine-project.org/projects/doctrine-dbal/en/2.9/reference/configuration.html
+[doctrine-mapping]: https://www.doctrine-project.org/projects/doctrine-orm/en/2.6/reference/annotations-reference.html
 [vardumper]: https://symfony.com/doc/current/components/var_dumper.html

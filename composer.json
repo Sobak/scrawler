@@ -12,9 +12,13 @@
         "symfony/dom-crawler": "^4.2"
     },
     "require-dev": {
+        "doctrine/orm": "^2.6",
         "phpunit/phpunit": "^8.0",
         "symfony/process": "^4.2",
         "symfony/var-dumper": "^4.2"
+    },
+    "suggest": {
+        "doctrine/orm": "Required to use DatabaseResultWriter"
     },
     "autoload": {
         "psr-4": {

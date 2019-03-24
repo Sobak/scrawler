@@ -31,6 +31,7 @@ mentioning its potential parameters etc.
 	- ConsoleLogWriter
 	- TextfileLogWriter
 - [ResultWriter](blocks/resultwriter.md)
+	- [DatabaseResultWriter](blocks/resultwriter.md#databaseresultwriter)
 	- [DumpResultWriter](blocks/resultwriter.md#dumpresultwriter)
 	- [InMemoryResultWriter](blocks/resultwriter.md#inmemoryresultwriter)
 	- [JsonFileResultWriter](blocks/resultwriter.md#jsonfileresultwriter)
