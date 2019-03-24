@@ -44,7 +44,7 @@ There is a dev-only autoloading rule defined in `composer.json` that maps `/dev`
 directory to the `App\` namespace so you don't have to create second project and
 configure Composer to symlink Scrawler into its directory. Simply drop a config
 file there, same for any custom implementations or e.g. entities and you're
-reday to go.
+ready to go.
 
 ## Running Tests
 Please don't forget to run the test suite before submitting a pull request.
