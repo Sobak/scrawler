@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Sobak\Scrawler\Application\Commands;
 
+use Sobak\Scrawler\Configuration\Configuration;
 use Sobak\Scrawler\Scrawler;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
@@ -21,9 +22,20 @@ class CrawlCommand extends Command
 
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
-        $configPath = $input->getArgument('config');
+        $configurationPath = $input->getArgument('config');
 
-        $scrawler = new Scrawler($configPath);
+        if (is_file($configurationPath) === false) {
+            throw new \Exception("Could not find configuration at '{$configurationPath}'");
+        }
+
+        /** @noinspection PhpIncludeInspection */
+        $configuration = require $configurationPath;
+
+        if (($configuration instanceof Configuration) === false) {
+            throw new \Exception('Application must return the Configuration instance');
+        }
+
+        $scrawler = new Scrawler($configuration, dirname(realpath($configurationPath)));
 
         return $scrawler->run();
     }

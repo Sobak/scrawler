@@ -10,6 +10,8 @@ All notable changes to Scrawler will be documented in this file.
   set the entity context for the result writer to use.
 - Added `initializeResultWrites` method to the `ResultWriterInterface` to allow
   hooking with any kind of preparation logic for every result writer.
+- `Scrawler` now accepts `Configuration` object plus the output directory instead
+  of configuration path
 
 ### Fixed
 - Fixed misleading default values for required configuration options which confused

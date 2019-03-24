@@ -24,15 +24,16 @@ class Scrawler
 
     protected $output;
 
-    public function __construct($configurationPath)
+    public function __construct(Configuration $configuration, string $outputDirectory)
     {
-        $this->configuration = $this->loadConfiguration($configurationPath);
-        $this->checkConfiguration($this->configuration);
+        $this->checkConfiguration($configuration);
 
         $this->output = new Outputter(
-            dirname(realpath($configurationPath)),
-            Utils::slugify($this->configuration->getOperationName())
+            $outputDirectory,
+            Utils::slugify($configuration->getOperationName())
         );
+
+        $this->configuration = $configuration;
         $this->logWriter = new LogWriter($this->configuration->getLogWriters(), $this->output);
     }
 
@@ -47,22 +48,6 @@ class Scrawler
         $request->makeRequest($initialUrl, []);
 
         return 0;
-    }
-
-    protected function loadConfiguration($configurationPath): Configuration
-    {
-        if (is_file($configurationPath) === false) {
-            throw new \Exception("Could not find configuration at '{$configurationPath}'");
-        }
-
-        /** @noinspection PhpIncludeInspection */
-        $configuration = require $configurationPath;
-
-        if (($configuration instanceof Configuration) === false) {
-            throw new \Exception('Application must return the Configuration instance');
-        }
-
-        return $configuration;
     }
 
     protected function checkConfiguration(Configuration $configuration): bool
