@@ -20,7 +20,7 @@ abstract class FileResultWriter extends AbstractResultWriter implements
     /** @var Outputter */
     protected $outputter;
 
-    public function __construct(string $entityName, array $configuration = [])
+    public function __construct(array $configuration = [])
     {
         if (
             isset($configuration['filename']) === false
@@ -29,7 +29,7 @@ abstract class FileResultWriter extends AbstractResultWriter implements
             throw new Exception("For the FileResultWriter you must set the FilenameProvider under 'filename' key");
         }
 
-        parent::__construct($entityName, $configuration);
+        parent::__construct($configuration);
     }
 
     public function getFilenameProvider(): FilenameProviderInterface

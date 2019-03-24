@@ -62,6 +62,8 @@ class Request
                     if (isset($resultWriters[$entityClass])) {
                         $resultWriter = $resultWriters[$entityClass];
 
+                        $resultWriter->setEntity($entityClass);
+
                         // Generate the filename for FileResultWriters
                         if ($resultWriter instanceof FileResultWriterInterface) {
                             /** @var FilenameProviderInterface $filenameProvider */

@@ -10,15 +10,26 @@ abstract class AbstractResultWriter implements ResultWriterInterface
 
     protected $entityName;
 
-    public function __construct(string $entityName, array $configuration = [])
+    public function __construct(array $configuration = [])
     {
         $this->configuration = $configuration;
-        $this->entityName = $entityName;
     }
 
     public function getConfiguration(): array
     {
         return $this->configuration;
+    }
+
+    public function getEntity(): string
+    {
+        return $this->entityName;
+    }
+
+    public function setEntity(string $entityName): ResultWriterInterface
+    {
+        $this->entityName = $entityName;
+
+        return $this;
     }
 
     public function initializeResultWrites(): void

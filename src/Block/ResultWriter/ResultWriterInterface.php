@@ -11,11 +11,9 @@ interface ResultWriterInterface
     /**
      * ResultWriterInterface constructor.
      *
-     * @param string $entityName Fully qualified name of entity class being
-     *                           written by this ResultWriter instance.
      * @param array $configuration
      */
-    public function __construct(string $entityName, array $configuration = []);
+    public function __construct(array $configuration = []);
 
     /**
      * Returns implementation-specific configuration provided by the user.
@@ -23,6 +21,22 @@ interface ResultWriterInterface
      * @return array
      */
     public function getConfiguration(): array;
+
+    /**
+     * Gets entity context for the result writer.
+     *
+     * @return string Fully qualified name of entity class
+     */
+    public function getEntity(): string;
+
+    /**
+     * Sets the entity context for the result writer.
+     *
+     * @param string $entityName Fully qualified name of entity class being
+     *                           written by this ResultWriter instance.
+     * @return ResultWriterInterface
+     */
+    public function setEntity(string $entityName): ResultWriterInterface;
 
     /**
      * Fires once before calling write() on any of the entities found for single result writer.
