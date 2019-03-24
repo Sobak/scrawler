@@ -30,10 +30,13 @@ mentioning its potential parameters etc.
 - LogWriter
 	- ConsoleLogWriter
 	- TextfileLogWriter
-- ResultWriter
-	- DumpResultWriter
-	- InMemoryResultWriter
-	- JsonFileResultWriter
+- [ResultWriter](blocks/resultwriter.md)
+	- [DumpResultWriter](blocks/resultwriter.md#dumpresultwriter)
+	- [InMemoryResultWriter](blocks/resultwriter.md#inmemoryresultwriter)
+	- [JsonFileResultWriter](blocks/resultwriter.md#jsonfileresultwriter)
+- [FilenameProvider](blocks/filenameprovider.md)
+    - [EntityPropertyFilenameProvider](blocks/filenameprovider.md#entitypropertyfilenameprovider)
+    - [RandomFilenameProvider](blocks/filenameprovider.md#randomfilenameprovider)
 - UrlListProvider
 	- ArgumentAdvancerUrlListProvider
 	- EmptyUrlListProvider
