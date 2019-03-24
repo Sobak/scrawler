@@ -11,7 +11,9 @@ class EntityPropertyFilenameProviderTest extends ServerBasedTest
 {
     public function testFilenameProviderForJsonFileResultWriter(): void
     {
-        $scrawler = new Scrawler(__DIR__ . '/config-entity-property-filename.php');
+        $config = require 'config-entity-property-filename.php';
+
+        $scrawler = new Scrawler($config, __DIR__);
         $scrawler->run();
 
         $files = glob(__DIR__ . '/output/test/*.json');

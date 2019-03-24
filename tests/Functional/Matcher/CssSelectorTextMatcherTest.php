@@ -10,7 +10,9 @@ class CssSelectorTextMatcherTest extends ServerBasedTest
 {
     public function testClassMatching(): void
     {
-        $scrawler = new Scrawler(__DIR__ . '/css-selector-text-matcher.php');
+        $config = require 'css-selector-text-matcher.php';
+
+        $scrawler = new Scrawler($config, __DIR__);
         $scrawler->run();
 
         $this->assertEquals('interesting', InMemoryResultWriter::$results[0]['match']);

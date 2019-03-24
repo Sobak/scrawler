@@ -11,7 +11,9 @@ class RandomFilenameProviderTest extends ServerBasedTest
 {
     public function testFilenameProviderForJsonFileResultWriter(): void
     {
-        $scrawler = new Scrawler(__DIR__ . '/config-random-filename.php');
+        $config = require 'config-random-filename.php';
+
+        $scrawler = new Scrawler($config, __DIR__);
         $scrawler->run();
 
         $files = glob(__DIR__ . '/output/test/*.json');

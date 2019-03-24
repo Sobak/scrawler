@@ -12,7 +12,9 @@ class ArgumentAdvancerUrlListProviderTest extends ServerBasedTest
 {
     public function testWithStopArgument(): void
     {
-        $scrawler = new Scrawler(__DIR__ . '/config-start-stop.php');
+        $config = require 'config-start-stop.php';
+
+        $scrawler = new Scrawler($config, __DIR__);
         $scrawler->run();
 
         $this->assertEquals('First message', InMemoryResultWriter::$results[0]['match']);
@@ -24,7 +26,9 @@ class ArgumentAdvancerUrlListProviderTest extends ServerBasedTest
 
     public function testWithNonDefaultStep(): void
     {
-        $scrawler = new Scrawler(__DIR__ . '/config-step-2.php');
+        $config = require 'config-step-2.php';
+
+        $scrawler = new Scrawler($config, __DIR__);
         $scrawler->run();
 
         $this->assertEquals('First message', InMemoryResultWriter::$results[0]['match']);

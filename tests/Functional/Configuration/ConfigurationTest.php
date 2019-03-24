@@ -13,10 +13,11 @@ class ConfigurationTest extends TestCase
 {
     public function testConfigurationObjectTypeChecking(): void
     {
-        $this->expectException(Exception::class);
-        $this->expectExceptionMessage('Application must return the Configuration instance');
+        $this->expectException(\TypeError::class);
 
-        $scrawler = new Scrawler(__DIR__ . '/config-wrong-object.php');
+        $config = require 'config-wrong-object.php';
+
+        $scrawler = new Scrawler($config, __DIR__);
         $scrawler->run();
     }
 
@@ -27,16 +28,9 @@ class ConfigurationTest extends TestCase
 
         $this->expectException(ConfigurationException::class);
 
-        $scrawler = new Scrawler(__DIR__ . '/config-empty.php');
-        $scrawler->run();
-    }
+        $config = require 'config-empty.php';
 
-    public function testMissingConfigurationFile(): void
-    {
-        $this->expectException(Exception::class);
-        $this->expectExceptionMessageRegExp('#^Could not find configuration at (.+)$#');
-
-        $scrawler = new Scrawler(__DIR__ . '/missing-file.php');
+        $scrawler = new Scrawler($config, __DIR__);
         $scrawler->run();
     }
 }
