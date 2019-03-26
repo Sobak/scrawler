@@ -3,4 +3,3 @@
 /tests/Functional/**/output
 /vendor
 composer.lock
-todo.md
