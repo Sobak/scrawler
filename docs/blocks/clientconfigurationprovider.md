@@ -17,8 +17,9 @@ an object of class implementing the valid interface and can be removed
 by using a fully qualified class name of the provider (`::class` value).
 
 ## ScrawlerUserAgentProvider
-This is a default client configuration provider. It sets an user agent
-to Scrawler with the addition of its current version, current PHP version
-and Scrawler's website.
+This is a default client configuration provider which includes Scrawler
+name and version inside the user agent. It does, however, require you to
+pass information about your specific bot based on Scrawler so that owners
+of websites you crawl can actually identify and contact you.
 
 [guzzle-docs]: http://docs.guzzlephp.org/en/stable/request-options.html

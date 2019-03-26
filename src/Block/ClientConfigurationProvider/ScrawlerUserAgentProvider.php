@@ -8,15 +8,19 @@ use Sobak\Scrawler\Scrawler;
 
 class ScrawlerUserAgentProvider extends AbstractClientConfigurationProvider
 {
-    public function __construct()
+    public function __construct(string $botName, string $botUrl)
     {
-        $phpVersion = PHP_VERSION;
-        $repositoryUrl = 'https://github.com/Sobak/scrawler';
-        $scrawlerVersion = Scrawler::VERSION;
+        $userAgent = sprintf(
+            '%s (<%s>; powered by Scrawler %s, %s)',
+            $botName,
+            $botUrl,
+            Scrawler::VERSION,
+            'https://github.com/Sobak/scrawler'
+        );
 
         $this->setConfiguration([
             'headers' => [
-                'User-Agent' => "Scrawler/{$scrawlerVersion} PHP/{$phpVersion} <{$repositoryUrl}>",
+                'User-Agent' => $userAgent,
             ],
         ]);
     }

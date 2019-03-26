@@ -72,6 +72,11 @@ you can easily achieve quite tedious task for which you would otherwise need
 to get a few libraries, define rules to follow, provide correct map to write
 down the file... Scrawler does it all for you!
 
+> **Note:** Scrawler _does not_ aim to execute client side code, by design.
+> This completely is doable (look at headless Chrome or even phantom.js if
+> you like history) but I consider it out of scope for this project and have
+> no interest in developing it. Thanks for understanding.
+
 ## Documentation
 
 > **Note:** some parts of the documentation are still under construction.
