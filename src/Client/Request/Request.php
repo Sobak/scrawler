@@ -56,7 +56,7 @@ class Request
 
                 // Map object result to entities and write them
                 foreach ($objectDefinition->getEntityMappings() as $entityClass) {
-                    $entity = EntityMapper::mapResultToEntity($objectResult, $entityClass);
+                    $entity = EntityMapper::resultToEntity($objectResult, $entityClass);
 
                     $resultWriters = $objectDefinition->getResultWriters();
                     if (isset($resultWriters[$entityClass])) {

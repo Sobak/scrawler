@@ -4,13 +4,13 @@ declare(strict_types=1);
 
 namespace Sobak\Scrawler\Block\ResultWriter;
 
-use Sobak\Scrawler\Entity\EntityInterface;
+use Sobak\Scrawler\Entity\EntityMapper;
 
 class JsonFileResultWriter extends FileResultWriter
 {
-    public function write(EntityInterface $entity): bool
+    public function write(object $entity): bool
     {
-        $output = json_encode($entity->toArray(), JSON_PRETTY_PRINT);
+        $output = json_encode(EntityMapper::entityToArray($entity), JSON_PRETTY_PRINT);
 
         return $this->writeToFile($output, 'json');
     }

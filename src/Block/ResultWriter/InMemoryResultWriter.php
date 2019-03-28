@@ -4,18 +4,18 @@ declare(strict_types=1);
 
 namespace Sobak\Scrawler\Block\ResultWriter;
 
-use Sobak\Scrawler\Entity\EntityInterface;
+use Sobak\Scrawler\Entity\EntityMapper;
 
 class InMemoryResultWriter extends AbstractResultWriter
 {
     public static $results;
 
-    public function write(EntityInterface $entity): bool
+    public function write(object $entity): bool
     {
         if (isset($this->configuration['group'])) {
-            self::$results[$this->configuration['group']][] = $entity->toArray();
+            self::$results[$this->configuration['group']][] = EntityMapper::entityToArray($entity);
         } else {
-            self::$results[] = $entity->toArray();
+            self::$results[] = EntityMapper::entityToArray($entity);
         }
 
         return true;

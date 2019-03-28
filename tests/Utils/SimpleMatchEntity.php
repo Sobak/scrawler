@@ -4,9 +4,7 @@ declare(strict_types=1);
 
 namespace Tests\Utils;
 
-use Sobak\Scrawler\Entity\EntityInterface;
-
-class SimpleMatchEntity implements EntityInterface
+class SimpleMatchEntity
 {
     protected $match;
 

@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Sobak\Scrawler\Block\ResultWriter\FilenameProvider;
 
 use Exception;
-use Sobak\Scrawler\Entity\EntityInterface;
 
 class EntityPropertyFilenameProvider extends AbstractFilenameProvider
 {
@@ -18,7 +17,7 @@ class EntityPropertyFilenameProvider extends AbstractFilenameProvider
         parent::__construct($configuration);
     }
 
-    public function generateFilename(EntityInterface $entity): string
+    public function generateFilename(object $entity): string
     {
         $methodName = 'get' . ucfirst($this->configuration['property']);
 

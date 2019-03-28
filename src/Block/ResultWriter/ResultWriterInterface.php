@@ -4,8 +4,6 @@ declare(strict_types=1);
 
 namespace Sobak\Scrawler\Block\ResultWriter;
 
-use Sobak\Scrawler\Entity\EntityInterface;
-
 interface ResultWriterInterface
 {
     /**
@@ -49,8 +47,8 @@ interface ResultWriterInterface
     /**
      * Writes single entitty and returns the operation status.
      *
-     * @param  EntityInterface $entity
+     * @param  object $entity
      * @return bool
      */
-    public function write(EntityInterface $entity): bool;
+    public function write(object $entity): bool;
 }

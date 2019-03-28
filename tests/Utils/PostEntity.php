@@ -4,9 +4,7 @@ declare(strict_types=1);
 
 namespace Tests\Utils;
 
-use Sobak\Scrawler\Entity\EntityInterface;
-
-class PostEntity implements EntityInterface
+class PostEntity
 {
     protected $content;
 

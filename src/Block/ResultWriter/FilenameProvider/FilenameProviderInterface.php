@@ -4,8 +4,6 @@ declare(strict_types=1);
 
 namespace Sobak\Scrawler\Block\ResultWriter\FilenameProvider;
 
-use Sobak\Scrawler\Entity\EntityInterface;
-
 interface FilenameProviderInterface
 {
     public function __construct(array $configuration = []);
@@ -20,8 +18,8 @@ interface FilenameProviderInterface
     /**
      * Generates a filename (with no extension) for a file holding single entity.
      *
-     * @param  EntityInterface $entity
+     * @param  object $entity
      * @return string
      */
-    public function generateFilename(EntityInterface $entity): string;
+    public function generateFilename(object $entity): string;
 }

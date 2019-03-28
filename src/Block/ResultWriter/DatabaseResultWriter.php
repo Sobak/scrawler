@@ -11,7 +11,6 @@ use Doctrine\ORM\Tools\SchemaTool;
 use Doctrine\ORM\Tools\Setup;
 use Exception;
 use ReflectionClass;
-use Sobak\Scrawler\Entity\EntityInterface;
 use Sobak\Scrawler\Output\Outputter;
 use Sobak\Scrawler\Output\OutputWriterInterface;
 
@@ -68,7 +67,7 @@ class DatabaseResultWriter extends AbstractResultWriter implements OutputWriterI
         $this->entityManager = $entityManager;
     }
 
-    public function write(EntityInterface $entity): bool
+    public function write(object $entity): bool
     {
         $this->entityManager->persist($entity);
         $this->entityManager->flush();
