@@ -21,6 +21,11 @@ slugs as filenames one might use:
 ]))
 ```
 
+## IncrementalFilenameProvider
+With this filename provider every result (entity) will be written into the file
+with incremental name. By default it starts from `1` but there is an optional
+configuration parameter `start` using which you can change that value.
+
 ## RandomFilenameProvider
 Every entity will be saved into the file with random name. This provider **does not**
 guarantee name uniqueness so it might happen that names will collide and some results

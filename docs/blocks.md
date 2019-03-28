@@ -32,6 +32,7 @@ mentioning its potential parameters etc.
 	- [JsonFileResultWriter](blocks/resultwriter.md#jsonfileresultwriter)
 - [FilenameProvider](blocks/filenameprovider.md)
     - [EntityPropertyFilenameProvider](blocks/filenameprovider.md#entitypropertyfilenameprovider)
+    - [IncrementalFilenameProvider](blocks/filenameprovider.md#incrementalfilenameprovider)
     - [RandomFilenameProvider](blocks/filenameprovider.md#randomfilenameprovider)
 - UrlListProvider
 	- ArgumentAdvancerUrlListProvider

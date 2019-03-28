@@ -4,6 +4,7 @@ All notable changes to Scrawler will be documented in this file.
 ## [Unreleased]
 ### Added
 - Added database result writer
+- Added incremental filename provider
 
 ### Changed
 - Added `getEntity` and `setEntity` methods to the `ResultWriterInterface` to
