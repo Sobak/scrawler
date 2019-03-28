@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Tests\Functional\Crawling;
 
-use Sobak\Scrawler\Block\FieldDefinition\StringField;
 use Sobak\Scrawler\Block\ResultWriter\FilenameProvider\EntityPropertyFilenameProvider;
 use Sobak\Scrawler\Block\ResultWriter\JsonFileResultWriter;
 use Sobak\Scrawler\Block\UrlListProvider\EmptyUrlListProvider;
@@ -23,8 +22,8 @@ $scrawler
     ->addUrlListProvider(new EmptyUrlListProvider())
     ->addObjectDefinition('message', new CssSelectorListMatcher('div.post'), function (ObjectConfiguration $object) {
         $object
-            ->addFieldDefinition('content', new StringField(new CssSelectorTextMatcher('span.content')))
-            ->addFieldDefinition('title', new StringField(new CssSelectorTextMatcher('h2')))
+            ->addFieldDefinition('content', new CssSelectorTextMatcher('span.content'))
+            ->addFieldDefinition('title', new CssSelectorTextMatcher('h2'))
             ->addEntityMapping(PostEntity::class)
             ->addResultWriter(PostEntity::class, new JsonFileResultWriter([
                 'filename' => new EntityPropertyFilenameProvider([

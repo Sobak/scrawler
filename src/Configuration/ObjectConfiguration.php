@@ -5,19 +5,35 @@ declare(strict_types=1);
 namespace Sobak\Scrawler\Configuration;
 
 use ArrayIterator;
-use Sobak\Scrawler\Block\FieldDefinition\AbstractFieldDefinition;
-use Sobak\Scrawler\Block\FieldDefinition\FieldDefinitionInterface;
 use Sobak\Scrawler\Block\ResultWriter\ResultWriterInterface;
+use Sobak\Scrawler\Matcher\MatcherInterface;
 
-class ObjectConfiguration extends AbstractFieldDefinition
+class ObjectConfiguration
 {
     protected $entityMappings = [];
 
-    /** @var FieldDefinitionInterface[] */
+    /** @var MatcherInterface[] */
     protected $fieldDefinitions;
+
+    protected $matcher;
 
     /** @var ResultWriterInterface[] */
     protected $resultWriters = [];
+
+    public function __construct(MatcherInterface $matcher)
+    {
+        $this->matcher = $matcher;
+    }
+
+    public function getMatcher(): MatcherInterface
+    {
+        return $this->matcher;
+    }
+
+    public function getMatches(): ArrayIterator
+    {
+        return $this->matcher->match();
+    }
 
     public function addEntityMapping(string $entityClass): self
     {
@@ -38,7 +54,7 @@ class ObjectConfiguration extends AbstractFieldDefinition
         return $this;
     }
 
-    public function addFieldDefinition(string $name, FieldDefinitionInterface $fieldDefinition): self
+    public function addFieldDefinition(string $name, MatcherInterface $fieldDefinition): self
     {
         $this->fieldDefinitions[$name] = $fieldDefinition;
 
@@ -74,15 +90,5 @@ class ObjectConfiguration extends AbstractFieldDefinition
         unset($this->resultWriters[$entityClass]);
 
         return $this;
-    }
-
-    public function serializeValue(): ArrayIterator
-    {
-        return $this->serializer($this->matcher->match());
-    }
-
-    public function serializer($value)
-    {
-        return $value;
     }
 }

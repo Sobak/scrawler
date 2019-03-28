@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Tests\Functional\Crawling;
 
-use Sobak\Scrawler\Block\FieldDefinition\StringField;
 use Sobak\Scrawler\Block\ResultWriter\FilenameProvider\RandomFilenameProvider;
 use Sobak\Scrawler\Block\ResultWriter\JsonFileResultWriter;
 use Sobak\Scrawler\Block\UrlListProvider\EmptyUrlListProvider;
@@ -23,7 +22,7 @@ $scrawler
     ->addUrlListProvider(new EmptyUrlListProvider())
     ->addObjectDefinition('message', new CssSelectorListMatcher('div.message'), function (ObjectConfiguration $object) {
         $object
-            ->addFieldDefinition('match', new StringField(new CssSelectorTextMatcher('span.content')))
+            ->addFieldDefinition('match', new CssSelectorTextMatcher('span.content'))
             ->addEntityMapping(SimpleMatchEntity::class)
             ->addResultWriter(SimpleMatchEntity::class, new JsonFileResultWriter([
                 'filename' => new RandomFilenameProvider(),

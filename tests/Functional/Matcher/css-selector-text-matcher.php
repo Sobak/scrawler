@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Tests\Functional\Matcher;
 
-use Sobak\Scrawler\Block\FieldDefinition\StringField;
 use Sobak\Scrawler\Block\ResultWriter\InMemoryResultWriter;
 use Sobak\Scrawler\Block\UrlListProvider\EmptyUrlListProvider;
 use Sobak\Scrawler\Configuration\Configuration;
@@ -22,7 +21,7 @@ $scrawler
     ->addUrlListProvider(new EmptyUrlListProvider())
     ->addObjectDefinition('test', new CssSelectorListMatcher('body'), function (ObjectConfiguration $object) {
         $object
-            ->addFieldDefinition('match', new StringField(new CssSelectorTextMatcher('span.match')))
+            ->addFieldDefinition('match', new CssSelectorTextMatcher('span.match'))
             ->addEntityMapping(SimpleMatchEntity::class)
             ->addResultWriter(SimpleMatchEntity::class, new InMemoryResultWriter())
         ;

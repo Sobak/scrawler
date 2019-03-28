@@ -18,6 +18,9 @@ All notable changes to Scrawler will be documented in this file.
 - Fixed misleading default values for required configuration options which confused
   some of the code analysys tools
 
+### Removed  
+- `FieldDefinition` classes
+
 ## 0.1.0 - 2019-03-04
 Initial release of Scrawler.
 

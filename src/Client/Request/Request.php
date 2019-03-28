@@ -43,15 +43,15 @@ class Request
 
         foreach ($this->configuration->getObjectDefinitions() as $objectListName => $objectDefinition) {
             $objectDefinition->getMatcher()->setCrawler(new Crawler($responseBody));
-            $matchesList = $objectDefinition->serializeValue();
+            $matchesList = $objectDefinition->getMatches();
 
             // Iterate over single found object
             foreach ($matchesList as $match) {
                 $objectResult = [];
-                foreach ($objectDefinition->getFieldDefinitions() as $fieldName => $fieldDefinition) {
-                    $fieldDefinition->getMatcher()->setCrawler(new Crawler($match));
+                foreach ($objectDefinition->getFieldDefinitions() as $fieldName => $matcher) {
+                    $matcher->setCrawler(new Crawler($match));
 
-                    $objectResult[$fieldName] = $fieldDefinition->serializeValue();
+                    $objectResult[$fieldName] = $matcher->match();
                 }
 
                 // Map object result to entities and write them

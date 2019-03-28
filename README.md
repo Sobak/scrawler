@@ -19,7 +19,6 @@ composer require sobak/scrawler
 <?php
 
 use App\PostEntity;
-use Sobak\Scrawler\Block\FieldDefinition\StringField;
 use Sobak\Scrawler\Block\ResultWriter\FilenameProvider\EntityPropertyFilenameProvider;
 use Sobak\Scrawler\Block\ResultWriter\JsonFileResultWriter;
 use Sobak\Scrawler\Block\UrlListProvider\ArgumentAdvancerUrlListProvider;
@@ -38,9 +37,9 @@ $scrawler
     ->addUrlListProvider(new ArgumentAdvancerUrlListProvider('http://sobak.pl/page/%u', 2, 1, 17))
     ->addObjectDefinition('post', new CssSelectorListMatcher('article.hentry'), function (ObjectConfiguration $object) {
         $object
-            ->addFieldDefinition('date', new StringField(new CssSelectorTextMatcher('time.entry-date')))
-            ->addFieldDefinition('content', new StringField(new CssSelectorTextMatcher('div.entry-content')))
-            ->addFieldDefinition('title', new StringField(new CssSelectorTextMatcher('h1.entry-title')))
+            ->addFieldDefinition('date', new CssSelectorTextMatcher('time.entry-date'))
+            ->addFieldDefinition('content', new CssSelectorTextMatcher('div.entry-content'))
+            ->addFieldDefinition('title', new CssSelectorTextMatcher('h1.entry-title'))
             ->addEntityMapping(PostEntity::class)
             ->addResultWriter(PostEntity::class, new JsonFileResultWriter([
                 'directory' => 'posts/',

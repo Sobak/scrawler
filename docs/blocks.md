@@ -22,11 +22,6 @@ mentioning its potential parameters etc.
 
 - [ClientConfigurationProvider](blocks/clientconfigurationprovider.md)
 	- [ScrawlerUserAgentProvider](blocks/clientconfigurationprovider.md#scrawleruseragentprovider)
-- FieldDefinition
-	- IntegerField
-	- NullableIntegerField
-	- StringField
-	- NullableStringField
 - LogWriter
 	- ConsoleLogWriter
 	- TextfileLogWriter
