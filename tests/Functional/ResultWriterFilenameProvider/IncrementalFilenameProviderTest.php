@@ -4,14 +4,33 @@ declare(strict_types=1);
 
 namespace Tests\Functional\ResultWriterFilenameProvider;
 
+use Sobak\Scrawler\Block\ResultWriter\FilenameProvider\IncrementalFilenameProvider;
+use Sobak\Scrawler\Block\ResultWriter\JsonFileResultWriter;
+use Sobak\Scrawler\Configuration\ObjectConfiguration;
+use Sobak\Scrawler\Matcher\CssSelectorListMatcher;
+use Sobak\Scrawler\Matcher\CssSelectorTextMatcher;
 use Sobak\Scrawler\Scrawler;
 use Tests\Functional\ServerBasedTest;
+use Tests\Utils\BasicConfigurationProvider;
+use Tests\Utils\PostEntity;
 
 class IncrementalFilenameProviderTest extends ServerBasedTest
 {
     public function testWithDefaultStartParameter(): void
     {
-        $config = require 'config-incremental-filename.php';
+        $config = BasicConfigurationProvider::getConfiguration()
+            ->setBaseUrl(ServerBasedTest::getHostUrl() . '/posts.html')
+            ->addObjectDefinition('message', new CssSelectorListMatcher('div.post'), function (ObjectConfiguration $object) {
+                $object
+                    ->addFieldDefinition('content', new CssSelectorTextMatcher('span.content'))
+                    ->addFieldDefinition('title', new CssSelectorTextMatcher('h2'))
+                    ->addEntityMapping(PostEntity::class)
+                    ->addResultWriter(PostEntity::class, new JsonFileResultWriter([
+                        'filename' => new IncrementalFilenameProvider(),
+                    ]))
+                ;
+            })
+        ;
 
         $scrawler = new Scrawler($config, __DIR__);
         $scrawler->run();
@@ -31,7 +50,21 @@ class IncrementalFilenameProviderTest extends ServerBasedTest
 
     public function testWithCustomStartParameter(): void
     {
-        $config = require 'config-incremental-filename-start.php';
+        $config = BasicConfigurationProvider::getConfiguration()
+            ->setBaseUrl(ServerBasedTest::getHostUrl() . '/posts.html')
+            ->addObjectDefinition('message', new CssSelectorListMatcher('div.post'), function (ObjectConfiguration $object) {
+                $object
+                    ->addFieldDefinition('content', new CssSelectorTextMatcher('span.content'))
+                    ->addFieldDefinition('title', new CssSelectorTextMatcher('h2'))
+                    ->addEntityMapping(PostEntity::class)
+                    ->addResultWriter(PostEntity::class, new JsonFileResultWriter([
+                        'filename' => new IncrementalFilenameProvider([
+                            'start' => 3,
+                        ]),
+                    ]))
+                ;
+            })
+        ;
 
         $scrawler = new Scrawler($config, __DIR__);
         $scrawler->run();
