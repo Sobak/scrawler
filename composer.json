@@ -34,6 +34,12 @@
             "Tests\\": "tests/"
         }
     },
+    "authors": [
+        {
+            "name": "Maciej Sobaczewski",
+            "homepage": "http://sobak.pl"
+        }
+    ],
     "bin": [
         "bin/scrawler"
     ],
