@@ -6,7 +6,7 @@ namespace Sobak\Scrawler\Matcher;
 
 use ArrayIterator;
 
-class XpathListMatcher extends AbstractMatcher
+class XpathListMatcher extends AbstractMatcher implements ListMatcherInterface
 {
     public function match(): ArrayIterator
     {

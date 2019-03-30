@@ -7,7 +7,7 @@ namespace Sobak\Scrawler\Configuration;
 use Sobak\Scrawler\Block\ClientConfigurationProvider\ClientConfigurationProviderInterface;
 use Sobak\Scrawler\Block\LogWriter\LogWriterInterface;
 use Sobak\Scrawler\Block\UrlListProvider\UrlListProviderInterface;
-use Sobak\Scrawler\Matcher\MatcherInterface;
+use Sobak\Scrawler\Matcher\ListMatcherInterface;
 
 class Configuration
 {
@@ -77,7 +77,7 @@ class Configuration
         return $this;
     }
 
-    public function addObjectDefinition(string $name, MatcherInterface $matcher, callable $configuration): self
+    public function addObjectDefinition(string $name, ListMatcherInterface $matcher, callable $configuration): self
     {
         $objectDefinition = new ObjectConfiguration($matcher);
         $configuration($objectDefinition);

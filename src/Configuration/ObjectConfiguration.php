@@ -6,6 +6,7 @@ namespace Sobak\Scrawler\Configuration;
 
 use ArrayIterator;
 use Sobak\Scrawler\Block\ResultWriter\ResultWriterInterface;
+use Sobak\Scrawler\Matcher\ListMatcherInterface;
 use Sobak\Scrawler\Matcher\MatcherInterface;
 
 class ObjectConfiguration
@@ -20,19 +21,14 @@ class ObjectConfiguration
     /** @var ResultWriterInterface[] */
     protected $resultWriters = [];
 
-    public function __construct(MatcherInterface $matcher)
+    public function __construct(ListMatcherInterface $matcher)
     {
         $this->matcher = $matcher;
     }
 
-    public function getMatcher(): MatcherInterface
+    public function getMatcher(): ListMatcherInterface
     {
         return $this->matcher;
-    }
-
-    public function getMatches(): ArrayIterator
-    {
-        return $this->matcher->match();
     }
 
     public function addEntityMapping(string $entityClass): self

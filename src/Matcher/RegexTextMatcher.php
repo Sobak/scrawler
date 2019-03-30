@@ -6,7 +6,7 @@ namespace Sobak\Scrawler\Matcher;
 
 use Sobak\Scrawler\Support\Utils;
 
-class RegexTextMatcher extends AbstractMatcher
+class RegexTextMatcher extends AbstractMatcher implements SingleMatcherInterface
 {
     public function match(): ?string
     {

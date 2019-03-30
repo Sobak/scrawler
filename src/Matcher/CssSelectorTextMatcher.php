@@ -6,7 +6,7 @@ namespace Sobak\Scrawler\Matcher;
 
 use Sobak\Scrawler\Support\Utils;
 
-class CssSelectorTextMatcher extends AbstractMatcher
+class CssSelectorTextMatcher extends AbstractMatcher implements SingleMatcherInterface
 {
     public function match(): ?string
     {

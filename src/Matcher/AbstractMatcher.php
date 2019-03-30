@@ -6,7 +6,7 @@ namespace Sobak\Scrawler\Matcher;
 
 use Symfony\Component\DomCrawler\Crawler;
 
-abstract class AbstractMatcher implements MatcherInterface
+abstract class AbstractMatcher
 {
     protected $crawler;
 

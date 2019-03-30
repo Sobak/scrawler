@@ -64,7 +64,7 @@ class Scrawler
 
         foreach ($this->configuration->getObjectDefinitions() as $objectListName => $objectDefinition) {
             $objectDefinition->getMatcher()->setCrawler(new Crawler($responseBody));
-            $matchesList = $objectDefinition->getMatches();
+            $matchesList = $objectDefinition->getMatcher()->match();
 
             // Iterate over single found object
             foreach ($matchesList as $match) {
