@@ -16,7 +16,7 @@ and result processing operations. You will learn more on [Blocks](blocks.md).
 ## Basic configuration
 There are a couple of configuration options that you need to provide:
 
-* **baseUrl** - it's the URL Scrawler will start crawling from. Must be absolute.
+- **baseUrl** - it's the URL Scrawler will start crawling from. Must be absolute.
 - **operationName** - it is your name for the particular configuration set for
   crawling, like _"Homepage scrapping"_. It will be used to name the output
   directory, appear in logs etc.
@@ -26,8 +26,8 @@ In order to set these options you will need to call setter methods on the
 
 There are also following types of blocks that you can provide for the top-level
 configuration:
-* **[Client configuration provider](blocks/clientconfigurationprovider.md)**
-* **URL list provider** - you have to add at least one implementation for URL
+- **[Client configuration provider](blocks/clientconfigurationprovider.md)**
+- **URL list provider** - you have to add at least one implementation for URL
   list provider block so that Scrawler will know what URLs should it crawl to
   after it's done with your base URL.
 
