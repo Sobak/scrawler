@@ -33,7 +33,8 @@ class Scrawler
 
     public function __construct(Configuration $configuration, string $outputDirectory)
     {
-        $this->checkConfiguration($configuration);
+        $configurationChecker = new ConfigurationChecker();
+        $configurationChecker->checkConfiguration($configuration);
 
         $this->output = new Outputter(
             $outputDirectory,
@@ -128,12 +129,5 @@ class Scrawler
                 }
             }
         }
-    }
-
-    protected function checkConfiguration(Configuration $configuration): bool
-    {
-        $configurationChecker = new ConfigurationChecker();
-
-        return $configurationChecker->checkConfiguration($configuration);
     }
 }
