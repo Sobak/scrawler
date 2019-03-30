@@ -82,6 +82,7 @@ down the file... Scrawler does it all for you!
 
 For the detailed documentation please check the table of contents below.
 
+- [Configuration](docs/configuration.md)
 - [Blocks](docs/blocks.md)
 - [Entities](docs/entities.md)
 - [Changelog](CHANGELOG.md)

@@ -5,7 +5,8 @@ aspect, their mapping details and some general tips on how to write them.
 
 Entities are plain PHP objects, they don't have to implement any interface or extend
 from any base class. Their primary responsibility is to store data fetched by the
-Scrawler so that it can be then used by result writers. That's why typically entities
+Scrawler so that it can be then used by result writers (take a look at the chapter on
+[configuration](configuration.md) for more details on the flow). That's why typically entities
 do not contain much logic. Most of what they do is defining properties (most recommended
 are private or protected) along with getters and setters so like a Data Transfer Object.
 
