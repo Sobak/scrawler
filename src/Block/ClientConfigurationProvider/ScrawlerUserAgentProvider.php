@@ -15,7 +15,7 @@ class ScrawlerUserAgentProvider extends AbstractClientConfigurationProvider
             $botName,
             $botUrl,
             Scrawler::VERSION,
-            'https://github.com/Sobak/scrawler'
+            'http://scrawler.sobak.pl'
         );
 
         $this->setConfiguration([
