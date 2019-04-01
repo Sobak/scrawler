@@ -1,7 +1,7 @@
 # ResultWriter Block
 Result writers are responsible for the final step Scrawler performs,
 persisting scrapped data. Since their underlying logic can be quite
-complex they accept all configuration array. Basic configuration handling
+complex they all accept configuration array. Basic configuration handling
 is one of the things you can get by extending from `AbstractResultWriter`
 class.
 
