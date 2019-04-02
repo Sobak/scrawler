@@ -16,6 +16,15 @@ Client configuration providers are registered as usual, by providing
 an object of class implementing the valid interface and can be removed
 by using a fully qualified class name of the provider (`::class` value).
 
+## BasicAuthProvider
+This client configuration provider enables you to send HTTP Basic Auth
+credentials required by the website. You need to provide username and
+password as arguments to the class constructor.
+
+```php
+->addClientConfigurationProvider(new BasicAuthProvider('username', 'password'))
+```
+
 ## ScrawlerUserAgentProvider
 This is a default client configuration provider which includes Scrawler
 name and version inside the user agent. It does, however, require you to

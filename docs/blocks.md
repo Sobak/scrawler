@@ -21,6 +21,7 @@ for description of every class that is provided out of the box,
 mentioning its potential parameters etc.
 
 - [ClientConfigurationProvider](blocks/clientconfigurationprovider.md)
+	- [BasicAuthProvider](blocks/clientconfigurationprovider.md#basicauthprovider)
 	- [ScrawlerUserAgentProvider](blocks/clientconfigurationprovider.md#scrawleruseragentprovider)
 - LogWriter
 	- ConsoleLogWriter
