@@ -32,7 +32,7 @@ class IncrementalFilenameProviderTest extends ServerBasedTest
             })
         ;
 
-        $scrawler = new Scrawler($config, __DIR__);
+        $scrawler = new Scrawler($config, __DIR__ . '/output');
         $scrawler->run();
 
         $files = glob(__DIR__ . '/output/test/*.json');
@@ -66,7 +66,7 @@ class IncrementalFilenameProviderTest extends ServerBasedTest
             })
         ;
 
-        $scrawler = new Scrawler($config, __DIR__);
+        $scrawler = new Scrawler($config, __DIR__ . '/output');
         $scrawler->run();
 
         $files = glob(__DIR__ . '/output/test/*.json');

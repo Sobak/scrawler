@@ -34,7 +34,7 @@ class ArgumentAdvancerUrlListProviderTest extends ServerBasedTest
             })
         ;
 
-        $scrawler = new Scrawler($config, __DIR__);
+        $scrawler = new Scrawler($config, __DIR__ . '/output');
         $scrawler->run();
 
         $this->assertEquals('First message', InMemoryResultWriter::$results[0]['match']);
@@ -61,7 +61,7 @@ class ArgumentAdvancerUrlListProviderTest extends ServerBasedTest
             })
         ;
 
-        $scrawler = new Scrawler($config, __DIR__);
+        $scrawler = new Scrawler($config, __DIR__ . '/output');
         $scrawler->run();
 
         $this->assertEquals('First message', InMemoryResultWriter::$results[0]['match']);

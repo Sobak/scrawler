@@ -8,22 +8,18 @@ use Sobak\Scrawler\Support\Utils;
 
 class Outputter
 {
-    const OUTPUT_DIRECTORY = 'output';
-
     protected $directoryName;
 
     public function __construct(string $basePath, string $directoryName)
     {
-        $outputDirectory = $basePath . '/' . self::OUTPUT_DIRECTORY;
+        $this->directoryName = $basePath  . '/' . trim($directoryName, '/') . '/';
 
-        $this->directoryName = $outputDirectory  . '/' . trim($directoryName, '/') . '/';
-
-        if (is_file($outputDirectory) || is_file($this->directoryName)) {
+        if (is_file($basePath) || is_file($this->directoryName)) {
             throw new \Exception('Output directory name taken by a file');
         }
 
-        if (file_exists($outputDirectory) === false) {
-            mkdir($outputDirectory);
+        if (file_exists($basePath) === false) {
+            mkdir($basePath, 0777, true);
         }
 
 

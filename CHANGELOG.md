@@ -6,6 +6,7 @@ All notable changes to Scrawler will be documented in this file.
 - Added database result writer
 - Added incremental filename provider
 - Added HTTP Basic Auth client configuration provider
+- Added possibility to specify output directory using `crawler` CLI
 
 ### Changed
 - Added `getEntity` and `setEntity` methods to the `ResultWriterInterface` to

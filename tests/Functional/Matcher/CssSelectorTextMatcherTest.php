@@ -26,7 +26,7 @@ class CssSelectorTextMatcherTest extends ServerBasedTest
             })
         ;
 
-        $scrawler = new Scrawler($config, __DIR__);
+        $scrawler = new Scrawler($config, __DIR__ . '/output');
         $scrawler->run();
 
         $this->assertEquals('interesting', InMemoryResultWriter::$results[0]['match']);
