@@ -35,6 +35,7 @@ mentioning its potential parameters etc.
 - [FilenameProvider](blocks/filenameprovider.md)
     - [EntityPropertyFilenameProvider](blocks/filenameprovider.md#entitypropertyfilenameprovider)
     - [IncrementalFilenameProvider](blocks/filenameprovider.md#incrementalfilenameprovider)
+    - [LiteralFilenameProvider](blocks/filenameprovider.md#literalfilenameprovider)
     - [RandomFilenameProvider](blocks/filenameprovider.md#randomfilenameprovider)
 - UrlListProvider
 	- ArgumentAdvancerUrlListProvider
