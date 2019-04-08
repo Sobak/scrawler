@@ -31,6 +31,7 @@ mentioning its potential parameters etc.
 	- [DumpResultWriter](blocks/resultwriter.md#dumpresultwriter)
 	- [InMemoryResultWriter](blocks/resultwriter.md#inmemoryresultwriter)
 	- [JsonFileResultWriter](blocks/resultwriter.md#jsonfileresultwriter)
+	- [TemplateFileResultWriter](blocks/resultwriter.md#templatefileresultwriter)
 - [FilenameProvider](blocks/filenameprovider.md)
     - [EntityPropertyFilenameProvider](blocks/filenameprovider.md#entitypropertyfilenameprovider)
     - [IncrementalFilenameProvider](blocks/filenameprovider.md#incrementalfilenameprovider)

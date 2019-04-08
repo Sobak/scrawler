@@ -69,9 +69,13 @@ abstract class FileResultWriter extends AbstractResultWriter implements
         $this->directory = $directory;
     }
 
-    protected function writeToFile(string $contents, string $extension): bool
+    protected function writeToFile(string $contents, ?string $extension): bool
     {
         $filename = $this->directory . $this->filename . '.' . $extension;
+        if ($extension === null) {
+            $filename = $this->directory . $this->filename;
+        }
+
         $this->outputter->writeToFile($filename, $contents);
 
         return true;

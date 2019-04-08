@@ -93,6 +93,36 @@ resulting file.
 This result writer does not define any additional configuration options
 aside from ones specific to all file result writers.
 
+## TemplateFileResultWriter
+The most generic out of all file result writers. Does not have any particular
+assumpions - instead it only takes template string where you can use variables
+referencing fields defined by your entity getters.
+
+Aside from specifying template string under `template` configuration key you
+can also set the `extension`. Omitting that key or setting it explicitly to
+`null` will result in files being created with no extension.
+
+```php
+->addResultWriter(PostEntity::class, new TemplateFileResultWriter([
+    'directory' => 'posts/',
+    'extension' => 'txt',
+    'filename' => new IncrementalFilenameProvider(),
+    'template' => 'Published at {{date}}'
+]))
+```
+
+In real-life examples you will probably want to load the template from file and
+keep it outside of your main configuration. Currently variable names are limited
+to `[a-zA-Z_]` so it's better not to be too cratetive with getter names for this
+use-case. You can insert any number tabs or spaces between variable names and
+curly braces delimiting it. Finally, the variable with no counterpart in the
+defined getters will result in the variable being printed directly into the
+result file, like so: `Published at {{date}}`.
+
+> **Note:** Even though this result writer can theoretically replace many others
+> (you could even type JSON template by hand) you should use specialized writers
+> whenever possible, including writing your own implementations.
+
 [doctrine-connection]: https://www.doctrine-project.org/projects/doctrine-dbal/en/2.9/reference/configuration.html
 [doctrine-mapping]: https://www.doctrine-project.org/projects/doctrine-orm/en/2.6/reference/annotations-reference.html
 [vardumper]: https://symfony.com/doc/current/components/var_dumper.html

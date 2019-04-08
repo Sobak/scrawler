@@ -4,6 +4,7 @@ All notable changes to Scrawler will be documented in this file.
 ## [Unreleased]
 ### Added
 - Added database result writer
+- Added template file result writer
 - Added incremental filename provider
 - Added HTTP Basic Auth client configuration provider
 - Added possibility to specify output directory using `crawler` CLI
@@ -18,6 +19,8 @@ All notable changes to Scrawler will be documented in this file.
   They can be plain PHP objects and aforementioned classes have been removed. That
   also means that entity mapping is now done by the Scrawler and you should use
   getters and setters to implement any custom mapping logic.
+- File result writers can now pass `null` as the extension into the `writeToFile()`
+  method in order to create files without extension
 - `Scrawler` now accepts `Configuration` object plus the output directory instead
   of configuration path
 - `ScrawlerUserAgentProvider` now requires final bot name and contact URL.
