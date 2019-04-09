@@ -8,6 +8,7 @@ All notable changes to Scrawler will be documented in this file.
 - Added incremental filename provider
 - Added literal filename provider
 - Added HTTP Basic Auth client configuration provider
+- Added suport for registering multiple result writers per entity
 - Added possibility to specify output directory using `crawler` CLI
 - Added confirmation on overriding output directory (can be forced with `--force`/`-f` option)
 
@@ -35,6 +36,7 @@ All notable changes to Scrawler will be documented in this file.
 
 ### Removed  
 - `FieldDefinition` classes
+- Removed the ability to remove previously registered result writers at runtime
 
 ## 0.1.0 - 2019-03-04
 Initial release of Scrawler.
