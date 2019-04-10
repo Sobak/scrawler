@@ -9,8 +9,15 @@ use Sobak\Scrawler\Output\OutputWriterInterface;
 
 class TextfileLogWriter extends AbstractLogWriter implements OutputWriterInterface
 {
+    protected $filename;
+
     /** @var Outputter */
     protected $outputter;
+
+    public function __construct(?string $filename = null)
+    {
+        $this->filename = $filename ?? 'crawler.log';
+    }
 
     public function getOutputter(): Outputter
     {
@@ -30,6 +37,6 @@ class TextfileLogWriter extends AbstractLogWriter implements OutputWriterInterfa
 
         $line = "[$datetime][$level] $message\n";
 
-        $this->outputter->appendToFile('crawler.log', $line);
+        $this->outputter->appendToFile($this->filename, $line);
     }
 }
