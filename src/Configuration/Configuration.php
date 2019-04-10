@@ -41,7 +41,7 @@ class Configuration
 
     public function addClientConfigurationProvider(ClientConfigurationProviderInterface $clientConfigurationProvider): self
     {
-        $this->clientConfigurationProviders[get_class($clientConfigurationProvider)] = $clientConfigurationProvider;
+        $this->clientConfigurationProviders[] = $clientConfigurationProvider;
 
         return $this;
     }
@@ -51,16 +51,9 @@ class Configuration
         return $this->clientConfigurationProviders;
     }
 
-    public function removeClientConfigurationProvider(string $clientConfigurationProvider): self
-    {
-        unset($this->clientConfigurationProviders[$clientConfigurationProvider]);
-
-        return $this;
-    }
-
     public function addLogWriter(LoggerInterface $logWriter): self
     {
-        $this->logWriters[get_class($logWriter)] = $logWriter;
+        $this->logWriters[] = $logWriter;
 
         return $this;
     }
@@ -68,13 +61,6 @@ class Configuration
     public function getLogWriters()
     {
         return $this->logWriters;
-    }
-
-    public function removeLogWriter(string $logWriter): self
-    {
-        unset($this->logWriters[$logWriter]);
-
-        return $this;
     }
 
     public function addObjectDefinition(string $name, ListMatcherInterface $matcher, callable $configuration): self
@@ -92,13 +78,6 @@ class Configuration
         return $this->objectDefinitions;
     }
 
-    public function removeObjectDefinition(string $name): self
-    {
-        unset($this->objectDefinitions[$name]);
-
-        return $this;
-    }
-
     public function getOperationName()
     {
         return $this->operationName;
@@ -113,7 +92,7 @@ class Configuration
 
     public function addUrlListProvider(UrlListProviderInterface $urlListProvider): self
     {
-        $this->urlListProviders[get_class($urlListProvider)] = $urlListProvider;
+        $this->urlListProviders[] = $urlListProvider;
 
         return $this;
     }
@@ -121,12 +100,5 @@ class Configuration
     public function getUrlListProviders()
     {
         return $this->urlListProviders;
-    }
-
-    public function removeUrlListProvider(string $name): self
-    {
-        unset($this->urlListProviders[$name]);
-
-        return $this;
     }
 }

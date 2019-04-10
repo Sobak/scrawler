@@ -6,13 +6,12 @@ namespace Tests\Functional\Crawling;
 
 use Sobak\Scrawler\Block\ResultWriter\InMemoryResultWriter;
 use Sobak\Scrawler\Block\UrlListProvider\ArgumentAdvancerUrlListProvider;
-use Sobak\Scrawler\Block\UrlListProvider\EmptyUrlListProvider;
+use Sobak\Scrawler\Configuration\Configuration;
 use Sobak\Scrawler\Configuration\ObjectConfiguration;
 use Sobak\Scrawler\Matcher\CssSelectorListMatcher;
 use Sobak\Scrawler\Matcher\CssSelectorTextMatcher;
 use Sobak\Scrawler\Scrawler;
 use Tests\Functional\ServerBasedTest;
-use Tests\Utils\BasicConfigurationProvider;
 use Tests\Utils\SimpleMatchEntity;
 
 class ArgumentAdvancerUrlListProviderTest extends ServerBasedTest
@@ -21,9 +20,9 @@ class ArgumentAdvancerUrlListProviderTest extends ServerBasedTest
     {
         $host = ServerBasedTest::getHostUrl();
 
-        $config = BasicConfigurationProvider::getConfiguration()
+        $config = (new Configuration())
+            ->setOperationName('test')
             ->setBaseUrl($host)
-            ->removeUrlListProvider(EmptyUrlListProvider::class)
             ->addUrlListProvider(new ArgumentAdvancerUrlListProvider("{$host}/page-%u.html", 1, 1, 4))
             ->addObjectDefinition('message', new CssSelectorListMatcher('div.message'), function (ObjectConfiguration $object) {
                 $object
@@ -48,9 +47,9 @@ class ArgumentAdvancerUrlListProviderTest extends ServerBasedTest
     {
         $host = ServerBasedTest::getHostUrl();
 
-        $config = BasicConfigurationProvider::getConfiguration()
+        $config = (new Configuration())
+            ->setOperationName('test')
             ->setBaseUrl($host)
-            ->removeUrlListProvider(EmptyUrlListProvider::class)
             ->addUrlListProvider(new ArgumentAdvancerUrlListProvider("{$host}/page-%u.html", 2, 2, 4))
             ->addObjectDefinition('message', new CssSelectorListMatcher('div.message'), function (ObjectConfiguration $object) {
                 $object

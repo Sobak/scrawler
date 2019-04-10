@@ -42,13 +42,6 @@ class ObjectConfiguration
         return $this->entityMappings;
     }
 
-    public function removeEntityMapping(string $entityClass): self
-    {
-        unset($this->entityMappings[$entityClass]);
-
-        return $this;
-    }
-
     public function addFieldDefinition(string $name, MatcherInterface $fieldDefinition): self
     {
         $this->fieldDefinitions[$name] = $fieldDefinition;
@@ -59,13 +52,6 @@ class ObjectConfiguration
     public function getFieldDefinitions()
     {
         return $this->fieldDefinitions;
-    }
-
-    public function removeFieldDefinition(string $name): self
-    {
-        unset($this->fieldDefinitions[$name]);
-
-        return $this;
     }
 
     public function addResultWriter(string $entityClass, ResultWriterInterface $resultWriter): self

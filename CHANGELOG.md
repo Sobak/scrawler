@@ -37,7 +37,8 @@ All notable changes to Scrawler will be documented in this file.
 
 ### Removed  
 - `FieldDefinition` classes
-- Removed the ability to remove previously registered result writers at runtime
+- Removing block, objects and field definitions at runtime (using `Configuration`s
+  or `ObjectConfiguration`s `remove*()` methods) is no longer supported
 
 ## 0.1.0 - 2019-03-04
 Initial release of Scrawler.
