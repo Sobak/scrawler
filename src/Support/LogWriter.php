@@ -4,13 +4,13 @@ declare(strict_types=1);
 
 namespace Sobak\Scrawler\Support;
 
-use Sobak\Scrawler\Block\LogWriter\LogWriterInterface;
+use Psr\Log\LoggerInterface;
 use Sobak\Scrawler\Output\Outputter;
 use Sobak\Scrawler\Output\OutputWriterInterface;
 
-class LogWriter implements LogWriterInterface
+class LogWriter implements LoggerInterface
 {
-    /** @var LogWriterInterface[] */
+    /** @var LoggerInterface[] */
     protected $logWriters;
 
     public function __construct(array $logWriters, Outputter $outputter)
@@ -25,31 +25,66 @@ class LogWriter implements LogWriterInterface
         }
     }
 
-    public function debug($string): void
+    public function emergency($message, array $context = [])
     {
         foreach ($this->logWriters as $logWriter) {
-            $logWriter->debug($string);
+            $logWriter->emergency($message, $context);
         }
     }
 
-    public function error($string): void
+    public function alert($message, array $context = [])
     {
         foreach ($this->logWriters as $logWriter) {
-            $logWriter->error($string);
+            $logWriter->alert($message, $context);
         }
     }
 
-    public function info($string): void
+    public function critical($message, array $context = [])
     {
         foreach ($this->logWriters as $logWriter) {
-            $logWriter->info($string);
+            $logWriter->critical($message, $context);
         }
     }
 
-    public function warning($string): void
+    public function error($message, array $context = [])
     {
         foreach ($this->logWriters as $logWriter) {
-            $logWriter->warning($string);
+            $logWriter->error($message, $context);
+        }
+    }
+
+    public function warning($message, array $context = [])
+    {
+        foreach ($this->logWriters as $logWriter) {
+            $logWriter->warning($message, $context);
+        }
+    }
+
+    public function notice($message, array $context = [])
+    {
+        foreach ($this->logWriters as $logWriter) {
+            $logWriter->notice($message, $context);
+        }
+    }
+
+    public function info($message, array $context = [])
+    {
+        foreach ($this->logWriters as $logWriter) {
+            $logWriter->info($message, $context);
+        }
+    }
+
+    public function debug($message, array $context = [])
+    {
+        foreach ($this->logWriters as $logWriter) {
+            $logWriter->debug($message, $context);
+        }
+    }
+
+    public function log($level, $message, array $context = [])
+    {
+        foreach ($this->logWriters as $logWriter) {
+            $logWriter->log($level, $message, $context);
         }
     }
 }

@@ -23,6 +23,7 @@ All notable changes to Scrawler will be documented in this file.
   getters and setters to implement any custom mapping logic.
 - File result writers can now pass `null` as the extension into the `writeToFile()`
   method in order to create files without extension
+- Loggers _must_ implement PSR-3 interface now  
 - `Scrawler` now accepts `Configuration` object plus the output directory instead
   of configuration path
 - `ScrawlerUserAgentProvider` now requires final bot name and contact URL.

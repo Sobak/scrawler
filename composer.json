@@ -7,6 +7,7 @@
         "php": ">=7.2.0",
         "ext-json": "*",
         "guzzlehttp/guzzle": "^6.3",
+        "psr/log": "^1.1",
         "symfony/console": "^4.2",
         "symfony/css-selector": "^4.2",
         "symfony/dom-crawler": "^4.2"

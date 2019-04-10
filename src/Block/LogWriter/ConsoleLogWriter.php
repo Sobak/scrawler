@@ -4,9 +4,10 @@ declare(strict_types=1);
 
 namespace Sobak\Scrawler\Block\LogWriter;
 
+use Psr\Log\LogLevel;
 use Symfony\Component\Console\Output\ConsoleOutput;
 
-class ConsoleLogWriter implements LogWriterInterface
+class ConsoleLogWriter extends AbstractLogWriter
 {
     protected $output;
 
@@ -15,23 +16,36 @@ class ConsoleLogWriter implements LogWriterInterface
         $this->output = new ConsoleOutput();
     }
 
-    public function debug(string $string): void
+    public function log($level, $message, array $context = [])
     {
-        $this->output->writeln($string);
+        $message = $this->interpolate($message, $context);
+        $style = $this->getStyleForLevel($level);
+
+        if ($style !== null) {
+            $this->output->writeln("<{$style}>{$message}</{$style}>");
+            return;
+        }
+
+        $this->output->writeln($message);
     }
 
-    public function error(string $string): void
+    protected function getStyleForLevel($level)
     {
-        $this->output->writeln("<error>$string</error>");
-    }
-
-    public function info(string $string): void
-    {
-        $this->output->writeln("<info>$string</info>");
-    }
-
-    public function warning(string $string): void
-    {
-        $this->output->writeln("<comment>$string</comment>");
+        switch ($level) {
+            case LogLevel::EMERGENCY:
+            case LogLevel::ALERT:
+            case LogLevel::CRITICAL:
+            case LogLevel::ERROR:
+                return 'error';
+            case LogLevel::WARNING:
+                return 'comment';
+            case LogLevel::NOTICE:
+            case LogLevel::INFO:
+                return 'info';
+            case LogLevel::DEBUG:
+                return null;
+            default:
+                throw new \Exception('Unsupported logger level: ' . (string) $level);
+        }
     }
 }

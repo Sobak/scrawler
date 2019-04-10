@@ -7,30 +7,10 @@ namespace Sobak\Scrawler\Block\LogWriter;
 use Sobak\Scrawler\Output\Outputter;
 use Sobak\Scrawler\Output\OutputWriterInterface;
 
-class TextfileLogWriter implements LogWriterInterface, OutputWriterInterface
+class TextfileLogWriter extends AbstractLogWriter implements OutputWriterInterface
 {
     /** @var Outputter */
     protected $outputter;
-
-    public function debug(string $string): void
-    {
-        $this->writeLine('debug', $string);
-    }
-
-    public function error(string $string): void
-    {
-        $this->writeLine('error', $string);
-    }
-
-    public function info(string $string): void
-    {
-        $this->writeLine('info', $string);
-    }
-
-    public function warning(string $string): void
-    {
-        $this->writeLine('warning', $string);
-    }
 
     public function getOutputter(): Outputter
     {
@@ -42,10 +22,11 @@ class TextfileLogWriter implements LogWriterInterface, OutputWriterInterface
         $this->outputter = $outputter;
     }
 
-    protected function writeLine($level, $message): void
+    public function log($level, $message, array $context = array())
     {
         $datetime = date('Y-m-d H:i:s');
         $level = strtoupper($level);
+        $message = $this->interpolate($message, $context);
 
         $line = "[$datetime][$level] $message\n";
 
