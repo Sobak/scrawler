@@ -11,9 +11,9 @@ details level each.
 Finally, Scrawler follows [PSR-3][PSR-3] so you can utilize various popular logger
 implementations for PHP, like Monolog.
 
-> **Note:** when using third-party loggers it's advisable to Scrawler's abbility
-> to set verbosity level, even if the external library has such capability, so
-> that handling is consistent.
+> **Note:** when using third-party loggers it's advisable to use Scrawler's ability
+> to set verbosity level, even if the external library has such capability, so that
+> handling is consistent.
 
 Log writers are registered using `addLogWriter()` method on the main `Configuration`
 class.
@@ -24,8 +24,8 @@ class.
 ```
 
 Note that settings shown above are default as long as you use `DefaultConfigurationProvider`.
-Minimal message level that the logger should care about can be set as second parameter to
-that method. Level must be compatible with PSR-3 so it's preferable to use constants from
+Minimal message level that the logger should care about can be set as a constructor parameter
+to that method. Level must be compatible with PSR-3 so it's preferable to use constants from
 the `Psr\Log\LogLevel` class.
 
 ## ConsoleLogWriter
