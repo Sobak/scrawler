@@ -23,9 +23,9 @@ mentioning its potential parameters etc.
 - [ClientConfigurationProvider](blocks/clientconfigurationprovider.md)
 	- [BasicAuthProvider](blocks/clientconfigurationprovider.md#basicauthprovider)
 	- [ScrawlerUserAgentProvider](blocks/clientconfigurationprovider.md#scrawleruseragentprovider)
-- LogWriter
-	- ConsoleLogWriter
-	- TextfileLogWriter
+- [LogWriter](blocks/logwriter.md)
+	- [ConsoleLogWriter](blocks/logwriter.md#consolelogwriter)
+	- [TextfileLogWriter](blocks/logwriter.md#textfilelogwriter)
 - [ResultWriter](blocks/resultwriter.md)
 	- [DatabaseResultWriter](blocks/resultwriter.md#databaseresultwriter)
 	- [DumpResultWriter](blocks/resultwriter.md#dumpresultwriter)

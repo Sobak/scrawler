@@ -1,0 +1,39 @@
+# LogWriter Block
+Log writers are blocks responsible exactly for what their name suggests, writing
+down the logs. Scrawler supports registering multiple log writers at the same
+time allowing to have information written e.g. to both console and the text file.
+
+Furthermore, you can set verbosity level per logger so that scenarios in which
+console only shows important messages while textfile keeps everything including
+debug data are fully achievable. You could also have two text files with different
+details level each.
+
+Finally, Scrawler follows [PSR-3][PSR-3] so you can utilize various popular logger
+implementations for PHP, like Monolog.
+
+> **Note:** when using third-party loggers it's advisable to Scrawler's abbility
+> to set verbosity level, even if the external library has such capability, so
+> that handling is consistent.
+
+Log writers are registered using `addLogWriter()` method on the main `Configuration`
+class.
+
+```php
+->addLogWriter(new ConsoleLogWriter())
+->addLogWriter(new TextfileLogWriter())
+```
+
+Note that settings shown above are default as long as you use `DefaultConfigurationProvider`.
+Minimal message level that the logger should care about can be set as second parameter to
+that method. Level must be compatible with PSR-3 so it's preferable to use constants from
+the `Psr\Log\LogLevel` class.
+
+## ConsoleLogWriter
+This log writer outputs to the default interface of the commandline interface
+and has no special options.
+
+## TextfileLogWriter
+Saves logs into the text file in the output directory. Optionally you can pass
+the filename as the second parameter. Otherwise `crawler.log` will be used.
+
+[PSR-3]: https://www.php-fig.org/psr/psr-3/
