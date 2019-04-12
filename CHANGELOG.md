@@ -9,7 +9,8 @@ All notable changes to Scrawler will be documented in this file.
 - Added literal filename provider
 - Added HTTP Basic Auth client configuration provider
 - Added ability to set the filename for text file log writer
-- Added suport for registering multiple result writers per entity
+- Added support for registering multiple result writers per entity
+- Added ability to set minimal verbosity level for each log writer
 - Added possibility to specify output directory using `crawler` CLI
 - Added confirmation on overriding output directory (can be forced with `--force`/`-f` option)
 

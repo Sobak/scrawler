@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Sobak\Scrawler\Configuration;
 
 use Psr\Log\LoggerInterface;
+use Psr\Log\LogLevel;
 use Sobak\Scrawler\Block\ClientConfigurationProvider\ClientConfigurationProviderInterface;
 use Sobak\Scrawler\Block\UrlListProvider\UrlListProviderInterface;
 use Sobak\Scrawler\Matcher\ListMatcherInterface;
@@ -18,7 +19,7 @@ class Configuration
 
     protected $operationName = '';
 
-    /** @var LoggerInterface[] */
+    /** @var array */
     protected $logWriters = [];
 
     /** @var ObjectConfiguration[] */
@@ -51,9 +52,12 @@ class Configuration
         return $this->clientConfigurationProviders;
     }
 
-    public function addLogWriter(LoggerInterface $logWriter): self
+    public function addLogWriter(LoggerInterface $logWriter, string $verbosity = LogLevel::DEBUG): self
     {
-        $this->logWriters[] = $logWriter;
+        $this->logWriters[] = [
+            'class' => $logWriter,
+            'verbosity' => $verbosity,
+        ];
 
         return $this;
     }
