@@ -77,9 +77,6 @@ down the file... Scrawler does it all for you!
 > no interest in developing it. Thanks for understanding.
 
 ## Documentation
-
-> **Note:** some parts of the documentation are still under construction.
-
 For the detailed documentation please check the table of contents below.
 
 - [Configuration](docs/configuration.md)

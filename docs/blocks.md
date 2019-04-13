@@ -37,6 +37,6 @@ mentioning its potential parameters etc.
     - [IncrementalFilenameProvider](blocks/filenameprovider.md#incrementalfilenameprovider)
     - [LiteralFilenameProvider](blocks/filenameprovider.md#literalfilenameprovider)
     - [RandomFilenameProvider](blocks/filenameprovider.md#randomfilenameprovider)
-- UrlListProvider
-	- ArgumentAdvancerUrlListProvider
-	- EmptyUrlListProvider
+- [UrlListProvider](blocks/urllistprovider.md)
+	- [ArgumentAdvancerUrlListProvider](blocks/urllistprovider.md#argumentadvancerurllistprovider)
+	- [EmptyUrlListProvider](blocks/urllistprovider.md#emptyurllistprovider)
