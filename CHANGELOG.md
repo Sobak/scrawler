@@ -52,4 +52,4 @@ All notable changes to Scrawler will be documented in this file.
 Initial release of Scrawler.
 
 [0.2.0]: https://github.com/Sobak/scrawler/compare/v0.1.0...v0.2.0
-[Unreleased]: https://github.com/Sobak/scrawler/compare/v0.1.0...develop
+[Unreleased]: https://github.com/Sobak/scrawler/compare/v0.2.0...develop
