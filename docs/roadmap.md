@@ -7,7 +7,6 @@ are going to be implemented in a foreseeable future.
 - support for multiple UrlList providers
 - performance improvements
 - support for writing results into SQLite database
-- refactoring of Result class
 - defining manual steps before/after the crawling
 - support for scrapping non-HTML/XML responses
 - more implementations for already defined blocks
