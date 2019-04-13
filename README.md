@@ -34,7 +34,7 @@ $scrawler = new Configuration();
 $scrawler
     ->setOperationName('Sobakowy Blog')
     ->setBaseUrl('http://sobak.pl')
-    ->addUrlListProvider(new ArgumentAdvancerUrlListProvider('http://sobak.pl/page/%u', 2, 1, 17))
+    ->addUrlListProvider(new ArgumentAdvancerUrlListProvider('http://sobak.pl/page/%u', 2, 1))
     ->addObjectDefinition('post', new CssSelectorListMatcher('article.hentry'), function (ObjectConfiguration $object) {
         $object
             ->addFieldDefinition('date', new CssSelectorTextMatcher('time.entry-date'))
@@ -62,9 +62,9 @@ php vendor/bin/scrawler crawl config.php
 ```
 
 The example shown above will fetch [http://sobak.pl]() page, then it will iterate
-over post pages starting from 2nd up to 17th, get all posts on each page, map them
-to `App\PostEntity` objects and finally write the results down to individual JSON 
-files using post slugs as filenames.
+over all existing post pages (limited by first 404 occurence) starting from 2nd,
+get all posts on each page, map them to `App\PostEntity` objects and finally write
+the results down to individual JSON files using post slugs as filenames.
 
 As you can see with this short code, almost half of it being the imports,
 you can easily achieve quite tedious task for which you would otherwise need

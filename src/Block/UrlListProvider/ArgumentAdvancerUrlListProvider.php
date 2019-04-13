@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Sobak\Scrawler\Block\UrlListProvider;
 
 use Sobak\Scrawler\Client\Response\Elements\Url;
+use Sobak\Scrawler\Client\Response\StatusCode;
 
 class ArgumentAdvancerUrlListProvider extends AbstractUrlListProvider
 {
@@ -31,7 +32,10 @@ class ArgumentAdvancerUrlListProvider extends AbstractUrlListProvider
     {
         $nextUrl = sprintf($this->template, $this->current);
 
-        if ($this->current > $this->stop) {
+        if (
+            ($this->stop !== null && $this->current > $this->stop)
+            || $this->response->getStatusCode() === StatusCode::HTTP_NOT_FOUND
+        ) {
             return [];
         }
 
