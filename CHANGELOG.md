@@ -2,6 +2,8 @@
 All notable changes to Scrawler will be documented in this file.
 
 ## [Unreleased]
+
+## [0.2.0] - 2019-04-13
 ### Added
 - Added basic capabilities of handling non-200 responses
 - Added database result writer
@@ -49,4 +51,5 @@ All notable changes to Scrawler will be documented in this file.
 ## 0.1.0 - 2019-03-04
 Initial release of Scrawler.
 
+[0.2.0]: https://github.com/Sobak/scrawler/compare/v0.1.0...v0.2.0
 [Unreleased]: https://github.com/Sobak/scrawler/compare/v0.1.0...develop
