@@ -70,10 +70,6 @@ class ConfigurationChecker
             throw new ConfigurationException('At least one UrlListProvider must be set');
         }
 
-        if (count($urlListProviders) > 1) {
-            throw new ConfigurationException('Having more than one UrlList provider is not supported yet');
-        }
-
         return true;
     }
 }
