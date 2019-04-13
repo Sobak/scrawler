@@ -23,7 +23,7 @@ use Symfony\Component\DomCrawler\Crawler;
 
 class Scrawler
 {
-    const VERSION = '0.2.0';
+    const VERSION = '0.3.0-dev';
 
     /** @var Configuration */
     protected $configuration;
