@@ -3,6 +3,7 @@ All notable changes to Scrawler will be documented in this file.
 
 ## [Unreleased]
 ### Added
+- Added basic capabilities of handling non-200 responses
 - Added database result writer
 - Added template file result writer
 - Added incremental filename provider

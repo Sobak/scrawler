@@ -5,11 +5,13 @@ declare(strict_types=1);
 namespace Sobak\Scrawler;
 
 use GuzzleHttp\Client;
+use Psr\Http\Message\ResponseInterface;
 use Sobak\Scrawler\Block\ResultWriter\FilenameProvider\FilenameProviderInterface;
 use Sobak\Scrawler\Block\ResultWriter\FileResultWriterInterface;
 use Sobak\Scrawler\Block\ResultWriter\ResultWriterInterface;
 use Sobak\Scrawler\Client\ClientFactory;
 use Sobak\Scrawler\Client\Response\Elements\Url;
+use Sobak\Scrawler\Client\Response\StatusCode;
 use Sobak\Scrawler\Configuration\Configuration;
 use Sobak\Scrawler\Configuration\ConfigurationChecker;
 use Sobak\Scrawler\Entity\EntityMapper;
@@ -50,7 +52,7 @@ class Scrawler
     {
         $this->logWriter->notice('Started "' . $this->configuration->getOperationName() . '" operation');
 
-        $client = ClientFactory::applyCustomConfiguration($this->configuration->getClientConfigurationProviders());
+        $client = ClientFactory::buildInstance($this->configuration->getClientConfigurationProviders());
         $initialUrl = new Url($this->configuration->getBaseUrl());
 
         $this->makeRequest($client, $initialUrl, []);
@@ -63,6 +65,35 @@ class Scrawler
         $this->logWriter->info('GET ' . $url->getUrl());
 
         $response = $client->request('GET', $url->getUrl());
+
+        $statusCode = new StatusCode($response->getStatusCode());
+        if ($statusCode->isProcessable()) {
+            $this->processResponse($response);
+        } else {
+            $this->logWriter->notice("Skipped processing, unprocessable response code: HTTP {$statusCode->getCode()}");
+        }
+
+        // Gather list of next URLs using rules specified in configuration
+        foreach ($this->configuration->getUrlListProviders() as $urlListProvider) {
+            $urlListProvider->setCurrentUrl($url);
+            $urlListProvider->setResponse(clone $response);
+
+            $urlList = $urlListProvider->getUrls();
+
+            foreach ($urlList as $url) {
+                $urlString = $url->getUrl();
+
+                if (isset($visitedUrls[$urlString]) === false) {
+                    $visitedUrls[$urlString] = true;
+
+                    $this->makeRequest($client, $url, $visitedUrls);
+                }
+            }
+        }
+    }
+
+    protected function processResponse(ResponseInterface $response): void
+    {
         $responseBody = $response->getBody()->getContents();
 
         foreach ($this->configuration->getObjectDefinitions() as $objectListName => $objectDefinition) {
@@ -122,24 +153,6 @@ class Scrawler
 
                         $resultWriter->write($entity);
                     }
-                }
-            }
-        }
-
-        // Gather list of next URLs using rules specified in configuration
-        foreach ($this->configuration->getUrlListProviders() as $urlListProvider) {
-            $urlListProvider->setCurrentUrl($url);
-            $urlListProvider->setResponse(clone $response);
-
-            $urlList = $urlListProvider->getUrls();
-
-            foreach ($urlList as $url) {
-                $urlString = $url->getUrl();
-
-                if (isset($visitedUrls[$urlString]) === false) {
-                    $visitedUrls[$urlString] = true;
-
-                    $this->makeRequest($client, $url, $visitedUrls);
                 }
             }
         }

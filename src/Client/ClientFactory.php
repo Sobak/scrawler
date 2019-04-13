@@ -9,8 +9,10 @@ use Sobak\Scrawler\Block\ClientConfigurationProvider\ClientConfigurationProvider
 
 class ClientFactory
 {
-    public static function applyCustomConfiguration(array $clientConfiguration): Client
+    public static function buildInstance(array $clientConfiguration): Client
     {
+        $defaultConfiguration = self::getDefaultConfiguration();
+
         $customConfiguration = array_map(function (ClientConfigurationProviderInterface $value) {
             return $value->getConfiguration();
         }, $clientConfiguration);
@@ -23,8 +25,15 @@ class ClientFactory
             $customConfiguration = [[]];
         }
 
-        $customConfiguration = array_merge_recursive(...$customConfiguration);
+        $configuration = array_merge_recursive($defaultConfiguration, ...$customConfiguration);
 
-        return new Client($customConfiguration);
+        return new Client($configuration);
+    }
+
+    protected static function getDefaultConfiguration()
+    {
+        return [
+            'http_errors' => false,
+        ];
     }
 }
