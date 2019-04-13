@@ -4,11 +4,16 @@ declare(strict_types=1);
 
 namespace Sobak\Scrawler\Block\ResultWriter;
 
+use Psr\Log\LoggerInterface;
+
 abstract class AbstractResultWriter implements ResultWriterInterface
 {
     protected $configuration;
 
     protected $entityName;
+
+    /** @var LoggerInterface */
+    protected $logWriter;
 
     public function __construct(array $configuration = [])
     {
@@ -28,6 +33,18 @@ abstract class AbstractResultWriter implements ResultWriterInterface
     public function setEntity(string $entityName): ResultWriterInterface
     {
         $this->entityName = $entityName;
+
+        return $this;
+    }
+
+    public function getLogWriter(): LoggerInterface
+    {
+        return $this->logWriter;
+    }
+
+    public function setLogWriter($logWriter): ResultWriterInterface
+    {
+        $this->logWriter = $logWriter;
 
         return $this;
     }

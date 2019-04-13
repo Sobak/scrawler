@@ -11,7 +11,6 @@ are going to be implemented in a foreseeable future.
 - defining manual steps before/after the crawling
 - support for scrapping non-HTML/XML responses
 - more implementations for already defined blocks
-- start to actually using the logger
 - improved error handling
 - better test coverage
 - way way more

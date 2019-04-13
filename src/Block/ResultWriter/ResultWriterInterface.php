@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Sobak\Scrawler\Block\ResultWriter;
 
+use Psr\Log\LoggerInterface;
+
 interface ResultWriterInterface
 {
     /**
@@ -35,6 +37,21 @@ interface ResultWriterInterface
      * @return ResultWriterInterface
      */
     public function setEntity(string $entityName): ResultWriterInterface;
+
+    /**
+     * Gets log writer for the result writer.
+     *
+     * @return LoggerInterface Log writer implementation
+     */
+    public function getLogWriter(): LoggerInterface;
+
+    /**
+     * Sets the log writer for the result writer.
+     *
+     * @param LoggerInterface $logWriter Log writer implementation
+     * @return ResultWriterInterface
+     */
+    public function setLogWriter(LoggerInterface $logWriter): ResultWriterInterface;
 
     /**
      * Fires once before calling write() on any of the entities found for single result writer.

@@ -48,7 +48,7 @@ class Scrawler
 
     public function run()
     {
-        $this->logWriter->info('Running "' . $this->configuration->getOperationName() . '" operation');
+        $this->logWriter->notice('Started "' . $this->configuration->getOperationName() . '" operation');
 
         $client = ClientFactory::applyCustomConfiguration($this->configuration->getClientConfigurationProviders());
         $initialUrl = new Url($this->configuration->getBaseUrl());
@@ -60,6 +60,8 @@ class Scrawler
 
     protected function makeRequest(Client $client, Url $url, array $visitedUrls): void
     {
+        $this->logWriter->info('GET ' . $url->getUrl());
+
         $response = $client->request('GET', $url->getUrl());
         $responseBody = $response->getBody()->getContents();
 
@@ -69,6 +71,8 @@ class Scrawler
 
             // Iterate over single found object
             foreach ($matchesList as $match) {
+                $this->logWriter->debug("Matched object for {$objectListName}");
+
                 $objectResult = [];
                 foreach ($objectDefinition->getFieldDefinitions() as $fieldName => $matcher) {
                     $matcher->setCrawler(new Crawler($match));
@@ -80,6 +84,8 @@ class Scrawler
                 foreach ($objectDefinition->getEntityMappings() as $entityClass) {
                     $entity = EntityMapper::resultToEntity($objectResult, $entityClass);
 
+                    $this->logWriter->debug("Matched object to the {$entityClass} entity");
+
                     $resultWriters = $objectDefinition->getResultWriters();
 
                     if (isset($resultWriters[$entityClass]) === false) {
@@ -89,6 +95,9 @@ class Scrawler
                     /** @var ResultWriterInterface $resultWriter */
                     foreach ($resultWriters[$entityClass] as $resultWriter) {
                         $resultWriter->setEntity($entityClass);
+                        $resultWriter->setLogWriter($this->logWriter);
+
+                        $this->logWriter->debug('Writing entity down using ' . get_class($resultWriter));
 
                         // Generate the filename for FileResultWriters
                         if ($resultWriter instanceof FileResultWriterInterface) {

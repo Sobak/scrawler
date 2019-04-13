@@ -125,7 +125,7 @@ class LogWriter implements LoggerInterface
             $logWriter = $logWriter['class'];
 
             if ($this->shouldLog($verbosity, LogLevel::DEBUG)) {
-                $logWriter->alert($message, $context);
+                $logWriter->debug($message, $context);
             }
         }
     }

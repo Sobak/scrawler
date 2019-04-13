@@ -63,6 +63,8 @@ abstract class FileResultWriter extends AbstractResultWriter implements
         if (isset($this->configuration['directory'])) {
             $directory = trim($this->configuration['directory'] ?? '', '/') . '/';
 
+            $this->logWriter->info("Created {$directory} directory to store result files");
+
             $this->outputter->createDirectory($directory, true);
         }
 

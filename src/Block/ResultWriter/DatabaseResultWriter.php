@@ -110,10 +110,13 @@ class DatabaseResultWriter extends AbstractResultWriter implements OutputWriterI
 
         // Ignore if database already exists
         if (in_array($databaseName, $connection->getSchemaManager()->listDatabases())) {
+            $this->logWriter->debug('Database already exists, ignored');
             return;
         }
 
         $connection->getSchemaManager()->createDatabase($databaseName);
+
+        $this->logWriter->info('Created fresh database: ' . $databaseName);
 
         $connection->close();
     }

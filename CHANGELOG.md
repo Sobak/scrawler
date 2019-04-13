@@ -12,6 +12,7 @@ All notable changes to Scrawler will be documented in this file.
 - Added support for registering multiple result writers per entity
 - Added ability to set minimal verbosity level for each log writer
 - Added possibility to specify output directory using `crawler` CLI
+- Added logging capabilities for more elements of the script lifecycle
 - Added confirmation on overriding output directory (can be forced with `--force`/`-f` option)
 
 ### Changed

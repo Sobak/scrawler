@@ -19,14 +19,18 @@ Log writers are registered using `addLogWriter()` method on the main `Configurat
 class.
 
 ```php
-->addLogWriter(new ConsoleLogWriter())
-->addLogWriter(new TextfileLogWriter())
+$configuration
+    ->addLogWriter(new ConsoleLogWriter(), LogLevel::NOTICE)
+    ->addLogWriter(new TextfileLogWriter())
+;
 ```
 
-Note that settings shown above are default as long as you use `DefaultConfigurationProvider`.
-Minimal message level that the logger should care about can be set as a constructor parameter
-to that method. Level must be compatible with PSR-3 so it's preferable to use constants from
-the `Psr\Log\LogLevel` class.
+Note that settings shown above are default as long as you use the `DefaultConfigurationProvider`.
+Console log writer only accepts messages of level `NOTICE` or higher so that
+your terminal is not cluttered with less useful info.
+
+> **Note:** using less verbose logging (or less log writers) may slightly improve
+> Scrawler's performance
 
 ## ConsoleLogWriter
 This log writer outputs to the default interface of the commandline interface

@@ -19,14 +19,15 @@ class ConsoleLogWriter extends AbstractLogWriter
     public function log($level, $message, array $context = [])
     {
         $message = $this->interpolate($message, $context);
+
+        $this->output->writeln($this->styleMessageForLevel($message, $level));
+    }
+
+    protected function styleMessageForLevel($message, $level)
+    {
         $style = $this->getStyleForLevel($level);
 
-        if ($style !== null) {
-            $this->output->writeln("<{$style}>{$message}</{$style}>");
-            return;
-        }
-
-        $this->output->writeln($message);
+        return sprintf($style, $message);
     }
 
     protected function getStyleForLevel($level)
@@ -36,16 +37,15 @@ class ConsoleLogWriter extends AbstractLogWriter
             case LogLevel::ALERT:
             case LogLevel::CRITICAL:
             case LogLevel::ERROR:
-                return 'error';
+                return '<error>%s</error>';
             case LogLevel::WARNING:
-                return 'comment';
+                return '<comment>%s</comment>';
             case LogLevel::NOTICE:
-            case LogLevel::INFO:
-                return 'info';
+                return '<info>%s</info>';
             case LogLevel::DEBUG:
-                return null;
+                return "\e[1;30m%s\e[0m";
             default:
-                throw new \Exception('Unsupported logger level: ' . (string) $level);
+                return '%s';
         }
     }
 }

@@ -33,7 +33,7 @@ class TextfileLogWriterTest extends ServerBasedTest
         $scrawler->run();
 
         $log = file(__DIR__ . '/output/test/crawler.log');
-        $this->assertRegExp('#\[INFO\] Running "test" operation#', $log[0]);
+        $this->assertRegExp('#\[NOTICE\] Started "test" operation#', $log[0]);
     }
 
     public function testSettingVerbosityLevels(): void
@@ -41,7 +41,7 @@ class TextfileLogWriterTest extends ServerBasedTest
         $config = BasicConfigurationProvider::getConfiguration()
             ->setBaseUrl(ServerBasedTest::getHostUrl())
             ->addLogWriter(new TextfileLogWriter('full.log'))
-            ->addLogWriter(new TextfileLogWriter('notice.log'), LogLevel::NOTICE)
+            ->addLogWriter(new TextfileLogWriter('warning.log'), LogLevel::WARNING)
             ->addObjectDefinition('test', new CssSelectorListMatcher('body'), function (ObjectConfiguration $object) {
                 $object
                     ->addFieldDefinition('match', new CssSelectorTextMatcher('span.match'))
@@ -55,9 +55,9 @@ class TextfileLogWriterTest extends ServerBasedTest
         $scrawler->run();
 
         $log = file(__DIR__ . '/output/test/full.log');
-        $this->assertRegExp('#\[INFO\] Running "test" operation#', $log[0]);
+        $this->assertRegExp('#\[NOTICE\] Started "test" operation#', $log[0]);
 
-        $this->assertFalse(file_exists(__DIR__ . '/output/notice.log'));
+        $this->assertFalse(file_exists(__DIR__ . '/output/warning.log'));
     }
 
     public function testTwoLogWritersWithSameVerbosity(): void
@@ -79,9 +79,9 @@ class TextfileLogWriterTest extends ServerBasedTest
         $scrawler->run();
 
         $log = file(__DIR__ . '/output/test/first.log');
-        $this->assertRegExp('#\[INFO\] Running "test" operation#', $log[0]);
+        $this->assertRegExp('#\[NOTICE\] Started "test" operation#', $log[0]);
 
         $log = file(__DIR__ . '/output/test/second.log');
-        $this->assertRegExp('#\[INFO\] Running "test" operation#', $log[0]);
+        $this->assertRegExp('#\[NOTICE\] Started "test" operation#', $log[0]);
     }
 }
