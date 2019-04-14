@@ -1,11 +1,10 @@
 # Configuration
-
-> **Note:** make sure to read the [getting started](getting-started.md) chapter
-> first to have understanding of basic Scrawler's concepts.
-
 As mentioned previously the configuration for `scrawler` — the default
 commandline entrypoint — should live in a file and should be object of class
 `Configuration` being returned by that file.
+
+> **Note:** make sure to read the [getting started](getting-started.md) chapter
+> first to have understanding of basic Scrawler's concepts.
 
 ## Basic options
 There is a couple of configuration options that you need to provide:
@@ -75,7 +74,7 @@ As you can see above, aside from the object name (which can be any unique string
 and the closure, you need to provide one more element when describing objects.
 This is a matcher instance. Matchers (described in the [Blocks](blocks.md) part
 of the documentation) are responsible for picking out information from the current
-page. There are two main types of matchers - ones returning single element and the
+page. There are two main types of matchers: ones returning single element and the
 list of elements. For objects you will need to use the latter even if you expect
 just one match for the object in the course of entire operation (just like website
 header/description example given in previous chapter).

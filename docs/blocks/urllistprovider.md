@@ -25,13 +25,13 @@ public function __construct(string $template, int $start = 1, int $step = 1, ?in
 ```
 
 As you can see, by default it starts with one and increments counter by one after
-every processed URL. Incremental part is marked using `%u` in the URL you need to
-provide. When you omit the `$stop` parameter URLs will be incremented to the point
-where HTTP 404 is received from the server. Note that it will cause entry into your
-logs that you should not worry about.
+every processed URL. Incremental part is marked using `%u` in the URL template.
+When you omit the `$stop` parameter URLs will be incremented to the point where
+HTTP 404 is received from the server. Note that it will cause entry into your logs
+that you should not worry about.
 
 ```php
-addUrlListProvider(new ArgumentAdvancerUrlListProvider('http://sobak.pl/page/%u', 2, 1, 17))
+addUrlListProvider(new ArgumentAdvancerUrlListProvider('http://sobak.pl/page/%u', 2, 1))
 ```
 
 > **Note:** relative URLs are not yet supported.
