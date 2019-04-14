@@ -79,13 +79,15 @@ down the file... Scrawler does it all for you!
 ## Documentation
 For the detailed documentation please check the table of contents below.
 
+- [Getting started](docs/getting-started.md)
 - [Configuration](docs/configuration.md)
 - [Entities](docs/entities.md)
 - [Blocks](docs/blocks.md)
 - [Changelog](CHANGELOG.md)
 - [Roadmap](docs/roadmap.md)
 
-The most interesting section is probably "Blocks". _Block_ in Scrawler is an
+If you are already familiar with the basic Scrawler concepts you will probably
+be mostly interested in the _"Blocks"_ chapter. _Block_ in Scrawler is an
 abstracted, swappable piece of logic defining the crawling, scrapping or result
 processing operations which you can customize using one of many builtin classes
 or even your own, tailored implementation. Looking at the example above, you

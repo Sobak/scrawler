@@ -5,10 +5,11 @@ aspect, their mapping details and some general tips on how to write them.
 
 Entities are plain PHP objects, they don't have to implement any interface or extend
 from any base class. Their primary responsibility is to store data fetched by the
-Scrawler so that it can be then used by result writers (take a look at the chapter on
-[configuration](configuration.md) for more details on the flow). That's why typically entities
-do not contain much logic. Most of what they do is defining properties (most recommended
-are private or protected) along with getters and setters so like a Data Transfer Object.
+Scrawler so that it can be then used by result writers (take a look at the
+[getting started](getting-started.md) chapter for more details on the flow).
+That's why typically entities do not contain much logic. Most of what they do is
+defining properties (most recommended are private or protected) along with getters
+and setters so they act as a Data Transfer Object.
 
 ```php
 <?php
@@ -98,6 +99,12 @@ public function getSlug()
 Setter does not really make sense in this case as we assume you will not be providing
 definition for the `slug` field in your configuration. Result writer will see the `slug`
 property in your entity and attempt to use it, though.
+
+> **Note:** you can mix the trick shown above with adding multiple entity mappings
+> for single Scrawler's object (as defined in _Getting started_ chapter) to create
+> powerful configuration and have same scrapped data written to multiple destinations
+> with varying fields. For example, you could omit some getters from one entity and
+> have less detailed information written to text file than database. Sky is the limit!
 
 Finally, your entities may sometimes need additional mapping metadata. This is a case
 e.g. when using database result writer. The Doctrine library which is used under the
