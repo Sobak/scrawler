@@ -15,7 +15,7 @@ All notable changes to Scrawler will be documented in this file.
 - Added ability to set the filename for text file log writer
 - Added support for registering multiple result writers per entity
 - Added ability to set minimal verbosity level for each log writer
-- Added possibility to specify output directory using `crawler` CLI
+- Added possibility to specify output directory using `scrawler` CLI
 - Added logging capabilities for more elements of the script lifecycle
 - Added confirmation on overriding output directory (can be forced with `--force`/`-f` option)
 
@@ -41,7 +41,7 @@ All notable changes to Scrawler will be documented in this file.
 
 ### Fixed
 - Fixed misleading default values for required configuration options which confused
-  some of the code analysys tools
+  some of the code analysis tools
 
 ### Removed  
 - `FieldDefinition` classes
