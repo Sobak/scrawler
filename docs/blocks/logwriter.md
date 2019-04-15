@@ -21,13 +21,12 @@ class.
 ```php
 $configuration
     ->addLogWriter(new ConsoleLogWriter(), LogLevel::NOTICE)
-    ->addLogWriter(new TextfileLogWriter())
+    ->addLogWriter(new TextfileLogWriter(), LogLevel::INFO)
 ;
 ```
 
 Note that settings shown above are default as long as you use the `DefaultConfigurationProvider`.
-Console log writer only accepts messages of level `NOTICE` or higher so that
-your terminal is not cluttered with less useful info.
+Console logs are less detailed than textfile logs and we are omitting debug data entirerly.
 
 > **Note:** using less verbose logging (or less log writers) may slightly improve
 > Scrawler's performance

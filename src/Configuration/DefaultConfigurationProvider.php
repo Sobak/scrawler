@@ -14,7 +14,7 @@ class DefaultConfigurationProvider
     {
         $configuration
             ->addLogWriter(new ConsoleLogWriter(), LogLevel::NOTICE)
-            ->addLogWriter(new TextfileLogWriter())
+            ->addLogWriter(new TextfileLogWriter(), LogLevel::INFO)
         ;
 
         return $configuration;
