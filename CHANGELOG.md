@@ -2,6 +2,8 @@
 All notable changes to Scrawler will be documented in this file.
 
 ## [Unreleased]
+### Added
+- Added total time displayed once operation is done
 
 ## [0.2.0] - 2019-04-13
 ### Added

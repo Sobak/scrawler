@@ -50,12 +50,17 @@ class Scrawler
 
     public function run()
     {
+        $timeStart = microtime(true);
+
         $this->logWriter->notice('Started "' . $this->configuration->getOperationName() . '" operation');
 
         $client = ClientFactory::buildInstance($this->configuration->getClientConfigurationProviders());
         $initialUrl = new Url($this->configuration->getBaseUrl());
 
         $this->makeRequest($client, $initialUrl, []);
+
+        $duration = round(microtime(true) - $timeStart, 2);
+        $this->logWriter->notice("Finished in {$duration}s");
 
         return 0;
     }
