@@ -5,6 +5,9 @@ All notable changes to Scrawler will be documented in this file.
 ### Added
 - Added total time displayed once operation is done
 
+### Changed
+- Improved performance of CSS selector matchers
+
 ## [0.2.0] - 2019-04-13
 ### Added
 - Added basic capabilities of handling non-200 responses
