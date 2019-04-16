@@ -9,6 +9,7 @@ All notable changes to Scrawler will be documented in this file.
 ### Changed
 - Underlying Guzzle instance will not always depend on cURL now. This is done to
   ensure that widest set of features is available for handling HTTP requests.
+- `DefaultConfigurationProvider` sets timeouts for Guzzle now  
 - Improved performance of CSS selector matchers
 - Lowered the default textfile log verbosity to exclude debug messages
 
