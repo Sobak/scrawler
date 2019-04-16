@@ -24,6 +24,21 @@ return (new Configuration())
 As you can see, all simple options (that only have a scalar value) are set using
 PHP setters named after them.
 
+## Default configuration
+In order to apply set of recommened configuration options you should pass your
+`Configuration` into `DefaultConfigurationProvider` class where it will be
+modified by the reference. Be sure to review what the default options are.
+
+```php
+$scrawler = new Configuration();
+$scrawler = (new DefaultConfigurationProvider())->setDefaultConfiguration($scrawler);
+
+$scrawler
+    ->setOperationName('Test config')
+    // ...
+;
+```
+
 ## Blocks
 Idea of blocks was described in the previous chapter so we will skip the theory
 now. In context of configuration you need to know that you can add infinite
