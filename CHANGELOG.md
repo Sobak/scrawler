@@ -3,6 +3,7 @@ All notable changes to Scrawler will be documented in this file.
 
 ## [Unreleased]
 ### Added
+- Added literal client configuration provider
 - Added total time displayed once operation is done
 
 ### Changed

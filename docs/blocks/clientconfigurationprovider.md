@@ -25,6 +25,15 @@ password as arguments to the class constructor.
 ->addClientConfigurationProvider(new BasicAuthProvider('username', 'password'))
 ```
 
+## LiteralConfigurationProvider
+Literal client configuration provider takes an array as its only constructor
+parameter and passes it to Guzzle. It means that you can use it to set any kind
+of configuration no matter if it has dedicated configuration provider.
+
+```php
+->addClientConfigurationProvider(new LiteralProvider(['timeout' => 0))
+```
+
 ## ScrawlerUserAgentProvider
 This is a default client configuration provider which includes Scrawler
 name and version inside the user agent. It does, however, require you to

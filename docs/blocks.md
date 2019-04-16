@@ -22,6 +22,7 @@ mentioning its potential parameters etc.
 
 - [ClientConfigurationProvider](blocks/clientconfigurationprovider.md)
 	- [BasicAuthProvider](blocks/clientconfigurationprovider.md#basicauthprovider)
+	- [LiteralConfigurationProvider](blocks/clientconfigurationprovider.md#literalconfigurationprovider)
 	- [ScrawlerUserAgentProvider](blocks/clientconfigurationprovider.md#scrawleruseragentprovider)
 - [LogWriter](blocks/logwriter.md)
 	- [ConsoleLogWriter](blocks/logwriter.md#consolelogwriter)
