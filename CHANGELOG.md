@@ -7,6 +7,8 @@ All notable changes to Scrawler will be documented in this file.
 - Added total time displayed once operation is done
 
 ### Changed
+- Underlying Guzzle instance will not always depend on cURL now. This is done to
+  ensure that widest set of features is available for handling HTTP requests.
 - Improved performance of CSS selector matchers
 - Lowered the default textfile log verbosity to exclude debug messages
 
