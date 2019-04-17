@@ -17,6 +17,13 @@ interface UrlListProviderInterface
     public function getUrls(): array;
 
     /**
+     * Sets operation's base Url.
+     *
+     * @param Url $url
+     */
+    public function setBaseUrl(Url $url): void;
+
+    /**
      * Sets the current Url as a context for finding new urls.
      *
      * @param Url $url

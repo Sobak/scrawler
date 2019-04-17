@@ -30,7 +30,12 @@ class ArgumentAdvancerUrlListProvider extends AbstractUrlListProvider
 
     public function getUrls(): array
     {
-        $nextUrl = sprintf($this->template, $this->current);
+        $template = $this->template;
+        if ($this->isRelative($template)) {
+            $template = $this->baseUrl->getUrl() . '/' . $template;
+        }
+
+        $nextUrl = sprintf($template, $this->current);
 
         if (
             ($this->stop !== null && $this->current > $this->stop)
@@ -44,5 +49,10 @@ class ArgumentAdvancerUrlListProvider extends AbstractUrlListProvider
         return [
             new Url($nextUrl, $this->currentUrl->getUrl()),
         ];
+    }
+
+    protected function isRelative($url): bool
+    {
+        return parse_url($url, PHP_URL_SCHEME) === null;
     }
 }

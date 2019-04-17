@@ -34,7 +34,12 @@ that you should not worry about.
 addUrlListProvider(new ArgumentAdvancerUrlListProvider('http://sobak.pl/page/%u', 2, 1))
 ```
 
-> **Note:** relative URLs are not yet supported.
+You can also use relative URL in the template — in such case your base URL
+will be prepended to it so the repetition can be avoided:
+
+```php
+addUrlListProvider(new ArgumentAdvancerUrlListProvider('/page/%u', 2, 1))
+```
 
 In the example above Scrawler will head to `http://sobak.pl/page/2` after
 processing the base URL, then it will continue increasing the number until

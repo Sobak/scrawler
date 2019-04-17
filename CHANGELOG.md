@@ -5,6 +5,7 @@ All notable changes to Scrawler will be documented in this file.
 ### Added
 - Added literal client configuration provider
 - Added total time displayed once operation is done
+- Added support for relative URL in `ArgumentAdvancerUrlListProvider`s template
 
 ### Changed
 - Underlying Guzzle instance will not always depend on cURL now. This is done to

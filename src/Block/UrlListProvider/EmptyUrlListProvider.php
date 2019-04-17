@@ -14,6 +14,11 @@ class EmptyUrlListProvider implements UrlListProviderInterface
         return [];
     }
 
+    public function setBaseUrl(Url $url): void
+    {
+        // Do nothing...
+    }
+
     public function setCurrentUrl(Url $url): void
     {
         // Do nothing...

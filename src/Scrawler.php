@@ -30,6 +30,9 @@ class Scrawler
 
     protected $initializedResultWrites;
 
+    /** @var Url */
+    protected $initialUrl;
+
     protected $logWriter;
 
     protected $output;
@@ -55,7 +58,7 @@ class Scrawler
         $this->logWriter->notice('Started "' . $this->configuration->getOperationName() . '" operation');
 
         $client = ClientFactory::buildInstance($this->configuration->getClientConfigurationProviders());
-        $initialUrl = new Url($this->configuration->getBaseUrl());
+        $initialUrl = $this->initialUrl = new Url($this->configuration->getBaseUrl());
 
         $this->makeRequest($client, $initialUrl, []);
 
@@ -80,6 +83,7 @@ class Scrawler
 
         // Gather list of next URLs using rules specified in configuration
         foreach ($this->configuration->getUrlListProviders() as $urlListProvider) {
+            $urlListProvider->setBaseUrl($this->initialUrl);
             $urlListProvider->setCurrentUrl($url);
             $urlListProvider->setResponse(clone $response);
 
