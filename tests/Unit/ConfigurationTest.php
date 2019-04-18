@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Tests\Unit\Configuration;
+namespace Tests\Unit;
 
 use PHPUnit\Framework\TestCase;
 use Sobak\Scrawler\Configuration\Configuration;
