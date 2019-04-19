@@ -20,6 +20,10 @@
     <filter>
         <whitelist processUncoveredFilesFromWhitelist="true">
             <directory suffix=".php">./src</directory>
+            <exclude>
+                <file>./src/Block/ResultWriter/DumpResultWriter.php</file>
+                <file>./src/Support/functions.php</file>
+            </exclude>
         </whitelist>
     </filter>
     <php>
