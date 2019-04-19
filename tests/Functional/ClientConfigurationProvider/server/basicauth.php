@@ -15,7 +15,9 @@ if (isset($_SERVER['PHP_AUTH_USER'], $_SERVER['PHP_AUTH_PW']) === false) {
 </head>
 <body>
 
-<p class="result"><?= ($_SERVER['PHP_AUTH_USER'] === 'test' && $_SERVER['PHP_AUTH_PW'] === 'password') ? 'OK' : 'FAILED'; ?></p>
+<p class="result">
+    <?= ($_SERVER['PHP_AUTH_USER'] === 'test' && $_SERVER['PHP_AUTH_PW'] === 'password') ? 'OK' : 'FAILED'; ?>
+</p>
 
 </body>
 </html>

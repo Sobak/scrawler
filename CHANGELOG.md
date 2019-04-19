@@ -14,6 +14,9 @@ All notable changes to Scrawler will be documented in this file.
 - Improved performance of CSS selector matchers
 - Lowered the default textfile log verbosity to exclude debug messages
 
+### Fixed
+- Fixed incorrect whitespace trimming in text matchers
+
 ## [0.2.0] - 2019-04-13
 ### Added
 - Added basic capabilities of handling non-200 responses
