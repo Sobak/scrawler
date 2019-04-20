@@ -21,8 +21,15 @@ return (new Configuration())
 ;
 ```
 
-As you can see, all simple options (that only have a scalar value) are set using
+As you can see, all simple options (that only have a single value) are set using
 PHP setters named after them.
+
+Optional simple settings include:
+
+### maxCrawledUrls
+Using `setMaxCrawledUrls()` you can give a number of unique URLs Scrawler will
+process. Omitting this option or setting it to `0` means that all the available
+URLs (given by registered URL list providers) will be fetched and parsed.
 
 ## Default configuration
 In order to apply set of recommened configuration options you should pass your

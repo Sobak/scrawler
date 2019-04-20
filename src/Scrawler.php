@@ -28,6 +28,8 @@ class Scrawler
     /** @var Configuration */
     protected $configuration;
 
+    protected $crawledUrls;
+
     protected $initializedResultWrites;
 
     /** @var Url */
@@ -60,6 +62,8 @@ class Scrawler
         $client = ClientFactory::buildInstance($this->configuration->getClientConfigurationProviders());
         $initialUrl = $this->initialUrl = new Url($this->configuration->getBaseUrl());
 
+        $this->crawledUrls = 0;
+
         $this->makeRequest($client, $initialUrl, []);
 
         $duration = round(microtime(true) - $timeStart, 2);
@@ -79,6 +83,13 @@ class Scrawler
             $this->processResponse($response);
         } else {
             $this->logWriter->notice("Skipped processing, unprocessable response code: HTTP {$statusCode->getCode()}");
+        }
+
+        ++$this->crawledUrls;
+
+        if ($this->crawledUrls >= $this->configuration->getMaxCrawledUrls() && $this->configuration->getMaxCrawledUrls() !== 0) {
+            $this->logWriter->notice('Reached crawled URLs limit of ' . $this->configuration->getMaxCrawledUrls());
+            return;
         }
 
         // Gather list of next URLs using rules specified in configuration

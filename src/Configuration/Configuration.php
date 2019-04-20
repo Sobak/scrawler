@@ -22,6 +22,9 @@ class Configuration
     /** @var array */
     protected $logWriters = [];
 
+    /** @var int */
+    protected $maxCrawledUrls = 0;
+
     /** @var ObjectConfiguration[] */
     protected $objectDefinitions = [];
 
@@ -65,6 +68,18 @@ class Configuration
     public function getLogWriters()
     {
         return $this->logWriters;
+    }
+
+    public function getMaxCrawledUrls(): int
+    {
+        return $this->maxCrawledUrls;
+    }
+
+    public function setMaxCrawledUrls(int $maxCrawledUrls): self
+    {
+        $this->maxCrawledUrls = $maxCrawledUrls;
+
+        return $this;
     }
 
     public function addObjectDefinition(string $name, ListMatcherInterface $matcher, callable $configuration): self
