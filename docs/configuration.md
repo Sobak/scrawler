@@ -133,7 +133,7 @@ return (new Configuration())
 
 ### Result writers
 The last piece of the puzzle is providing the class(es) responsible for saving
-the results. Since result writers are _de fact_ blocks you add them using
+the results. Since result writers are _de facto_ blocks you add them using
 `addResultWriter()` method. As the name implies you can register multiple result
 writers — you can write different entities each in their own way or even write
 single entity to multiple destinations.
