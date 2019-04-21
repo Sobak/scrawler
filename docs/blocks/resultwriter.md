@@ -90,8 +90,10 @@ resulting file.
 > **Note:** This is a file result writer. You might want to read the
 > general [section about them](#meta-file-result-writers).
 
-This result writer does not define any additional configuration options
-aside from ones specific to all file result writers.
+Aside from options specific to all file result writers the JSON result writer
+can accept `options` confiuration key which will be passed as options to the
+`json_encode()` PHP function. The default value is
+`JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE`.
 
 ## TemplateFileResultWriter
 The most generic out of all file result writers. Does not have any particular

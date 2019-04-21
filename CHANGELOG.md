@@ -7,12 +7,15 @@ All notable changes to Scrawler will be documented in this file.
 - Added literal client configuration provider
 - Added total time displayed once operation is done
 - Added ability to set maximum number of crawled URLs
+- Added ability to pass encoding options to JSON file result writer
 - Added support for relative URL in `ArgumentAdvancerUrlListProvider`s template
 
 ### Changed
 - Underlying Guzzle instance will _always_ depend on cURL now. This is done to
   ensure that widest set of features is available for handling HTTP requests.
 - `DefaultConfigurationProvider` sets timeouts for Guzzle now  
+- `JSON_UNESCAPED_UNICODE` option is now used by default when using JSON file
+  result writer
 - Improved performance of CSS selector matchers
 - Lowered the default textfile log verbosity to exclude debug messages
 

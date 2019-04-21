@@ -10,7 +10,8 @@ class JsonFileResultWriter extends FileResultWriter
 {
     public function write(object $entity): bool
     {
-        $output = json_encode(EntityMapper::entityToArray($entity), JSON_PRETTY_PRINT);
+        $options = $this->configuration['options'] ?? JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE;
+        $output = json_encode(EntityMapper::entityToArray($entity), $options);
 
         return $this->writeToFile($output, 'json');
     }
