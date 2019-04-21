@@ -44,14 +44,7 @@ class Url
 
     protected function normalizeUrl($url, $currentUrl)
     {
-        $url = trim($url);
-
-        // @fixme add support before 0.1.0
-        if (parse_url($url, PHP_URL_SCHEME) === null) {
-            throw new \Exception('Relative URLs are not supported yet');
-        }
-
-        $url = $this->removeAnchor($url);
+        $url = $this->removeAnchor(trim($url));
 
         if ($url === '') {
             return $currentUrl;
@@ -68,10 +61,10 @@ class Url
             return $baseUrl . $url;
         }
 
-        // Resolve URL with relative scheme
+        // Resolve URL with relative protocol
         if (strpos($url, '//') === 0) {
             if ($currentUrl === null) {
-                throw new \Exception('First URL must provide explicit scheme (http/https)');
+                throw new \Exception('First URL must use explicit protocol (http/https)');
             }
 
             // Return is e.g. "http"
@@ -80,12 +73,54 @@ class Url
             $url = $currentScheme . ':' . $url;
         }
 
-        return $url;
+        if ($currentUrl === null && parse_url($url, PHP_URL_SCHEME) === null) {
+            throw new \Exception('First URL must be absolute');
+        }
+
+        // If the URL is absolute, we're done
+        if (parse_url($url, PHP_URL_SCHEME) !== null) {
+            return $url;
+        }
+
+        $baseUrl = rtrim($baseUrl, '/');
+
+        // Resolve absolute path (but relative URL)
+        if ('/' === $url[0]) {
+            return $baseUrl . $url;
+        }
+
+        // Resolve relative path
+        $path = parse_url(substr($currentUrl, strlen($baseUrl)), PHP_URL_PATH);
+        $path = $this->canonicalizePath(substr($path, 0, (int) strrpos($path, '/')) . '/' . $url);
+
+        return $baseUrl . ($path === '' || $path[0] !== '/' ? '/' : '') . $path;
+    }
+
+    protected function canonicalizePath($path)
+    {
+        if ($path === '' || $path === '/') {
+            return $path;
+        }
+
+        if (substr($path, -1) === '.') {
+            $path .= '/';
+        }
+
+        $output = [];
+        foreach (explode('/', $path) as $segment) {
+            if ($segment === '..') {
+                array_pop($output);
+            } elseif ($segment !== '.') {
+                $output[] = $segment;
+            }
+        }
+
+        return implode('/', $output);
     }
 
     protected function removeAnchor(string $url): string
     {
-        if ($position = strpos($url, '#') !== false) {
+        if (($position = strpos($url, '#')) !== false) {
             return substr($url, 0, $position);
         }
 
@@ -94,7 +129,7 @@ class Url
 
     protected function removeQueryString(string $url): string
     {
-        if ($position = strpos($url, '?') !== false) {
+        if (($position = strpos($url, '?')) !== false) {
             return substr($url, 0, $position);
         }
 

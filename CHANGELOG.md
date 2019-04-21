@@ -3,6 +3,7 @@ All notable changes to Scrawler will be documented in this file.
 
 ## [Unreleased]
 ### Added
+- Added support for resolving relative URLs
 - Added literal client configuration provider
 - Added total time displayed once operation is done
 - Added ability to set maximum number of crawled URLs
@@ -17,6 +18,9 @@ All notable changes to Scrawler will be documented in this file.
 
 ### Fixed
 - Fixed incorrect whitespace trimming in text matchers
+
+### Known issues
+- Relative URLs with paths using `..` are not yet supported
 
 ## [0.2.0] - 2019-04-13
 ### Added
