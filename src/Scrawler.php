@@ -82,7 +82,7 @@ class Scrawler
         if ($statusCode->isProcessable()) {
             $this->processResponse($response);
         } else {
-            $this->logWriter->notice("Skipped processing, unprocessable response code: HTTP {$statusCode->getCode()}");
+            $this->logWriter->notice('GET ' . $url->getUrl() . " Skipped due to unprocesable response code ({$statusCode->getCode()})");
         }
 
         ++$this->crawledUrls;
