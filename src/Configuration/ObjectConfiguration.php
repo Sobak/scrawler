@@ -17,6 +17,8 @@ class ObjectConfiguration
 
     protected $matcher;
 
+    protected $once = false;
+
     /** @var array */
     protected $resultWriters = [];
 
@@ -64,5 +66,17 @@ class ObjectConfiguration
     public function getResultWriters()
     {
         return $this->resultWriters;
+    }
+
+    public function once(): self
+    {
+        $this->once = true;
+
+        return $this;
+    }
+
+    public function isOnce(): bool
+    {
+        return $this->once;
     }
 }

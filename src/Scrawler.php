@@ -37,6 +37,8 @@ class Scrawler
 
     protected $logWriter;
 
+    protected $onceMatchedObjects = [];
+
     protected $output;
 
     public function __construct(Configuration $configuration, string $outputDirectory)
@@ -128,6 +130,16 @@ class Scrawler
         $responseBody = $response->getBody()->getContents();
 
         foreach ($this->configuration->getObjectDefinitions() as $objectListName => $objectDefinition) {
+            if ($objectDefinition->isOnce()) {
+                $objectId = spl_object_id($objectDefinition);
+
+                if (in_array($objectId, $this->onceMatchedObjects)) {
+                    continue;
+                }
+
+                $this->onceMatchedObjects[] = $objectId;
+            }
+
             $objectDefinition->getMatcher()->setCrawler(new Crawler($responseBody));
             $matchesList = $objectDefinition->getMatcher()->match();
 

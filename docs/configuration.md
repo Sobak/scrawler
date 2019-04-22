@@ -98,7 +98,28 @@ of the documentation) are responsible for picking out information from the curre
 page. There are two main types of matchers: ones returning single element and the
 list of elements. For objects you will need to use the latter even if you expect
 just one match for the object in the course of entire operation (just like website
-header/description example given in previous chapter).
+header/description example given in previous chapter). However, if you expect that
+given object will be the same on every page, you can mark it using `once()` method
+so that Scrawler will not spend time on mapping and writing it over and over:
+
+```php
+return (new Configuration())
+    ->setOperationName('Sample config')
+    ->setBaseUrl('http://sobak.pl')
+    ->addUrlListProvider(new EmptyUrlListProvider())
+    ->addObjectDefinition('post', new CssSelectorListMatcher('article.hentry'), function (ObjectConfiguration $object) {
+        $object
+            ->addFieldDefinition('date', new CssSelectorTextMatcher('time.entry-date'))
+        ;
+    })
+    ->addObjectDefinition('meta', new CssSelectorListMatcher('body'), function (ObjectConfiguration $object) {
+        $object
+            ->addFieldDefinition('description', new CssSelectorTextMatcher('h2.site-description'))
+            ->once()
+        ;
+    })
+;
+```
 
 ### Object fields
 As you can see configuration for an object field is quite similar to the config
@@ -127,6 +148,13 @@ return (new Configuration())
             ->addEntityMapping(PostEntity::class)
         ;
     })
+    ->addObjectDefinition('meta', new CssSelectorListMatcher('body'), function (ObjectConfiguration $object) {
+            $object
+            ->addFieldDefinition('description', new CssSelectorTextMatcher('h2.site-description'))
+            ->addEntityMapping(MetaEntity::class)
+            ->once()
+        ;
+    })
 ;
 ```
 
@@ -150,6 +178,16 @@ return (new Configuration())
             ->addFieldDefinition('date', new CssSelectorTextMatcher('time.entry-date'))
             ->addEntityMapping(PostEntity::class)
             ->addResultWriter(PostEntity::class, new DumpResultWriter())    
+        ;
+    })
+    ->addObjectDefinition('meta', new CssSelectorListMatcher('body'), function (ObjectConfiguration $object) {
+            $object
+            ->addFieldDefinition('description', new CssSelectorTextMatcher('h2.site-description'))
+            ->addEntityMapping(MetaEntity::class)
+            ->addResultWriter(MetaEntity::class, new JsonFileResultWriter([
+                'filename' => new LiteralFilenameProvider(['filename' => 'meta']),
+            ]))
+            ->once()
         ;
     })
 ;
