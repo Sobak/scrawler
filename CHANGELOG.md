@@ -3,6 +3,7 @@ All notable changes to Scrawler will be documented in this file.
 
 ## [Unreleased]
 ### Added
+- Added robots.txt parser block
 - Added support for resolving relative URLs
 - Added literal client configuration provider
 - Added total time displayed once operation is done

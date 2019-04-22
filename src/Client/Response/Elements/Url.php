@@ -27,6 +27,33 @@ class Url
         return $this->currentUrl;
     }
 
+    public function getDomain(): string
+    {
+        $components = parse_url($this->url);
+        $domain = '';
+
+        if (isset($components['scheme']) === false) {
+            throw new \Exception('Cannot get domain from protocol-relative URL');
+        }
+
+        $domain .= $components['scheme'] . '://';
+
+        if (isset($components['user'])) {
+            $domain .= "{$components['user']}:";
+        }
+        if (isset($components['pass'])) {
+            $domain .= "{$components['pass']}@";
+        }
+
+        $domain .= $components['host'];
+
+        if (isset($components['port'])) {
+            $domain .= ":{$components['port']}";
+        }
+
+        return $domain;
+    }
+
     public function getMethod(): ?string
     {
         return $this->method;

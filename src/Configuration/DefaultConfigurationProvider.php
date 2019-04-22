@@ -8,6 +8,7 @@ use Psr\Log\LogLevel;
 use Sobak\Scrawler\Block\ClientConfigurationProvider\LiteralProvider;
 use Sobak\Scrawler\Block\LogWriter\ConsoleLogWriter;
 use Sobak\Scrawler\Block\LogWriter\TextfileLogWriter;
+use Sobak\Scrawler\Block\RobotsParser\DefaultRobotsParser;
 
 class DefaultConfigurationProvider
 {
@@ -20,6 +21,7 @@ class DefaultConfigurationProvider
                 'connect_timeout' => 5,
                 'timeout' => 10,
             ]))
+            ->setRobotsParser(new DefaultRobotsParser())
         ;
 
         return $configuration;

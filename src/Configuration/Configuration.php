@@ -7,6 +7,7 @@ namespace Sobak\Scrawler\Configuration;
 use Psr\Log\LoggerInterface;
 use Psr\Log\LogLevel;
 use Sobak\Scrawler\Block\ClientConfigurationProvider\ClientConfigurationProviderInterface;
+use Sobak\Scrawler\Block\RobotsParser\RobotsParserInterface;
 use Sobak\Scrawler\Block\UrlListProvider\UrlListProviderInterface;
 use Sobak\Scrawler\Matcher\ListMatcherInterface;
 
@@ -27,6 +28,9 @@ class Configuration
 
     /** @var ObjectConfiguration[] */
     protected $objectDefinitions = [];
+
+    /** @var ?RobotsParserInterface */
+    protected $robotsParser;
 
     /** @var UrlListProviderInterface[] */
     protected $urlListProviders = [];
@@ -105,6 +109,18 @@ class Configuration
     public function setOperationName(string $operationName): self
     {
         $this->operationName = $operationName;
+
+        return $this;
+    }
+
+    public function getRobotsParser(): ?RobotsParserInterface
+    {
+        return $this->robotsParser;
+    }
+
+    public function setRobotsParser(?RobotsParserInterface $robotsParser): self
+    {
+        $this->robotsParser = $robotsParser;
 
         return $this;
     }

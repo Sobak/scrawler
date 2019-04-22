@@ -7,6 +7,7 @@
         "php": ">=7.2.0",
         "ext-curl": "*",
         "ext-json": "*",
+        "bopoda/robots-txt-parser": "^2.3",
         "guzzlehttp/guzzle": "^6.3",
         "psr/log": "^1.1",
         "symfony/console": "^4.2",

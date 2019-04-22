@@ -62,6 +62,14 @@ class Scrawler
         $client = ClientFactory::buildInstance($this->configuration->getClientConfigurationProviders());
         $initialUrl = $this->initialUrl = new Url($this->configuration->getBaseUrl());
 
+        $robotsTxt = $this->fetchRobotsTxt($client, $initialUrl);
+        if ($robotsTxt && $this->configuration->getRobotsParser()) {
+            $this->configuration->getRobotsParser()->parseRobotsTxt($robotsTxt);
+        } else {
+            // Unset robots parser if there is no robots.txt file
+            $this->configuration->setRobotsParser(null);
+        }
+
         $this->crawledUrls = 0;
 
         $this->makeRequest($client, $initialUrl, []);
@@ -76,12 +84,16 @@ class Scrawler
     {
         $response = $client->request('GET', $url->getUrl());
 
+        $robotsParser = $this->configuration->getRobotsParser();
         $statusCode = new StatusCode($response->getStatusCode());
-        if ($statusCode->isProcessable()) {
+
+        if ($statusCode->isProcessable() === false) {
+            $this->logWriter->notice('GET ' . $url->getUrl() . " Skipped due to unprocessable response code ({$statusCode->getCode()})");
+        } elseif ($robotsParser && $robotsParser->isAllowed($url) === false) {
+            $this->logWriter->notice('GET ' . $url->getUrl() . " Blocked by the robots.txt");
+        } else {
             $this->logWriter->info('GET ' . $url->getUrl());
             $this->processResponse($response);
-        } else {
-            $this->logWriter->notice('GET ' . $url->getUrl() . " Skipped due to unprocessable response code ({$statusCode->getCode()})");
         }
 
         ++$this->crawledUrls;
@@ -175,5 +187,26 @@ class Scrawler
                 }
             }
         }
+    }
+
+    protected function fetchRobotsTxt(Client $client, Url $url)
+    {
+        if ($this->configuration->getRobotsParser() === null) {
+            return false;
+        }
+
+        $robotsTxtUrl = $url->getDomain() . '/robots.txt';
+
+        $this->logWriter->info('GET ' . $robotsTxtUrl);
+
+        $response = $client->request('GET', $robotsTxtUrl);
+
+        $statusCode = new StatusCode($response->getStatusCode());
+        if ($statusCode->isProcessable() === false) {
+            $this->logWriter->notice('GET ' . $robotsTxtUrl . " Skipped due to unprocesable response code ({$statusCode->getCode()})");
+            return false;
+        }
+
+        return $response->getBody()->getContents();
     }
 }

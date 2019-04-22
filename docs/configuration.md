@@ -25,6 +25,11 @@ The `maxCrawledUrls` option specifies a number of unique URLs Scrawler will
 process. Omitting this option or setting it to `0` means that all the available
 URLs (given by registered URL list providers) will be fetched and parsed.
 
+### `setRobotsParser()`
+You can set single robots parser block which will be used to check all found URLs
+against the rules set by the website owner. For more details please consult
+[separate chapter](blocks/robotsparser.md) of the documentation.
+
 ## Default configuration
 In order to apply set of recommened configuration options you should pass your
 `Configuration` into `DefaultConfigurationProvider` class where it will be
