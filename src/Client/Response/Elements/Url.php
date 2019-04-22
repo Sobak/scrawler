@@ -42,6 +42,11 @@ class Url
         return $this->url;
     }
 
+    public function __toString(): string
+    {
+        return $this->url;
+    }
+
     protected function normalizeUrl($url, $currentUrl)
     {
         $url = $this->removeAnchor(trim($url));
