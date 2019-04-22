@@ -13,5 +13,10 @@ interface FileResultWriterInterface extends ResultWriterInterface
      */
     public function getFilename(): string;
 
+    /**
+     * Sets the filename (with no extension included) to use for the result file.
+     *
+     * @param string $filename
+     */
     public function setFilename(string $filename): void;
 }
