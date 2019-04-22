@@ -16,17 +16,17 @@ implementations for PHP, like Monolog.
 > handling is consistent.
 
 Log writers are registered using `addLogWriter()` method on the main `Configuration`
-class.
+class. You can pass the log level constant as the second parameter to limit log
+verbosity.
 
 ```php
 $configuration
-    ->addLogWriter(new ConsoleLogWriter(), LogLevel::NOTICE)
+    ->addLogWriter(new ConsoleLogWriter(), LogLevel::INFO)
     ->addLogWriter(new TextfileLogWriter(), LogLevel::INFO)
 ;
 ```
 
 Note that settings shown above are default as long as you use the `DefaultConfigurationProvider`.
-Console logs are less detailed than textfile logs and we are omitting debug data entirerly.
 
 > **Note:** using less verbose logging (or less log writers) may slightly improve
 > Scrawler's performance

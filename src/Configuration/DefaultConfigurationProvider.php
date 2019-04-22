@@ -14,7 +14,7 @@ class DefaultConfigurationProvider
     public function setDefaultConfiguration(Configuration $configuration): Configuration
     {
         $configuration
-            ->addLogWriter(new ConsoleLogWriter(), LogLevel::NOTICE)
+            ->addLogWriter(new ConsoleLogWriter(), LogLevel::INFO)
             ->addLogWriter(new TextfileLogWriter(), LogLevel::INFO)
             ->addClientConfigurationProvider(new LiteralProvider([
                 'connect_timeout' => 5,
