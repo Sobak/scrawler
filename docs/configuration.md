@@ -7,27 +7,21 @@ commandline entrypoint — should live in a file and should be object of class
 > first to have understanding of basic Scrawler's concepts.
 
 ## Basic options
-There is a couple of configuration options that you need to provide:
+The basic options only take single value which is provided using classing PHP
+setter method.
 
-- **baseUrl** - it's the URL Scrawler will start crawling from. Must be absolute.
-- **operationName** - it is your name for the particular configuration set for
-  crawling, like _"Homepage scrapping"_. It will be used to name the output
-  directory, will appear in logs etc.
+### `setBaseUrl()`
+Setting this value is **mandatory**. It should be an absolute URL Scrawler will
+start crawling from.
 
-```php
-return (new Configuration())
-    ->setOperationName('Sample config')
-    ->setBaseUrl('http://sobak.pl')
-;
-```
+### `setOperationName()`
+Setting this value is **mandatory**. This can be any string that will uniquely
+define your configuration set. However, it will be used to name then output
+directory, will appear in the logs etc, so it makes sense to set it to something
+meaningful.
 
-As you can see, all simple options (that only have a single value) are set using
-PHP setters named after them.
-
-Optional simple settings include:
-
-### maxCrawledUrls
-Using `setMaxCrawledUrls()` you can give a number of unique URLs Scrawler will
+### `setMaxCrawledUrls()`
+The `maxCrawledUrls` option specifies a number of unique URLs Scrawler will
 process. Omitting this option or setting it to `0` means that all the available
 URLs (given by registered URL list providers) will be fetched and parsed.
 
