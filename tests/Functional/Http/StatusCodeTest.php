@@ -32,6 +32,6 @@ class StatusCodeTest extends ServerBasedTest
         $scrawler->run();
 
         $log = file(__DIR__ . '/output/test/crawler.log');
-        $this->assertRegExp('#\[NOTICE\] Skipped processing, unprocessable response code: HTTP 404#', $log[2]);
+        $this->assertRegExp('#Skipped due to unprocessable response code#', $log[1]);
     }
 }

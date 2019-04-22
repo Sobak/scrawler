@@ -74,15 +74,14 @@ class Scrawler
 
     protected function makeRequest(Client $client, Url $url, array $visitedUrls): void
     {
-        $this->logWriter->info('GET ' . $url->getUrl());
-
         $response = $client->request('GET', $url->getUrl());
 
         $statusCode = new StatusCode($response->getStatusCode());
         if ($statusCode->isProcessable()) {
+            $this->logWriter->info('GET ' . $url->getUrl());
             $this->processResponse($response);
         } else {
-            $this->logWriter->notice('GET ' . $url->getUrl() . " Skipped due to unprocesable response code ({$statusCode->getCode()})");
+            $this->logWriter->notice('GET ' . $url->getUrl() . " Skipped due to unprocessable response code ({$statusCode->getCode()})");
         }
 
         ++$this->crawledUrls;

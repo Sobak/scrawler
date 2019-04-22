@@ -17,6 +17,7 @@ All notable changes to Scrawler will be documented in this file.
 - `JSON_UNESCAPED_UNICODE` option is now used by default when using JSON file
   result writer
 - Improved performance of CSS selector matchers
+- Improved logs readability
 - Changed default log verbosity for both console and the textfile to `INFO` level
 
 ### Fixed
