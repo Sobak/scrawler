@@ -32,7 +32,7 @@ class ArgumentAdvancerUrlListProvider extends AbstractUrlListProvider
     {
         $template = $this->template;
         if ($this->isRelative($template)) {
-            $template = $this->baseUrl->getUrl() . '/' . $template;
+            $template = $this->baseUrl->getUrl() . '/' . ltrim($template, '/');
         }
 
         $nextUrl = sprintf($template, $this->current);
