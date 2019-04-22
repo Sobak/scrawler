@@ -146,7 +146,7 @@ class Scrawler
                 foreach ($objectDefinition->getEntityMappings() as $entityClass) {
                     $entity = EntityMapper::resultToEntity($objectResult, $entityClass);
 
-                    $this->logWriter->debug("Matched object to the {$entityClass} entity");
+                    $this->logWriter->debug("Mapped object to the {$entityClass} entity");
 
                     $resultWriters = $objectDefinition->getResultWriters();
 
