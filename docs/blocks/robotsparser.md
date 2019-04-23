@@ -11,7 +11,7 @@ $configuration
 ;
 ```
 
-You can set your username fragment which will be used to check vendor-specific
+You can set your useragent fragment which will be used to check vendor-specific
 settings in `robots.txt` file. To do so pass the optional parameter to the
 robots parser's constructor. Otherwise the useragent will be set to `Scrawler`
 meaning it will match any bot name including `Scrawler` in its name and the
