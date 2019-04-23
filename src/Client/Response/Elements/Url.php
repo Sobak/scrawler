@@ -111,6 +111,11 @@ class Url
 
         // If the URL is absolute, we're done
         if (parse_url($url, PHP_URL_SCHEME) !== null) {
+            // ...unless wrong protocol is set
+            if (in_array(parse_url($url, PHP_URL_SCHEME), ['http', 'https']) === false) {
+                throw new \Exception('Only http and https protocols are supported');
+            }
+
             return $url;
         }
 

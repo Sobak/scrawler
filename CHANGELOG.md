@@ -18,6 +18,7 @@ All notable changes to Scrawler will be documented in this file.
 - `DefaultConfigurationProvider` sets timeouts for Guzzle now  
 - `JSON_UNESCAPED_UNICODE` option is now used by default when using JSON file
   result writer
+- Only HTTP and HTTPS protocols are now explicitly allowed
 - Improved performance of CSS selector matchers
 - Improved handling of networking errors
 - Improved logs readability
