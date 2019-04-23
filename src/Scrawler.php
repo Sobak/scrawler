@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Sobak\Scrawler;
 
 use GuzzleHttp\Client;
+use GuzzleHttp\Exception\ConnectException;
 use Psr\Http\Message\ResponseInterface;
 use Sobak\Scrawler\Block\ResultWriter\FilenameProvider\FilenameProviderInterface;
 use Sobak\Scrawler\Block\ResultWriter\FileResultWriterInterface;
@@ -64,7 +65,12 @@ class Scrawler
         $client = ClientFactory::buildInstance($this->configuration->getClientConfigurationProviders());
         $initialUrl = $this->initialUrl = new Url($this->configuration->getBaseUrl());
 
-        $robotsTxt = $this->fetchRobotsTxt($client, $initialUrl);
+        try {
+            $robotsTxt = $this->fetchRobotsTxt($client, $initialUrl);
+        } catch (ConnectException $exception) {
+            return -1;
+        }
+
         if ($robotsTxt && $this->configuration->getRobotsParser()) {
             $this->configuration->getRobotsParser()->parseRobotsTxt($robotsTxt);
         } else {
@@ -84,7 +90,12 @@ class Scrawler
 
     protected function makeRequest(Client $client, Url $url, array $visitedUrls): void
     {
-        $response = $client->request('GET', $url->getUrl());
+        try {
+            $response = $client->request('GET', $url->getUrl());
+        } catch (ConnectException $exception) {
+            $this->logWriter->critical('GET ' . $url->getUrl() . ' Could not connect to the server');
+            return;
+        }
 
         $robotsParser = $this->configuration->getRobotsParser();
         $statusCode = new StatusCode($response->getStatusCode());
@@ -209,9 +220,13 @@ class Scrawler
 
         $robotsTxtUrl = $url->getDomain() . '/robots.txt';
 
-        $this->logWriter->info('GET ' . $robotsTxtUrl);
-
-        $response = $client->request('GET', $robotsTxtUrl);
+        try {
+            $response = $client->request('GET', $robotsTxtUrl);
+            $this->logWriter->info('GET ' . $robotsTxtUrl);
+        } catch (ConnectException $exception) {
+            $this->logWriter->critical('GET ' . $robotsTxtUrl . ' Could not connect to the server');
+            throw $exception;
+        }
 
         $statusCode = new StatusCode($response->getStatusCode());
         if ($statusCode->isProcessable() === false) {
