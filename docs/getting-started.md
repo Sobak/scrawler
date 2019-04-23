@@ -32,7 +32,7 @@ In most cases there will be multiple instances of given object find on a website
 that some pieces of information you want to get will be global for the whole website
 but repeated on every subpage (e.g. its header and description). Just to clarify,
 you will still need to describe them as an object, even if you are interested in
-just single occurence. You can hovewer mark such objects to be fetched only once.
+just single occurence. You can, however, mark such objects to be fetched only once.
 
 ## Entity mapping
 Once you have defined the fields your object of information have, you will need
