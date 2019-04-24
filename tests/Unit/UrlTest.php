@@ -25,6 +25,15 @@ class UrlTest extends TestCase
         $url->getUrl();
     }
 
+    public function testUnsupportedProtocol(): void
+    {
+        $this->expectException(\Exception::class);
+        $this->expectExceptionMessage('Only http and https protocols are supported');
+
+        $url = new Url('file:///C:/Users/User/file.html');
+        $url->getUrl();
+    }
+
     /**
      * @param $url string URL being tested
      * @param $currentUrl string Current URL context
