@@ -11,6 +11,7 @@ use Sobak\Scrawler\Block\ResultWriter\FilenameProvider\FilenameProviderInterface
 use Sobak\Scrawler\Block\ResultWriter\FileResultWriterInterface;
 use Sobak\Scrawler\Block\ResultWriter\ResultWriterInterface;
 use Sobak\Scrawler\Client\ClientFactory;
+use Sobak\Scrawler\Client\Response\ContentType;
 use Sobak\Scrawler\Client\Response\Elements\Url;
 use Sobak\Scrawler\Client\Response\StatusCode;
 use Sobak\Scrawler\Configuration\Configuration;
@@ -97,10 +98,13 @@ class Scrawler
             return;
         }
 
+        $contentType = new ContentType($response->getHeader('content-type'));
         $robotsParser = $this->configuration->getRobotsParser();
         $statusCode = new StatusCode($response->getStatusCode());
 
-        if ($statusCode->isProcessable() === false) {
+        if ($contentType->isProcessable() === false) {
+            $this->logWriter->warning('GET ' . $url->getUrl() . " Skipped due to unprocessable content type ({$contentType->getType()})");
+        } elseif ($statusCode->isProcessable() === false) {
             $this->logWriter->notice('GET ' . $url->getUrl() . " Skipped due to unprocessable response code ({$statusCode->getCode()})");
         } elseif ($robotsParser && $robotsParser->isAllowed($url) === false) {
             $this->logWriter->notice('GET ' . $url->getUrl() . " Blocked by the robots.txt");
