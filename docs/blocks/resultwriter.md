@@ -23,6 +23,36 @@ Second, they _need_ to accept a filename provider object under the
 [dedicated documentation section](filenameprovider.md) and choose one
 suitable to your needs.
 
+## CsvFileResultWriter
+This result writers will write each entity as a row of the CSV file. Aside from
+all generic options for file result writers mentioned above it also accepts
+`headers` array. Passing it will create one header row at the top of the file
+and will make all entity properties being ordered consistently with headers,
+otherwise properties will be ordered alphabetically.
+
+```php
+->addResultWriter(PostEntity::class, new CsvFileResultWriter([
+    'filename' => new LiteralFilenameProvider(['filename' => 'posts']),
+    'headers' => [
+        'date' => 'Published on',
+        'title' => 'Title',
+        'slug' => 'Slug',
+    ],
+]))
+```
+
+> **Note:** since this result writer will create _one_ file for all of its
+> entities you will probably want to use the `LiteralFilenameProvider` to
+> get the filename.
+
+Optionally you can customize any of the parameters supported by the underlying
+`fputcsv()` function, being `delimiter`, `enclosure` and `escape_char`.
+
+> **Note:** in order to have UTF-8 characters read properly by Microsoft Excel
+> on Windows you will need a BOM character at the beginning of the file. You
+> can tell Scrawler to insert it for you by setting `insert_bom` config option
+> to `true` (`false` by default).
+
 ## DatabaseResultWriter
 Saves results into almost any of the databases supported by PDO.
 

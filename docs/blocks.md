@@ -28,6 +28,7 @@ mentioning its potential parameters etc.
 	- [ConsoleLogWriter](blocks/logwriter.md#consolelogwriter)
 	- [TextfileLogWriter](blocks/logwriter.md#textfilelogwriter)
 - [ResultWriter](blocks/resultwriter.md)
+	- [CsvFileResultWriter](blocks/resultwriter.md#csvfileresultwriter)
 	- [DatabaseResultWriter](blocks/resultwriter.md#databaseresultwriter)
 	- [DumpResultWriter](blocks/resultwriter.md#dumpresultwriter)
 	- [InMemoryResultWriter](blocks/resultwriter.md#inmemoryresultwriter)

@@ -45,6 +45,18 @@ class Outputter
         file_put_contents($this->directoryName . $filename, $contents);
     }
 
+    public function createFileHandle($filename, $mode)
+    {
+        $filename = $this->directoryName . $filename;
+        $result = fopen($filename, $mode);
+
+        if ($result === false) {
+            throw new \Exception('Could not create file handle for ' . $filename);
+        }
+
+        return $result;
+    }
+
     public function deleteFile($filename): void
     {
         unlink($this->directoryName . $filename);
