@@ -124,7 +124,7 @@ class Scrawler
         foreach ($this->configuration->getUrlListProviders() as $urlListProvider) {
             $urlListProvider->setBaseUrl($this->initialUrl);
             $urlListProvider->setCurrentUrl($url);
-            $urlListProvider->setResponse(clone $response);
+            $urlListProvider->setResponse($response);
 
             $urlList = $urlListProvider->getUrls();
 
