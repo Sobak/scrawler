@@ -43,6 +43,8 @@ class Scrawler
 
     protected $output;
 
+    protected $visitedUrls = [];
+
     public function __construct(Configuration $configuration, string $outputDirectory)
     {
         $configurationChecker = new ConfigurationChecker();
@@ -81,7 +83,7 @@ class Scrawler
 
         $this->crawledUrls = 0;
 
-        $this->makeRequest($client, $initialUrl, []);
+        $this->makeRequest($client, $initialUrl);
 
         $duration = round(microtime(true) - $timeStart, 2);
         $this->logWriter->notice("Finished in {$duration}s");
@@ -89,8 +91,10 @@ class Scrawler
         return 0;
     }
 
-    protected function makeRequest(Client $client, Url $url, array $visitedUrls): void
+    protected function makeRequest(Client $client, Url $url): void
     {
+        $this->visitedUrls[$url->getUrl()] = true;
+
         try {
             $response = $client->request('GET', $url->getUrl());
         } catch (ConnectException $exception) {
@@ -126,16 +130,13 @@ class Scrawler
             $urlListProvider->setCurrentUrl($url);
             $urlListProvider->setResponse($response);
 
-            $urlList = $urlListProvider->getUrls();
-
-            foreach ($urlList as $url) {
-                $urlString = $url->getUrl();
-
-                if (isset($visitedUrls[$urlString]) === false) {
-                    $visitedUrls[$urlString] = true;
-
-                    $this->makeRequest($client, $url, $visitedUrls);
+            foreach ($urlListProvider->getUrls() as $url) {
+                $canonicalUrl = $url->getUrl();
+                if (isset($this->visitedUrls[$canonicalUrl]) && $this->visitedUrls[$canonicalUrl] === true) {
+                    continue;
                 }
+
+                $this->makeRequest($client, $url);
             }
         }
     }

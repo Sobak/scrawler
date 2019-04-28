@@ -27,6 +27,8 @@ All notable changes to Scrawler will be documented in this file.
 - Changed default log verbosity for both console and the textfile to `INFO` level
 
 ### Fixed
+- Fixed incorrect detecting of visited URLs resulting in some adresses being
+  processed multiple times
 - Fixed incorrect whitespace trimming in text matchers
 
 ### Known issues
