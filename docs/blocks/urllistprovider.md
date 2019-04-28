@@ -16,6 +16,15 @@ $configuration
 ;
 ```
 
+Each URL list provider object is fed with useful data before `getUrls()` method
+is called such as base and current URL and the currently processed response
+object. In most cases you will want to use this data to obtain list of next
+URLs for your custom implementation.
+
+> **Note:** when trying to read response's content please remember it is a
+> _stream_ so you need to `rewind()` it before reading, otherwise you will
+> get empty string as it has been read before.
+
 ## ArgumentAdvancerUrlListProvider
 This URL list provider implementation allows to define the URL template in which
 you want certain part of that URL to increase every time up to some point.
