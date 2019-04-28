@@ -11,7 +11,7 @@ All notable changes to Scrawler will be documented in this file.
 - Added ability to set maximum number of crawled URLs
 - Added ability to mark objects as fetched only once per operation
 - Added ability to pass encoding options to JSON file result writer
-- Added support for relative URL in `ArgumentAdvancerUrlListProvider`s template
+- Added support for relative URL in `ArgumentAdvancerUrlListProvider`'s template
 
 ### Changed
 - Underlying Guzzle instance will _always_ depend on cURL now. This is done to
