@@ -119,7 +119,7 @@ class Scrawler
 
         ++$this->crawledUrls;
 
-        if ($this->crawledUrls >= $this->configuration->getMaxCrawledUrls() && $this->configuration->getMaxCrawledUrls() !== 0) {
+        if ($this->isUrlsLimitReached()) {
             $this->logWriter->notice('Reached crawled URLs limit of ' . $this->configuration->getMaxCrawledUrls());
             return;
         }
@@ -132,7 +132,10 @@ class Scrawler
 
             foreach ($urlListProvider->getUrls() as $url) {
                 $canonicalUrl = $url->getUrl();
-                if (isset($this->visitedUrls[$canonicalUrl]) && $this->visitedUrls[$canonicalUrl] === true) {
+                if (
+                    (isset($this->visitedUrls[$canonicalUrl]) && $this->visitedUrls[$canonicalUrl] === true)
+                    || $this->isUrlsLimitReached()
+                ) {
                     continue;
                 }
 
@@ -240,5 +243,11 @@ class Scrawler
         }
 
         return $response->getBody()->getContents();
+    }
+
+    protected function isUrlsLimitReached(): bool
+    {
+        return $this->crawledUrls >= $this->configuration->getMaxCrawledUrls()
+               && $this->configuration->getMaxCrawledUrls() !== 0;
     }
 }

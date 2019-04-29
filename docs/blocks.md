@@ -44,3 +44,4 @@ mentioning its potential parameters etc.
 - [UrlListProvider](blocks/urllistprovider.md)
     - [ArgumentAdvancerUrlListProvider](blocks/urllistprovider.md#argumentadvancerurllistprovider)
     - [EmptyUrlListProvider](blocks/urllistprovider.md#emptyurllistprovider)
+    - [SameDomainUrlListProvider](blocks/urllistprovider.md#samedomainurllistprovider)

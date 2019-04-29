@@ -56,3 +56,8 @@ server responds with HTTP 404.
 
 ## EmptyUrlListProvider
 This URL returns empty list what ultimately makes Scrawler parse base URL only.
+
+## SameDomainUrlListProvider
+Returns every URL in same domain as the configured base URL. Scrapped URLs are
+normalized (resolving relative paths, protocols, removing anchors etc) before
+the comparison.
