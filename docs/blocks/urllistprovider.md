@@ -58,7 +58,7 @@ server responds with HTTP 404.
 This URL returns empty list what ultimately makes Scrawler parse base URL only.
 
 ## SameDomainUrlListProvider
-Looks for `href` attributes of `a` tags and filters out links with the domain
+Looks for `href` attributes of `a` tags and returns links with the domain
 matching domain of current operation's base URL. Gathered URLs are normalized
 (resolving relative paths, protocols, removing anchors etc) before the domain
 comparison is made.
