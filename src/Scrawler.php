@@ -93,12 +93,14 @@ class Scrawler
 
     protected function makeRequest(Client $client, Url $url): void
     {
-        $this->visitedUrls[$url->getUrl()] = true;
+        $canonicalUrl = $url->getUrl();
+
+        $this->visitedUrls[$canonicalUrl] = true;
 
         try {
-            $response = $client->request('GET', $url->getUrl());
+            $response = $client->request('GET', $canonicalUrl);
         } catch (ConnectException $exception) {
-            $this->logWriter->critical('GET ' . $url->getUrl() . ' Could not connect to the server');
+            $this->logWriter->critical("GET {$canonicalUrl} Could not connect to the server");
             return;
         }
 
@@ -107,13 +109,13 @@ class Scrawler
         $statusCode = new StatusCode($response->getStatusCode());
 
         if ($contentType->isProcessable() === false) {
-            $this->logWriter->warning('GET ' . $url->getUrl() . " Skipped due to unprocessable content type ({$contentType->getType()})");
+            $this->logWriter->warning("GET {$canonicalUrl} Skipped due to unprocessable content type ({$contentType->getType()})");
         } elseif ($statusCode->isProcessable() === false) {
-            $this->logWriter->notice('GET ' . $url->getUrl() . " Skipped due to unprocessable response code ({$statusCode->getCode()})");
+            $this->logWriter->notice("GET {$canonicalUrl} Skipped due to unprocessable response code ({$statusCode->getCode()})");
         } elseif ($robotsParser && $robotsParser->isAllowed($url) === false) {
-            $this->logWriter->notice('GET ' . $url->getUrl() . " Blocked by the robots.txt");
+            $this->logWriter->notice("GET {$canonicalUrl} Blocked by the robots.txt");
         } else {
-            $this->logWriter->info('GET ' . $url->getUrl());
+            $this->logWriter->info("GET {$canonicalUrl}");
             $this->processResponse($response);
         }
 
@@ -131,9 +133,9 @@ class Scrawler
             $urlListProvider->setResponse($response);
 
             foreach ($urlListProvider->getUrls() as $url) {
-                $canonicalUrl = $url->getUrl();
+                $nextCanonicalUrl = $url->getUrl();
                 if (
-                    (isset($this->visitedUrls[$canonicalUrl]) && $this->visitedUrls[$canonicalUrl] === true)
+                    (isset($this->visitedUrls[$nextCanonicalUrl]) && $this->visitedUrls[$nextCanonicalUrl] === true)
                     || $this->isUrlsLimitReached()
                 ) {
                     continue;
