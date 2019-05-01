@@ -43,6 +43,6 @@ class Utils
 
     public static function trimWhitespace(string $string): string
     {
-        return trim($string, "\n\r\t ");
+        return trim($string);
     }
 }
