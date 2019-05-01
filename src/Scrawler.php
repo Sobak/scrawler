@@ -148,6 +148,11 @@ class Scrawler
     {
         $responseBody = $response->getBody()->getContents();
 
+        if (empty(Utils::trimWhitespace($responseBody))) {
+            $this->logWriter->warning('Received empty response');
+            return;
+        }
+
         foreach ($this->configuration->getObjectDefinitions() as $objectListName => $objectDefinition) {
             if ($objectDefinition->isOnce()) {
                 $objectId = spl_object_id($objectDefinition);
