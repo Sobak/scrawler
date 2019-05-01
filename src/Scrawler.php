@@ -239,13 +239,13 @@ class Scrawler
             $response = $client->request('GET', $robotsTxtUrl);
             $this->logWriter->info('GET ' . $robotsTxtUrl);
         } catch (ConnectException $exception) {
-            $this->logWriter->critical('GET ' . $robotsTxtUrl . ' Could not connect to the server');
+            $this->logWriter->critical("GET {$robotsTxtUrl} Could not connect to the server");
             throw $exception;
         }
 
         $statusCode = new StatusCode($response->getStatusCode());
         if ($statusCode->isProcessable() === false) {
-            $this->logWriter->notice('GET ' . $robotsTxtUrl . " Skipped due to unprocesable response code ({$statusCode->getCode()})");
+            $this->logWriter->notice("GET {$robotsTxtUrl} Skipped due to unprocesable response code ({$statusCode->getCode()})");
             return false;
         }
 
