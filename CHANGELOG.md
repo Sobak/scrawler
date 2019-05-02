@@ -7,6 +7,7 @@ All notable changes to Scrawler will be documented in this file.
 - Added support for resolving relative URLs
 - Added CSV file result writer
 - Added `SameDomainUrlListProvider`
+- Added support for writing results into SQLite databases
 - Added literal client configuration provider
 - Added total time displayed once operation is done
 - Added ability to set maximum number of crawled URLs

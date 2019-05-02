@@ -64,14 +64,13 @@ parameters as `connection` key, accordingly to the
 [Doctrine documentation][doctrine-connection]. Please note that the URL
 connection string is not supported, you need to use an array.
 
-> **Note:** SQLite support is not available yet.
-
 There is an additional parameter `simple_annotations` which when set to
 `true` parses Doctrine annotations without importing their namespace.
 
 Sample configuration for the database result writer might then look like so:
 
 ```php
+// MySQL
 ->addResultWriter(PostEntity::class, new DatabaseResultWriter([
     'connection' => [
         'driver'   => 'pdo_mysql',
@@ -80,6 +79,17 @@ Sample configuration for the database result writer might then look like so:
         'dbname'   => 'scrawler',
     ],
     'simple_annotations' => false,
+]))
+
+// SQLite
+// Note that relative paths are resolved based on the location Scrawler's CLI
+// was called at so it's more reliable to stick to the absolute paths.
+->addResultWriter(PostEntity::class, new DatabaseResultWriter([
+    'connection' => [
+        'driver'   => 'pdo_sqlite',
+        'path'     => '/var/scrawler/results.sqlite',
+    ],
+    'simple_annotations' => true,
 ]))
 ```
 

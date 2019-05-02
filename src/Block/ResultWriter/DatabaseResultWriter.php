@@ -11,15 +11,13 @@ use Doctrine\ORM\Tools\SchemaTool;
 use Doctrine\ORM\Tools\Setup;
 use Exception;
 use ReflectionClass;
-use Sobak\Scrawler\Output\Outputter;
-use Sobak\Scrawler\Output\OutputWriterInterface;
 
-class DatabaseResultWriter extends AbstractResultWriter implements OutputWriterInterface
+class DatabaseResultWriter extends AbstractResultWriter
 {
+    const DRIVER_SQLITE = 'pdo_sqlite';
+
     /** @var EntityManagerInterface */
     protected $entityManager;
-
-    protected $outputter;
 
     public function __construct(array $configuration = [])
     {
@@ -31,21 +29,7 @@ class DatabaseResultWriter extends AbstractResultWriter implements OutputWriterI
             throw new Exception('Using URL Doctrine configuration is not supported, please pass an array');
         }
 
-        if ($configuration['connection']['driver'] === 'pdo_sqlite') {
-            throw new Exception('SQLite driver is not yet supported');
-        }
-
         parent::__construct($configuration);
-    }
-
-    public function getOutputter(): Outputter
-    {
-        return $this->outputter;
-    }
-
-    public function setOutputter(Outputter $outputter): void
-    {
-        $this->outputter = $outputter;
     }
 
     public function initializeResultWrites(): void
@@ -101,15 +85,23 @@ class DatabaseResultWriter extends AbstractResultWriter implements OutputWriterI
 
     protected function createDatabase($configuration)
     {
-        $databaseName = $configuration['connection']['dbname'];
+        $databaseNameKey = 'dbname';
+        if ($configuration['connection']['driver'] === self::DRIVER_SQLITE) {
+            $databaseNameKey = 'path';
+        }
+
+        $databaseName = $configuration['connection'][$databaseNameKey];
 
         $connectionParams = $configuration['connection'];
-        unset($connectionParams['dbname']);
+        unset($connectionParams[$databaseNameKey]);
 
         $connection = DriverManager::getConnection($connectionParams);
 
         // Ignore if database already exists
-        if (in_array($databaseName, $connection->getSchemaManager()->listDatabases())) {
+        if (
+            $connection->getDriver()->getName() !== self::DRIVER_SQLITE
+            && in_array($databaseName, $connection->getSchemaManager()->listDatabases())
+        ) {
             $this->logWriter->debug('Database already exists, ignored');
             return;
         }

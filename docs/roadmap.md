@@ -4,7 +4,6 @@ below is unordered and mentions some of the new features and improvements which
 are going to be implemented in a foreseeable future.
 
 - performance improvements
-- support for writing results into SQLite database
 - defining manual steps before/after the crawling
 - support for scrapping non-HTML/XML responses
 - more implementations for already defined blocks
