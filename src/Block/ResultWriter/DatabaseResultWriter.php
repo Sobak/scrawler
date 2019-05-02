@@ -78,7 +78,7 @@ class DatabaseResultWriter extends AbstractResultWriter
                 true,
                 null,
                 null,
-                $configuration['simple_annotations']
+                $configuration['simple_annotations'] ?? false
             )
         );
     }

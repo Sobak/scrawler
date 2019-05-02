@@ -64,8 +64,9 @@ parameters as `connection` key, accordingly to the
 [Doctrine documentation][doctrine-connection]. Please note that the URL
 connection string is not supported, you need to use an array.
 
-There is an additional parameter `simple_annotations` which when set to
-`true` parses Doctrine annotations without importing their namespace.
+You can pass an additional parameter `simple_annotations` which when set to
+`true` parses Doctrine annotations without importing their namespace (`false`
+by default).
 
 Sample configuration for the database result writer might then look like so:
 
@@ -78,7 +79,6 @@ Sample configuration for the database result writer might then look like so:
         'password' => '',
         'dbname'   => 'scrawler',
     ],
-    'simple_annotations' => false,
 ]))
 
 // SQLite
