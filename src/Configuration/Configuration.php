@@ -7,9 +7,9 @@ namespace Sobak\Scrawler\Configuration;
 use Psr\Log\LoggerInterface;
 use Psr\Log\LogLevel;
 use Sobak\Scrawler\Block\ClientConfigurationProvider\ClientConfigurationProviderInterface;
+use Sobak\Scrawler\Block\Matcher\ListMatcherInterface;
 use Sobak\Scrawler\Block\RobotsParser\RobotsParserInterface;
 use Sobak\Scrawler\Block\UrlListProvider\UrlListProviderInterface;
-use Sobak\Scrawler\Matcher\ListMatcherInterface;
 
 class Configuration
 {

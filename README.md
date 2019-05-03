@@ -19,13 +19,13 @@ composer require sobak/scrawler
 <?php
 
 use App\PostEntity;
+use Sobak\Scrawler\Block\Matcher\CssSelectorHtmlMatcher;
+use Sobak\Scrawler\Block\Matcher\CssSelectorListMatcher;
 use Sobak\Scrawler\Block\ResultWriter\FilenameProvider\EntityPropertyFilenameProvider;
 use Sobak\Scrawler\Block\ResultWriter\JsonFileResultWriter;
 use Sobak\Scrawler\Block\UrlListProvider\ArgumentAdvancerUrlListProvider;
 use Sobak\Scrawler\Configuration\Configuration;
 use Sobak\Scrawler\Configuration\ObjectConfiguration;
-use Sobak\Scrawler\Matcher\CssSelectorListMatcher;
-use Sobak\Scrawler\Matcher\CssSelectorHtmlMatcher;
 
 require 'vendor/autoload.php';
 

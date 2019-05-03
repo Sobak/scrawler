@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace Sobak\Scrawler\Configuration;
 
+use Sobak\Scrawler\Block\Matcher\ListMatcherInterface;
+use Sobak\Scrawler\Block\Matcher\MatcherInterface;
 use Sobak\Scrawler\Block\ResultWriter\ResultWriterInterface;
-use Sobak\Scrawler\Matcher\ListMatcherInterface;
-use Sobak\Scrawler\Matcher\MatcherInterface;
 
 class ObjectConfiguration
 {

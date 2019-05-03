@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Sobak\Scrawler\Matcher;
+namespace Sobak\Scrawler\Block\Matcher;
 
 use Symfony\Component\DomCrawler\Crawler;
 

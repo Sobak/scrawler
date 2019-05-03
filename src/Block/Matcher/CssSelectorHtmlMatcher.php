@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Sobak\Scrawler\Matcher;
+namespace Sobak\Scrawler\Block\Matcher;
 
 use Sobak\Scrawler\Support\Utils;
 use Symfony\Component\CssSelector\CssSelectorConverter;

@@ -4,10 +4,10 @@ namespace Tests\Functional\LogWriter;
 
 use Psr\Log\LogLevel;
 use Sobak\Scrawler\Block\LogWriter\TextfileLogWriter;
+use Sobak\Scrawler\Block\Matcher\CssSelectorHtmlMatcher;
+use Sobak\Scrawler\Block\Matcher\CssSelectorListMatcher;
 use Sobak\Scrawler\Block\ResultWriter\InMemoryResultWriter;
 use Sobak\Scrawler\Configuration\ObjectConfiguration;
-use Sobak\Scrawler\Matcher\CssSelectorListMatcher;
-use Sobak\Scrawler\Matcher\CssSelectorHtmlMatcher;
 use Sobak\Scrawler\Scrawler;
 use Tests\Functional\ServerBasedTest;
 use Tests\Utils\BasicConfigurationProvider;

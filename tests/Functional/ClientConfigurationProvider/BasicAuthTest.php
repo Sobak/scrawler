@@ -3,10 +3,10 @@
 namespace Tests\Functional\ClientConfigurationProvider;
 
 use Sobak\Scrawler\Block\ClientConfigurationProvider\BasicAuthProvider;
+use Sobak\Scrawler\Block\Matcher\CssSelectorHtmlMatcher;
+use Sobak\Scrawler\Block\Matcher\CssSelectorListMatcher;
 use Sobak\Scrawler\Block\ResultWriter\InMemoryResultWriter;
 use Sobak\Scrawler\Configuration\ObjectConfiguration;
-use Sobak\Scrawler\Matcher\CssSelectorListMatcher;
-use Sobak\Scrawler\Matcher\CssSelectorHtmlMatcher;
 use Sobak\Scrawler\Scrawler;
 use Tests\Functional\ServerBasedTest;
 use Tests\Utils\BasicConfigurationProvider;
