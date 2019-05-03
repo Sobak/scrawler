@@ -48,7 +48,7 @@ $scrawler
                 ]),
             ]))
         ;
-        })
+    })
 ;
 
 return $scrawler;
