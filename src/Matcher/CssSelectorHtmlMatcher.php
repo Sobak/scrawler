@@ -7,7 +7,7 @@ namespace Sobak\Scrawler\Matcher;
 use Sobak\Scrawler\Support\Utils;
 use Symfony\Component\CssSelector\CssSelectorConverter;
 
-class CssSelectorTextMatcher extends AbstractMatcher implements SingleMatcherInterface
+class CssSelectorHtmlMatcher extends AbstractMatcher implements SingleMatcherInterface
 {
     private static $cache;
 

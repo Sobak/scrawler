@@ -7,7 +7,7 @@ use Sobak\Scrawler\Block\LogWriter\TextfileLogWriter;
 use Sobak\Scrawler\Block\ResultWriter\InMemoryResultWriter;
 use Sobak\Scrawler\Configuration\ObjectConfiguration;
 use Sobak\Scrawler\Matcher\CssSelectorListMatcher;
-use Sobak\Scrawler\Matcher\CssSelectorTextMatcher;
+use Sobak\Scrawler\Matcher\CssSelectorHtmlMatcher;
 use Sobak\Scrawler\Scrawler;
 use Tests\Functional\ServerBasedTest;
 use Tests\Utils\BasicConfigurationProvider;
@@ -22,7 +22,7 @@ class TextfileLogWriterTest extends ServerBasedTest
             ->addLogWriter(new TextfileLogWriter())
             ->addObjectDefinition('test', new CssSelectorListMatcher('body'), function (ObjectConfiguration $object) {
                 $object
-                    ->addFieldDefinition('match', new CssSelectorTextMatcher('span.match'))
+                    ->addFieldDefinition('match', new CssSelectorHtmlMatcher('span.match'))
                     ->addEntityMapping(SimpleMatchEntity::class)
                     ->addResultWriter(SimpleMatchEntity::class, new InMemoryResultWriter())
                 ;
@@ -44,7 +44,7 @@ class TextfileLogWriterTest extends ServerBasedTest
             ->addLogWriter(new TextfileLogWriter('warning.log'), LogLevel::WARNING)
             ->addObjectDefinition('test', new CssSelectorListMatcher('body'), function (ObjectConfiguration $object) {
                 $object
-                    ->addFieldDefinition('match', new CssSelectorTextMatcher('span.match'))
+                    ->addFieldDefinition('match', new CssSelectorHtmlMatcher('span.match'))
                     ->addEntityMapping(SimpleMatchEntity::class)
                     ->addResultWriter(SimpleMatchEntity::class, new InMemoryResultWriter())
                 ;
@@ -68,7 +68,7 @@ class TextfileLogWriterTest extends ServerBasedTest
             ->addLogWriter(new TextfileLogWriter('second.log'))
             ->addObjectDefinition('test', new CssSelectorListMatcher('body'), function (ObjectConfiguration $object) {
                 $object
-                    ->addFieldDefinition('match', new CssSelectorTextMatcher('span.match'))
+                    ->addFieldDefinition('match', new CssSelectorHtmlMatcher('span.match'))
                     ->addEntityMapping(SimpleMatchEntity::class)
                     ->addResultWriter(SimpleMatchEntity::class, new InMemoryResultWriter())
                 ;

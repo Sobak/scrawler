@@ -6,7 +6,7 @@ namespace Sobak\Scrawler\Matcher;
 
 use Sobak\Scrawler\Support\Utils;
 
-class XpathTextMatcher extends AbstractMatcher implements SingleMatcherInterface
+class XpathHtmlMatcher extends AbstractMatcher implements SingleMatcherInterface
 {
     public function match(): ?string
     {

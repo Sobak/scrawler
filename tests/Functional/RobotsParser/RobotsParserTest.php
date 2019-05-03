@@ -6,7 +6,7 @@ use Sobak\Scrawler\Block\ResultWriter\InMemoryResultWriter;
 use Sobak\Scrawler\Block\RobotsParser\DefaultRobotsParser;
 use Sobak\Scrawler\Configuration\ObjectConfiguration;
 use Sobak\Scrawler\Matcher\CssSelectorListMatcher;
-use Sobak\Scrawler\Matcher\CssSelectorTextMatcher;
+use Sobak\Scrawler\Matcher\CssSelectorHtmlMatcher;
 use Sobak\Scrawler\Scrawler;
 use Tests\Functional\ServerBasedTest;
 use Tests\Utils\BasicConfigurationProvider;
@@ -21,7 +21,7 @@ class RobotsParserTest extends ServerBasedTest
             ->setRobotsParser(new DefaultRobotsParser())
             ->addObjectDefinition('test', new CssSelectorListMatcher('body'), function (ObjectConfiguration $object) {
                 $object
-                    ->addFieldDefinition('match', new CssSelectorTextMatcher('span.match'))
+                    ->addFieldDefinition('match', new CssSelectorHtmlMatcher('span.match'))
                     ->addEntityMapping(SimpleMatchEntity::class)
                     ->addResultWriter(SimpleMatchEntity::class, new InMemoryResultWriter())
                 ;

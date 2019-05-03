@@ -85,7 +85,7 @@ return (new Configuration())
     ->addUrlListProvider(new EmptyUrlListProvider())
     ->addObjectDefinition('post', new CssSelectorListMatcher('article.hentry'), function (ObjectConfiguration $object) {
         $object
-            ->addFieldDefinition('date', new CssSelectorTextMatcher('time.entry-date'))
+            ->addFieldDefinition('date', new CssSelectorHtmlMatcher('time.entry-date'))
         ;
     })
 ;
@@ -109,12 +109,12 @@ return (new Configuration())
     ->addUrlListProvider(new EmptyUrlListProvider())
     ->addObjectDefinition('post', new CssSelectorListMatcher('article.hentry'), function (ObjectConfiguration $object) {
         $object
-            ->addFieldDefinition('date', new CssSelectorTextMatcher('time.entry-date'))
+            ->addFieldDefinition('date', new CssSelectorHtmlMatcher('time.entry-date'))
         ;
     })
     ->addObjectDefinition('meta', new CssSelectorListMatcher('body'), function (ObjectConfiguration $object) {
         $object
-            ->addFieldDefinition('description', new CssSelectorTextMatcher('h2.site-description'))
+            ->addFieldDefinition('description', new CssSelectorHtmlMatcher('h2.site-description'))
             ->once()
         ;
     })
@@ -143,14 +143,14 @@ return (new Configuration())
     ->addUrlListProvider(new EmptyUrlListProvider())
     ->addObjectDefinition('post', new CssSelectorListMatcher('article.hentry'), function (ObjectConfiguration $object) {
         $object
-            ->addFieldDefinition('date', new CssSelectorTextMatcher('time.entry-date'))
+            ->addFieldDefinition('date', new CssSelectorHtmlMatcher('time.entry-date'))
             // obviously you can define more fields...
             ->addEntityMapping(PostEntity::class)
         ;
     })
     ->addObjectDefinition('meta', new CssSelectorListMatcher('body'), function (ObjectConfiguration $object) {
             $object
-            ->addFieldDefinition('description', new CssSelectorTextMatcher('h2.site-description'))
+            ->addFieldDefinition('description', new CssSelectorHtmlMatcher('h2.site-description'))
             ->addEntityMapping(MetaEntity::class)
             ->once()
         ;
@@ -175,14 +175,14 @@ return (new Configuration())
     ->addUrlListProvider(new EmptyUrlListProvider())
     ->addObjectDefinition('post', new CssSelectorListMatcher('article.hentry'), function (ObjectConfiguration $object) {
         $object
-            ->addFieldDefinition('date', new CssSelectorTextMatcher('time.entry-date'))
+            ->addFieldDefinition('date', new CssSelectorHtmlMatcher('time.entry-date'))
             ->addEntityMapping(PostEntity::class)
             ->addResultWriter(PostEntity::class, new DumpResultWriter())    
         ;
     })
     ->addObjectDefinition('meta', new CssSelectorListMatcher('body'), function (ObjectConfiguration $object) {
             $object
-            ->addFieldDefinition('description', new CssSelectorTextMatcher('h2.site-description'))
+            ->addFieldDefinition('description', new CssSelectorHtmlMatcher('h2.site-description'))
             ->addEntityMapping(MetaEntity::class)
             ->addResultWriter(MetaEntity::class, new JsonFileResultWriter([
                 'filename' => new LiteralFilenameProvider(['filename' => 'meta']),

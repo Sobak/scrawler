@@ -25,7 +25,7 @@ use Sobak\Scrawler\Block\UrlListProvider\ArgumentAdvancerUrlListProvider;
 use Sobak\Scrawler\Configuration\Configuration;
 use Sobak\Scrawler\Configuration\ObjectConfiguration;
 use Sobak\Scrawler\Matcher\CssSelectorListMatcher;
-use Sobak\Scrawler\Matcher\CssSelectorTextMatcher;
+use Sobak\Scrawler\Matcher\CssSelectorHtmlMatcher;
 
 require 'vendor/autoload.php';
 
@@ -37,9 +37,9 @@ $scrawler
     ->addUrlListProvider(new ArgumentAdvancerUrlListProvider('/page/%u', 2))
     ->addObjectDefinition('post', new CssSelectorListMatcher('article.hentry'), function (ObjectConfiguration $object) {
         $object
-            ->addFieldDefinition('date', new CssSelectorTextMatcher('time.entry-date'))
-            ->addFieldDefinition('content', new CssSelectorTextMatcher('div.entry-content'))
-            ->addFieldDefinition('title', new CssSelectorTextMatcher('h1.entry-title'))
+            ->addFieldDefinition('date', new CssSelectorHtmlMatcher('time.entry-date'))
+            ->addFieldDefinition('content', new CssSelectorHtmlMatcher('div.entry-content'))
+            ->addFieldDefinition('title', new CssSelectorHtmlMatcher('h1.entry-title a'))
             ->addEntityMapping(PostEntity::class)
             ->addResultWriter(PostEntity::class, new JsonFileResultWriter([
                 'directory' => 'posts/',

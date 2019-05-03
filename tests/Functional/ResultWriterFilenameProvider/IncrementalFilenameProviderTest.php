@@ -8,7 +8,7 @@ use Sobak\Scrawler\Block\ResultWriter\FilenameProvider\IncrementalFilenameProvid
 use Sobak\Scrawler\Block\ResultWriter\JsonFileResultWriter;
 use Sobak\Scrawler\Configuration\ObjectConfiguration;
 use Sobak\Scrawler\Matcher\CssSelectorListMatcher;
-use Sobak\Scrawler\Matcher\CssSelectorTextMatcher;
+use Sobak\Scrawler\Matcher\CssSelectorHtmlMatcher;
 use Sobak\Scrawler\Scrawler;
 use Tests\Functional\ServerBasedTest;
 use Tests\Utils\BasicConfigurationProvider;
@@ -22,8 +22,8 @@ class IncrementalFilenameProviderTest extends ServerBasedTest
             ->setBaseUrl(ServerBasedTest::getHostUrl() . '/posts.html')
             ->addObjectDefinition('message', new CssSelectorListMatcher('div.post'), function (ObjectConfiguration $object) {
                 $object
-                    ->addFieldDefinition('content', new CssSelectorTextMatcher('span.content'))
-                    ->addFieldDefinition('title', new CssSelectorTextMatcher('h2'))
+                    ->addFieldDefinition('content', new CssSelectorHtmlMatcher('span.content'))
+                    ->addFieldDefinition('title', new CssSelectorHtmlMatcher('h2'))
                     ->addEntityMapping(PostEntity::class)
                     ->addResultWriter(PostEntity::class, new JsonFileResultWriter([
                         'filename' => new IncrementalFilenameProvider(),
@@ -54,8 +54,8 @@ class IncrementalFilenameProviderTest extends ServerBasedTest
             ->setBaseUrl(ServerBasedTest::getHostUrl() . '/posts.html')
             ->addObjectDefinition('message', new CssSelectorListMatcher('div.post'), function (ObjectConfiguration $object) {
                 $object
-                    ->addFieldDefinition('content', new CssSelectorTextMatcher('span.content'))
-                    ->addFieldDefinition('title', new CssSelectorTextMatcher('h2'))
+                    ->addFieldDefinition('content', new CssSelectorHtmlMatcher('span.content'))
+                    ->addFieldDefinition('title', new CssSelectorHtmlMatcher('h2'))
                     ->addEntityMapping(PostEntity::class)
                     ->addResultWriter(PostEntity::class, new JsonFileResultWriter([
                         'filename' => new IncrementalFilenameProvider([

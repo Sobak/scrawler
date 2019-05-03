@@ -17,6 +17,12 @@ All notable changes to Scrawler will be documented in this file.
 - Added support for relative URL in `ArgumentAdvancerUrlListProvider`'s template
 
 ### Changed
+- `CssSelectorTextMatcher` and `XpathSelectorTextMatcher` are now renamed to
+  `CssSelectorHtmlMatcher` and `XpathSelectorHtmlMatcher` accordingly and will
+  return original HTML content instead of textual form, making them consistent
+  with other matchers like regular expression matcher. To retain previous
+  behavior one should strip the tags further down the line (e.g. in entities)
+- `RegexTextMatcher` has been renamed to `RegexHtmlMatcher`
 - Underlying Guzzle instance will _always_ depend on cURL now. This is done to
   ensure that widest set of features is available for handling HTTP requests.
 - Scrawler will now explicitly emit a warning for content types other than XML or (X)HTML

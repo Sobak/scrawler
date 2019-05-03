@@ -9,7 +9,7 @@ use Sobak\Scrawler\Block\UrlListProvider\ArgumentAdvancerUrlListProvider;
 use Sobak\Scrawler\Configuration\Configuration;
 use Sobak\Scrawler\Configuration\ObjectConfiguration;
 use Sobak\Scrawler\Matcher\CssSelectorListMatcher;
-use Sobak\Scrawler\Matcher\CssSelectorTextMatcher;
+use Sobak\Scrawler\Matcher\CssSelectorHtmlMatcher;
 use Sobak\Scrawler\Scrawler;
 use Tests\Functional\ServerBasedTest;
 use Tests\Utils\SimpleMatchEntity;
@@ -26,7 +26,7 @@ class ArgumentAdvancerUrlListProviderTest extends ServerBasedTest
             ->addUrlListProvider(new ArgumentAdvancerUrlListProvider("{$host}/page-%u.html", 1, 1, 4))
             ->addObjectDefinition('message', new CssSelectorListMatcher('div.message'), function (ObjectConfiguration $object) {
                 $object
-                    ->addFieldDefinition('match', new CssSelectorTextMatcher('span.content'))
+                    ->addFieldDefinition('match', new CssSelectorHtmlMatcher('span.content'))
                     ->addEntityMapping(SimpleMatchEntity::class)
                     ->addResultWriter(SimpleMatchEntity::class, new InMemoryResultWriter())
                 ;
@@ -53,7 +53,7 @@ class ArgumentAdvancerUrlListProviderTest extends ServerBasedTest
             ->addUrlListProvider(new ArgumentAdvancerUrlListProvider("{$host}/page-%u.html", 1, 1))
             ->addObjectDefinition('message', new CssSelectorListMatcher('div.message'), function (ObjectConfiguration $object) {
                 $object
-                    ->addFieldDefinition('match', new CssSelectorTextMatcher('span.content'))
+                    ->addFieldDefinition('match', new CssSelectorHtmlMatcher('span.content'))
                     ->addEntityMapping(SimpleMatchEntity::class)
                     ->addResultWriter(SimpleMatchEntity::class, new InMemoryResultWriter())
                 ;
@@ -80,7 +80,7 @@ class ArgumentAdvancerUrlListProviderTest extends ServerBasedTest
             ->addUrlListProvider(new ArgumentAdvancerUrlListProvider("/page-%u.html", 1, 1))
             ->addObjectDefinition('message', new CssSelectorListMatcher('div.message'), function (ObjectConfiguration $object) {
                 $object
-                    ->addFieldDefinition('match', new CssSelectorTextMatcher('span.content'))
+                    ->addFieldDefinition('match', new CssSelectorHtmlMatcher('span.content'))
                     ->addEntityMapping(SimpleMatchEntity::class)
                     ->addResultWriter(SimpleMatchEntity::class, new InMemoryResultWriter())
                 ;
@@ -107,7 +107,7 @@ class ArgumentAdvancerUrlListProviderTest extends ServerBasedTest
             ->addUrlListProvider(new ArgumentAdvancerUrlListProvider("{$host}/page-%u.html", 2, 2, 4))
             ->addObjectDefinition('message', new CssSelectorListMatcher('div.message'), function (ObjectConfiguration $object) {
                 $object
-                    ->addFieldDefinition('match', new CssSelectorTextMatcher('span.content'))
+                    ->addFieldDefinition('match', new CssSelectorHtmlMatcher('span.content'))
                     ->addEntityMapping(SimpleMatchEntity::class)
                     ->addResultWriter(SimpleMatchEntity::class, new InMemoryResultWriter())
                 ;

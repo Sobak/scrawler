@@ -10,7 +10,7 @@ use Sobak\Scrawler\Block\UrlListProvider\EmptyUrlListProvider;
 use Sobak\Scrawler\Configuration\Configuration;
 use Sobak\Scrawler\Configuration\ObjectConfiguration;
 use Sobak\Scrawler\Matcher\CssSelectorListMatcher;
-use Sobak\Scrawler\Matcher\CssSelectorTextMatcher;
+use Sobak\Scrawler\Matcher\CssSelectorHtmlMatcher;
 use Sobak\Scrawler\Scrawler;
 use Tests\Functional\ServerBasedTest;
 use Tests\Utils\SimpleMatchEntity;
@@ -25,7 +25,7 @@ class ContentTypeTest extends ServerBasedTest
             ->addUrlListProvider(new EmptyUrlListProvider())
             ->addObjectDefinition('movie', new CssSelectorListMatcher('movie'), function (ObjectConfiguration $object) {
                 $object
-                    ->addFieldDefinition('match', new CssSelectorTextMatcher('title'))
+                    ->addFieldDefinition('match', new CssSelectorHtmlMatcher('title'))
                     ->addEntityMapping(SimpleMatchEntity::class)
                     ->addResultWriter(SimpleMatchEntity::class, new InMemoryResultWriter())
                 ;
