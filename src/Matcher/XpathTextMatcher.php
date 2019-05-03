@@ -12,6 +12,6 @@ class XpathTextMatcher extends AbstractMatcher implements SingleMatcherInterface
     {
         $result = $this->getCrawler()->filterXPath($this->getMatchBy());
 
-        return $result->count() === 0 ? null : Utils::trimWhitespace($result->text());
+        return $result->count() === 0 ? null : Utils::trimWhitespace($result->html());
     }
 }

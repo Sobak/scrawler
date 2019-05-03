@@ -28,6 +28,6 @@ class CssSelectorTextMatcher extends AbstractMatcher implements SingleMatcherInt
 
         $result = $this->getCrawler()->filterXPath(self::$cache[$this->getMatchBy()]);
 
-        return $result->count() === 0 ? null : Utils::trimWhitespace($result->text());
+        return $result->count() === 0 ? null : Utils::trimWhitespace($result->html());
     }
 }
