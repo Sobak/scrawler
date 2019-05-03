@@ -14,7 +14,7 @@ use Tests\Utils\SimpleMatchEntity;
 
 class BasicAuthTest extends ServerBasedTest
 {
-    public function testClassMatching(): void
+    public function testBasicAuth(): void
     {
         $config = BasicConfigurationProvider::getConfiguration()
             ->setBaseUrl(ServerBasedTest::getHostUrl() . '/basicauth.php')
