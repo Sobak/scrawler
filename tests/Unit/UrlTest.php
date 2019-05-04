@@ -47,6 +47,48 @@ class UrlTest extends TestCase
         $this->assertEquals($expectedUrl, $url->getUrl());
     }
 
+    /**
+     * @param $url
+     * @param $expectedDomain
+     * @dataProvider domainsProvider
+     */
+    public function testExtractingUrlDomain($url, $expectedDomain): void
+    {
+        $url = new Url($url, 'http://example.com/irrelevant');
+
+        $this->assertEquals($expectedDomain, $url->getDomain());
+    }
+
+    public function testCurrentUrlGetter(): void
+    {
+        $url = new Url('http://example.org/index.php?foo=bar', 'http://example.org/sitemap.xml');
+
+        $this->assertEquals('http://example.org/sitemap.xml', $url->getCurrentUrl());
+    }
+
+    public function testMethodGetter(): void
+    {
+        $url = new Url('http://example.org/index.php?foo=bar', 'http://example.org/sitemap.xml');
+        $url2 = new Url('http://example.net', null, 'POST');
+
+        $this->assertEquals('GET', $url->getMethod());
+        $this->assertEquals('POST', $url2->getMethod());
+    }
+
+    public function testRawUrlGetter(): void
+    {
+        $url = new Url('//example.org/index.php?foo=bar', 'http://example.org/sitemap.xml');
+
+        $this->assertEquals('//example.org/index.php?foo=bar', $url->getRawUrl());
+    }
+
+    public function testCastingUrlToString(): void
+    {
+        $url = new Url('//example.org/index.php?foo=bar', 'http://example.org/sitemap.xml');
+
+        $this->assertEquals('http://example.org/index.php?foo=bar', (string) $url);
+    }
+
     public static function urlsProvider()
     {
         return [
@@ -61,6 +103,20 @@ class UrlTest extends TestCase
             ['/test', 'http://example.com/', 'http://example.com/test'],
             ['test', 'http://example.com', 'http://example.com/test'],
             ['test', 'http://example.com/', 'http://example.com/test'],
+
+            ['', 'http://example.com/index.php?foo=bar', 'http://example.com/index.php?foo=bar'],
+        ];
+    }
+
+    public static function domainsProvider()
+    {
+        return [
+            // [url, expectedDomain]
+            ['http://example.com', 'http://example.com'],
+            ['http://www.example.com/foo', 'http://www.example.com'],
+            ['http://username:@example.com/foo', 'http://username:@example.com'],
+            ['http://username:password@example.com/foo', 'http://username:password@example.com'],
+            ['http://username:password@127.0.0.1:8080/index.php?args=test', 'http://username:password@127.0.0.1:8080'],
         ];
     }
 }
