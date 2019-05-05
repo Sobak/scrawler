@@ -102,11 +102,6 @@ class LogWriterTest extends TestCase
         $this->assertEquals('[EMERGENCY] Emergency message', InMemoryLogWriter::$log[0]);
     }
 
-    protected function tearDown(): void
-    {
-        InMemoryLogWriter::$log = [];
-    }
-
     protected function writeLogMessages($verbosity)
     {
         /** @var OutputManager $outputterMock Just to silence the warnings further down the line */

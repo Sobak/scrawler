@@ -8,6 +8,11 @@ class InMemoryLogWriter extends AbstractLogWriter
 {
     public static $log;
 
+    public function __construct()
+    {
+        self::$log = [];
+    }
+
     public function log($level, $message, array $context = array())
     {
         $level = strtoupper($level);

@@ -51,8 +51,7 @@ abstract class IntegrationTest extends TestCase
 
     protected function tearDown(): void
     {
-        // Cleanup dangling results and logs
-        InMemoryLogWriter::$log = [];
+        // Cleanup dangling results
         InMemoryResultWriter::$results = [];
     }
 
