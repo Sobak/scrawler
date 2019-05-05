@@ -28,15 +28,6 @@ interface OutputManagerInterface
     public function writeToFile($filename, $contents): void;
 
     /**
-     * Create file handle to use with builtin PHP functions.
-     *
-     * @param string $filename
-     * @param string $mode
-     * @return resource
-     */
-    public function createFileHandle($filename, $mode);
-
-    /**
      * Delete specific file.
      *
      * @param string $filename
