@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Tests\Functional\Http;
+namespace Tests\Integration\Http;
 
 use Sobak\Scrawler\Block\Matcher\CssSelectorHtmlMatcher;
 use Sobak\Scrawler\Block\Matcher\CssSelectorListMatcher;
@@ -11,7 +11,7 @@ use Sobak\Scrawler\Block\UrlListProvider\EmptyUrlListProvider;
 use Sobak\Scrawler\Configuration\Configuration;
 use Sobak\Scrawler\Configuration\ObjectConfiguration;
 use Sobak\Scrawler\Scrawler;
-use Tests\Functional\ServerBasedTest;
+use Tests\Integration\IntegrationTest;
 use Tests\Utils\InMemoryLogWriter;
 use Tests\Utils\SimpleMatchEntity;
 
@@ -19,13 +19,13 @@ use Tests\Utils\SimpleMatchEntity;
  * @covers \Sobak\Scrawler\Client\Response\ContentType
  * @covers \Sobak\Scrawler\Scrawler
  */
-class ContentTypeTest extends ServerBasedTest
+class ContentTypeTest extends IntegrationTest
 {
     public function testCrawlingXmlContent(): void
     {
         $config = (new Configuration())
             ->setOperationName('test')
-            ->setBaseUrl(ServerBasedTest::getHostUrl() . '/movies.xml')
+            ->setBaseUrl(IntegrationTest::getHostUrl() . '/movies.xml')
             ->addUrlListProvider(new EmptyUrlListProvider())
             ->addObjectDefinition('movie', new CssSelectorListMatcher('movie'), function (ObjectConfiguration $object) {
                 $object
@@ -48,7 +48,7 @@ class ContentTypeTest extends ServerBasedTest
     {
         $config = (new Configuration())
             ->setOperationName('test')
-            ->setBaseUrl(ServerBasedTest::getHostUrl() . '/file.txt')
+            ->setBaseUrl(IntegrationTest::getHostUrl() . '/file.txt')
             ->addLogWriter(new InMemoryLogWriter())
             ->addUrlListProvider(new EmptyUrlListProvider())
         ;

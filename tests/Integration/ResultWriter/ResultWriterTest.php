@@ -1,13 +1,13 @@
 <?php
 
-namespace Tests\Functional\Matcher;
+namespace Tests\Integration\Matcher;
 
 use Sobak\Scrawler\Block\Matcher\CssSelectorHtmlMatcher;
 use Sobak\Scrawler\Block\Matcher\CssSelectorListMatcher;
 use Sobak\Scrawler\Block\ResultWriter\InMemoryResultWriter;
 use Sobak\Scrawler\Configuration\ObjectConfiguration;
 use Sobak\Scrawler\Scrawler;
-use Tests\Functional\ServerBasedTest;
+use Tests\Integration\IntegrationTest;
 use Tests\Utils\BasicConfigurationProvider;
 use Tests\Utils\SimpleMatchEntity;
 
@@ -19,12 +19,12 @@ use Tests\Utils\SimpleMatchEntity;
  * @covers \Sobak\Scrawler\Configuration\ConfigurationChecker
  * @covers \Sobak\Scrawler\Configuration\ObjectConfiguration
  */
-class ResultWriterTest extends ServerBasedTest
+class ResultWriterTest extends IntegrationTest
 {
     public function testMultipleResultWritersPerEntity(): void
     {
         $config = BasicConfigurationProvider::getConfiguration()
-            ->setBaseUrl(ServerBasedTest::getHostUrl())
+            ->setBaseUrl(IntegrationTest::getHostUrl())
             ->addObjectDefinition('test', new CssSelectorListMatcher('body'), function (ObjectConfiguration $object) {
                 $object
                     ->addFieldDefinition('match', new CssSelectorHtmlMatcher('span.match'))

@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Functional\LogWriter;
+namespace Tests\Integration\LogWriter;
 
 use Psr\Log\LogLevel;
 use Sobak\Scrawler\Block\LogWriter\TextfileLogWriter;
@@ -9,7 +9,7 @@ use Sobak\Scrawler\Block\Matcher\CssSelectorListMatcher;
 use Sobak\Scrawler\Block\ResultWriter\InMemoryResultWriter;
 use Sobak\Scrawler\Configuration\ObjectConfiguration;
 use Sobak\Scrawler\Scrawler;
-use Tests\Functional\ServerBasedTest;
+use Tests\Integration\IntegrationTest;
 use Tests\Utils\BasicConfigurationProvider;
 use Tests\Utils\SimpleMatchEntity;
 
@@ -19,12 +19,12 @@ use Tests\Utils\SimpleMatchEntity;
  * @covers \Sobak\Scrawler\Support\LogWriter
  * @covers \Sobak\Scrawler\Output\Outputter
  */
-class TextfileLogWriterTest extends ServerBasedTest
+class TextfileLogWriterTest extends IntegrationTest
 {
     public function testWritingLogToFile(): void
     {
         $config = BasicConfigurationProvider::getConfiguration()
-            ->setBaseUrl(ServerBasedTest::getHostUrl())
+            ->setBaseUrl(IntegrationTest::getHostUrl())
             ->addLogWriter(new TextfileLogWriter())
             ->addObjectDefinition('test', new CssSelectorListMatcher('body'), function (ObjectConfiguration $object) {
                 $object
@@ -45,7 +45,7 @@ class TextfileLogWriterTest extends ServerBasedTest
     public function testSettingVerbosityLevels(): void
     {
         $config = BasicConfigurationProvider::getConfiguration()
-            ->setBaseUrl(ServerBasedTest::getHostUrl())
+            ->setBaseUrl(IntegrationTest::getHostUrl())
             ->addLogWriter(new TextfileLogWriter('full.log'))
             ->addLogWriter(new TextfileLogWriter('warning.log'), LogLevel::WARNING)
             ->addObjectDefinition('test', new CssSelectorListMatcher('body'), function (ObjectConfiguration $object) {
@@ -69,7 +69,7 @@ class TextfileLogWriterTest extends ServerBasedTest
     public function testTwoLogWritersWithSameVerbosity(): void
     {
         $config = BasicConfigurationProvider::getConfiguration()
-            ->setBaseUrl(ServerBasedTest::getHostUrl())
+            ->setBaseUrl(IntegrationTest::getHostUrl())
             ->addLogWriter(new TextfileLogWriter('first.log'))
             ->addLogWriter(new TextfileLogWriter('second.log'))
             ->addObjectDefinition('test', new CssSelectorListMatcher('body'), function (ObjectConfiguration $object) {

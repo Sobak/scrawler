@@ -1,5 +1,5 @@
 /.idea
 /dev
-/tests/Functional/**/output
+/tests/Integration/**/output
 /vendor
 composer.lock

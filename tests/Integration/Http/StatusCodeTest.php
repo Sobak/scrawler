@@ -1,30 +1,28 @@
 <?php
 
-namespace Tests\Functional\RobotsParser;
+namespace Tests\Integration\Http;
 
 use Sobak\Scrawler\Block\Matcher\CssSelectorHtmlMatcher;
 use Sobak\Scrawler\Block\Matcher\CssSelectorListMatcher;
 use Sobak\Scrawler\Block\ResultWriter\InMemoryResultWriter;
-use Sobak\Scrawler\Block\RobotsParser\DefaultRobotsParser;
 use Sobak\Scrawler\Configuration\ObjectConfiguration;
 use Sobak\Scrawler\Scrawler;
-use Tests\Functional\ServerBasedTest;
+use Tests\Integration\IntegrationTest;
 use Tests\Utils\BasicConfigurationProvider;
+use Tests\Utils\InMemoryLogWriter;
 use Tests\Utils\SimpleMatchEntity;
 
 /**
- * @covers \Sobak\Scrawler\Block\RobotsParser\AbstractRobotsParser
- * @covers \Sobak\Scrawler\Block\RobotsParser\DefaultRobotsParser
- * @covers \Sobak\Scrawler\Block\UrlListProvider\EmptyUrlListProvider
+ * @covers \Sobak\Scrawler\Client\Response\StatusCode
  * @covers \Sobak\Scrawler\Scrawler
  */
-class RobotsParserTest extends ServerBasedTest
+class StatusCodeTest extends IntegrationTest
 {
-    public function testRobotsTxtParser(): void
+    public function testNonProcessableBaseUrl(): void
     {
         $config = BasicConfigurationProvider::getConfiguration()
-            ->setBaseUrl(ServerBasedTest::getHostUrl())
-            ->setRobotsParser(new DefaultRobotsParser())
+            ->setBaseUrl(IntegrationTest::getHostUrl() . '/non-existent')
+            ->addLogWriter(new InMemoryLogWriter())
             ->addObjectDefinition('test', new CssSelectorListMatcher('body'), function (ObjectConfiguration $object) {
                 $object
                     ->addFieldDefinition('match', new CssSelectorHtmlMatcher('span.match'))
@@ -37,6 +35,6 @@ class RobotsParserTest extends ServerBasedTest
         $scrawler = new Scrawler($config, __DIR__ . '/output');
         $scrawler->run();
 
-        $this->assertEmpty(InMemoryResultWriter::$results);
+        $this->assertRegExp('#Skipped due to unprocessable response code#', InMemoryLogWriter::$log[1]);
     }
 }

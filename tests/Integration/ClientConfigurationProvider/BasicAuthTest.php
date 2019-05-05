@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Functional\ClientConfigurationProvider;
+namespace Tests\Integration\ClientConfigurationProvider;
 
 use Sobak\Scrawler\Block\ClientConfigurationProvider\BasicAuthProvider;
 use Sobak\Scrawler\Block\Matcher\CssSelectorHtmlMatcher;
@@ -8,19 +8,19 @@ use Sobak\Scrawler\Block\Matcher\CssSelectorListMatcher;
 use Sobak\Scrawler\Block\ResultWriter\InMemoryResultWriter;
 use Sobak\Scrawler\Configuration\ObjectConfiguration;
 use Sobak\Scrawler\Scrawler;
-use Tests\Functional\ServerBasedTest;
+use Tests\Integration\IntegrationTest;
 use Tests\Utils\BasicConfigurationProvider;
 use Tests\Utils\SimpleMatchEntity;
 
 /**
  * @covers \Sobak\Scrawler\Block\ClientConfigurationProvider\BasicAuthProvider
  */
-class BasicAuthTest extends ServerBasedTest
+class BasicAuthTest extends IntegrationTest
 {
     public function testBasicAuth(): void
     {
         $config = BasicConfigurationProvider::getConfiguration()
-            ->setBaseUrl(ServerBasedTest::getHostUrl() . '/basicauth.php')
+            ->setBaseUrl(IntegrationTest::getHostUrl() . '/basicauth.php')
             ->addClientConfigurationProvider(new BasicAuthProvider('test', 'password'))
             ->addObjectDefinition('test', new CssSelectorListMatcher('body'), function (ObjectConfiguration $object) {
                 $object

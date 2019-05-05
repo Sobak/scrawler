@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Tests\Functional;
+namespace Tests\Integration;
 
 use ReflectionClass;
 use RuntimeException;
@@ -12,7 +12,7 @@ use Symfony\Component\Process\PhpExecutableFinder;
 use Symfony\Component\Process\Process;
 use Tests\Utils\InMemoryLogWriter;
 
-abstract class ServerBasedTest extends TestCase
+abstract class IntegrationTest extends TestCase
 {
     protected static $phpServerPort;
 

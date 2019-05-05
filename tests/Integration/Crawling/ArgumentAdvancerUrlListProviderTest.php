@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Tests\Functional\Crawling;
+namespace Tests\Integration\Crawling;
 
 use Sobak\Scrawler\Block\Matcher\CssSelectorHtmlMatcher;
 use Sobak\Scrawler\Block\Matcher\CssSelectorListMatcher;
@@ -11,7 +11,7 @@ use Sobak\Scrawler\Block\UrlListProvider\ArgumentAdvancerUrlListProvider;
 use Sobak\Scrawler\Configuration\Configuration;
 use Sobak\Scrawler\Configuration\ObjectConfiguration;
 use Sobak\Scrawler\Scrawler;
-use Tests\Functional\ServerBasedTest;
+use Tests\Integration\IntegrationTest;
 use Tests\Utils\SimpleMatchEntity;
 
 /**
@@ -24,11 +24,11 @@ use Tests\Utils\SimpleMatchEntity;
  * @covers \Sobak\Scrawler\Scrawler
  * @covers \Sobak\Scrawler\Support\Utils
  */
-class ArgumentAdvancerUrlListProviderTest extends ServerBasedTest
+class ArgumentAdvancerUrlListProviderTest extends IntegrationTest
 {
     public function testWithStopArgument(): void
     {
-        $host = ServerBasedTest::getHostUrl();
+        $host = IntegrationTest::getHostUrl();
 
         $config = (new Configuration())
             ->setOperationName('test')
@@ -55,7 +55,7 @@ class ArgumentAdvancerUrlListProviderTest extends ServerBasedTest
 
     public function testWithoutStopArgument(): void
     {
-        $host = ServerBasedTest::getHostUrl();
+        $host = IntegrationTest::getHostUrl();
 
         $config = (new Configuration())
             ->setOperationName('test')
@@ -82,7 +82,7 @@ class ArgumentAdvancerUrlListProviderTest extends ServerBasedTest
 
     public function testWithRelativeUrl(): void
     {
-        $host = ServerBasedTest::getHostUrl();
+        $host = IntegrationTest::getHostUrl();
 
         $config = (new Configuration())
             ->setOperationName('test')
@@ -109,7 +109,7 @@ class ArgumentAdvancerUrlListProviderTest extends ServerBasedTest
 
     public function testWithNonDefaultStep(): void
     {
-        $host = ServerBasedTest::getHostUrl();
+        $host = IntegrationTest::getHostUrl();
 
         $config = (new Configuration())
             ->setOperationName('test')
