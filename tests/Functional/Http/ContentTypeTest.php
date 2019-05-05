@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Tests\Functional\Http;
 
-use Sobak\Scrawler\Block\LogWriter\TextfileLogWriter;
 use Sobak\Scrawler\Block\Matcher\CssSelectorHtmlMatcher;
 use Sobak\Scrawler\Block\Matcher\CssSelectorListMatcher;
 use Sobak\Scrawler\Block\ResultWriter\InMemoryResultWriter;
@@ -13,6 +12,7 @@ use Sobak\Scrawler\Configuration\Configuration;
 use Sobak\Scrawler\Configuration\ObjectConfiguration;
 use Sobak\Scrawler\Scrawler;
 use Tests\Functional\ServerBasedTest;
+use Tests\Utils\InMemoryLogWriter;
 use Tests\Utils\SimpleMatchEntity;
 
 class ContentTypeTest extends ServerBasedTest
@@ -45,14 +45,13 @@ class ContentTypeTest extends ServerBasedTest
         $config = (new Configuration())
             ->setOperationName('test')
             ->setBaseUrl(ServerBasedTest::getHostUrl() . '/file.txt')
-            ->addLogWriter(new TextfileLogWriter())
+            ->addLogWriter(new InMemoryLogWriter())
             ->addUrlListProvider(new EmptyUrlListProvider())
         ;
 
         $scrawler = new Scrawler($config, __DIR__ . '/output');
         $scrawler->run();
 
-        $log = file(__DIR__ . '/output/test/crawler.log');
-        $this->assertRegExp('#Skipped due to unprocessable content type \(text/plain\)#', $log[1]);
+        $this->assertRegExp('#Skipped due to unprocessable content type \(text/plain\)#', InMemoryLogWriter::$log[1]);
     }
 }

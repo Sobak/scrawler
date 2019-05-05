@@ -10,6 +10,7 @@ use PHPUnit\Framework\TestCase;
 use Sobak\Scrawler\Block\ResultWriter\InMemoryResultWriter;
 use Symfony\Component\Process\PhpExecutableFinder;
 use Symfony\Component\Process\Process;
+use Tests\Utils\InMemoryLogWriter;
 
 abstract class ServerBasedTest extends TestCase
 {
@@ -50,7 +51,8 @@ abstract class ServerBasedTest extends TestCase
 
     protected function tearDown(): void
     {
-        // Cleanup dangling results
+        // Cleanup dangling results and logs
+        InMemoryLogWriter::$log = [];
         InMemoryResultWriter::$results = [];
     }
 
