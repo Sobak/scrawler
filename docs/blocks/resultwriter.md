@@ -30,6 +30,9 @@ all generic options for file result writers mentioned above it also accepts
 and will make all entity properties being ordered consistently with headers,
 otherwise properties will be ordered alphabetically.
 
+> **Note:** This writer depends on League CSV, install it with
+> `composer require league/csv "^9.2"` first
+
 ```php
 ->addResultWriter(PostEntity::class, new CsvFileResultWriter([
     'filename' => new LiteralFilenameProvider(['filename' => 'posts']),
@@ -45,13 +48,14 @@ otherwise properties will be ordered alphabetically.
 > entities you will probably want to use the `LiteralFilenameProvider` to
 > get the filename.
 
-Optionally you can customize any of the parameters supported by the underlying
-`fputcsv()` function, being `delimiter`, `enclosure` and `escape_char`.
+CSV generation can be customized by setting  `delimiter`, `enclosure` and
+`escape_char` options. You can check PHP manual on `fgetcsv` to get their
+meaning.
 
-> **Note:** in order to have UTF-8 characters read properly by Microsoft Excel
-> on Windows you will need a BOM character at the beginning of the file. You
-> can tell Scrawler to insert it for you by setting `insert_bom` config option
-> to `true` (`false` by default).
+In order to have UTF-8 characters read properly by Microsoft Excel on Windows
+you will need a BOM character at the beginning of the file. You can tell
+Scrawler to insert it for you by setting `insert_bom` config option  to `true`
+(`false` by default).
 
 ## DatabaseResultWriter
 Saves results into almost any of the databases supported by PDO.
