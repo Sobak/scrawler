@@ -41,7 +41,7 @@ abstract class IntegrationTest extends TestCase
 
     public static function getHost()
     {
-        return sprintf('127.0.0.1:%s', $_ENV['PHP_SERVER_PORT']);
+        return sprintf('127.0.0.1:%s', $_ENV['TEST_SERVER_PORT']);
     }
 
     public static function getHostUrl()

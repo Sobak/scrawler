@@ -36,6 +36,8 @@ All notable changes to Scrawler will be documented in this file.
 - Improved handling of networking errors
 - Improved logs readability
 - Changed default log verbosity for both console and the textfile to `INFO` level
+- `PHP_SERVER_PORT` environment variable used to set the port of the webserver
+  used to run integration tests has been renamed to `TEST_SERVER_PORT`
 
 ### Fixed
 - Fixed incorrect detecting of visited URLs resulting in some adresses being

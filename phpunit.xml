@@ -27,6 +27,6 @@
         </whitelist>
     </filter>
     <php>
-        <env name="PHP_SERVER_PORT" value="9394" />
+        <env name="TEST_SERVER_PORT" value="9394" />
     </php>
 </phpunit>
