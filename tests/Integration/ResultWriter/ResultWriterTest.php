@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Integration\Matcher;
+namespace Tests\Integration\ResultWriter;
 
 use Sobak\Scrawler\Block\Matcher\CssSelectorHtmlMatcher;
 use Sobak\Scrawler\Block\Matcher\CssSelectorListMatcher;
