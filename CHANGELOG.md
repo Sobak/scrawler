@@ -15,6 +15,8 @@ All notable changes to Scrawler will be documented in this file.
 - Added ability to mark objects as fetched only once per operation
 - Added ability to pass encoding options to JSON file result writer
 - Added support for relative URL in `ArgumentAdvancerUrlListProvider`'s template
+- Added `TEST_SERVER_WAIT` environment variable to change default wait time for
+  the server used in integration tests
 
 ### Changed
 - `CssSelectorTextMatcher` and `XpathSelectorTextMatcher` are now renamed to

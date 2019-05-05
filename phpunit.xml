@@ -28,5 +28,6 @@
     </filter>
     <php>
         <env name="TEST_SERVER_PORT" value="9394" />
+        <env name="TEST_SERVER_WAIT" value="500000" />
     </php>
 </phpunit>

@@ -27,7 +27,7 @@ abstract class IntegrationTest extends TestCase
         static::$process = new Process([$phpBinary, '-S', self::getHost(), '-t', "{$directory}"]);
         static::$process->start();
 
-        usleep(500000); // Wait 0.5s for the server to start
+        usleep((int) $_ENV['TEST_SERVER_WAIT']); // Wait for the server to start
 
         if (static::$process->isRunning() === false) {
             throw new RuntimeException('Could not start PHP server: ' . static::$process->getErrorOutput());
@@ -41,7 +41,7 @@ abstract class IntegrationTest extends TestCase
 
     public static function getHost()
     {
-        return sprintf('127.0.0.1:%s', $_ENV['TEST_SERVER_PORT']);
+        return sprintf('127.0.0.1:%s', (string) $_ENV['TEST_SERVER_PORT']);
     }
 
     public static function getHostUrl()
