@@ -6,13 +6,13 @@ namespace Tests\Integration\Http;
 
 use Sobak\Scrawler\Block\Matcher\CssSelectorHtmlMatcher;
 use Sobak\Scrawler\Block\Matcher\CssSelectorListMatcher;
-use Sobak\Scrawler\Block\ResultWriter\InMemoryResultWriter;
 use Sobak\Scrawler\Block\UrlListProvider\EmptyUrlListProvider;
 use Sobak\Scrawler\Configuration\Configuration;
 use Sobak\Scrawler\Configuration\ObjectConfiguration;
 use Sobak\Scrawler\Scrawler;
 use Tests\Integration\IntegrationTest;
 use Tests\Utils\InMemoryLogWriter;
+use Tests\Utils\InMemoryResultWriter;
 use Tests\Utils\SimpleMatchEntity;
 
 /**

@@ -115,17 +115,6 @@ Scrawler will fall back to simple `var_dump()` call.
 
 This result writer does not define any additional configuration options.
 
-## InMemoryResultWriter
-Another of simple result writer implementations and again suited mostly
-for debugging and development. All prepared entities are stored in global
-static `InMemoryResultWriter::$results` variable. Internally it is ued by
-Scrawler for its own testing and you should not have a good reason to use
-that writer, most of the cases will hugely benefit from less generic implemtation
-even if all you need is to _do something_ with your results.
-
-This result writer allows to pass an optional `group` setting which will
-determine an array subkey all processed entities will be stored under.
-
 ## JsonFileResultWriter
 This block implementation will store each of your entities into single
 JSON file. Every entity property will be used as property name in the

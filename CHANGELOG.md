@@ -46,6 +46,10 @@ All notable changes to Scrawler will be documented in this file.
   processed multiple times
 - Fixed incorrect whitespace trimming in text matchers
 
+### Removed
+- Removed `InMemoryResultWriter` from the blocks list - now it is only available
+  during development to run tests
+
 ### Known issues
 - Relative URLs with paths using `..` are not yet supported
 

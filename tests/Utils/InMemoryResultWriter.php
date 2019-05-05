@@ -2,8 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Sobak\Scrawler\Block\ResultWriter;
+namespace Tests\Utils;
 
+use Sobak\Scrawler\Block\ResultWriter\AbstractResultWriter;
 use Sobak\Scrawler\Entity\EntityMapper;
 
 class InMemoryResultWriter extends AbstractResultWriter

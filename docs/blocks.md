@@ -31,7 +31,6 @@ mentioning its potential parameters etc.
     - [CsvFileResultWriter](blocks/resultwriter.md#csvfileresultwriter)
     - [DatabaseResultWriter](blocks/resultwriter.md#databaseresultwriter)
     - [DumpResultWriter](blocks/resultwriter.md#dumpresultwriter)
-    - [InMemoryResultWriter](blocks/resultwriter.md#inmemoryresultwriter)
     - [JsonFileResultWriter](blocks/resultwriter.md#jsonfileresultwriter)
     - [TemplateFileResultWriter](blocks/resultwriter.md#templatefileresultwriter)
 - [FilenameProvider](blocks/filenameprovider.md)

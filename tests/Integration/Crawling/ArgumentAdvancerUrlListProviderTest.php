@@ -6,12 +6,12 @@ namespace Tests\Integration\Crawling;
 
 use Sobak\Scrawler\Block\Matcher\CssSelectorHtmlMatcher;
 use Sobak\Scrawler\Block\Matcher\CssSelectorListMatcher;
-use Sobak\Scrawler\Block\ResultWriter\InMemoryResultWriter;
 use Sobak\Scrawler\Block\UrlListProvider\ArgumentAdvancerUrlListProvider;
 use Sobak\Scrawler\Configuration\Configuration;
 use Sobak\Scrawler\Configuration\ObjectConfiguration;
 use Sobak\Scrawler\Scrawler;
 use Tests\Integration\IntegrationTest;
+use Tests\Utils\InMemoryResultWriter;
 use Tests\Utils\SimpleMatchEntity;
 
 /**

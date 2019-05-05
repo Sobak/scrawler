@@ -4,17 +4,16 @@ namespace Tests\Integration\ResultWriter;
 
 use Sobak\Scrawler\Block\Matcher\CssSelectorHtmlMatcher;
 use Sobak\Scrawler\Block\Matcher\CssSelectorListMatcher;
-use Sobak\Scrawler\Block\ResultWriter\InMemoryResultWriter;
 use Sobak\Scrawler\Configuration\ObjectConfiguration;
 use Sobak\Scrawler\Scrawler;
 use Tests\Integration\IntegrationTest;
 use Tests\Utils\BasicConfigurationProvider;
+use Tests\Utils\InMemoryResultWriter;
 use Tests\Utils\SimpleMatchEntity;
 
 /**
  * @covers \Sobak\Scrawler\Block\Matcher\CssSelectorListMatcher
  * @covers \Sobak\Scrawler\Block\ResultWriter\AbstractResultWriter
- * @covers \Sobak\Scrawler\Block\ResultWriter\InMemoryResultWriter
  * @covers \Sobak\Scrawler\Configuration\Configuration
  * @covers \Sobak\Scrawler\Configuration\ConfigurationChecker
  * @covers \Sobak\Scrawler\Configuration\ObjectConfiguration

@@ -4,12 +4,12 @@ namespace Tests\Integration\RobotsParser;
 
 use Sobak\Scrawler\Block\Matcher\CssSelectorHtmlMatcher;
 use Sobak\Scrawler\Block\Matcher\CssSelectorListMatcher;
-use Sobak\Scrawler\Block\ResultWriter\InMemoryResultWriter;
 use Sobak\Scrawler\Block\RobotsParser\DefaultRobotsParser;
 use Sobak\Scrawler\Configuration\ObjectConfiguration;
 use Sobak\Scrawler\Scrawler;
 use Tests\Integration\IntegrationTest;
 use Tests\Utils\BasicConfigurationProvider;
+use Tests\Utils\InMemoryResultWriter;
 use Tests\Utils\SimpleMatchEntity;
 
 /**

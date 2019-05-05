@@ -7,10 +7,9 @@ namespace Tests\Integration;
 use ReflectionClass;
 use RuntimeException;
 use PHPUnit\Framework\TestCase;
-use Sobak\Scrawler\Block\ResultWriter\InMemoryResultWriter;
 use Symfony\Component\Process\PhpExecutableFinder;
 use Symfony\Component\Process\Process;
-use Tests\Utils\InMemoryLogWriter;
+use Tests\Utils\InMemoryResultWriter;
 
 abstract class IntegrationTest extends TestCase
 {
