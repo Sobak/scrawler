@@ -8,7 +8,7 @@ use FilesystemIterator;
 use RecursiveDirectoryIterator;
 use RecursiveIteratorIterator;
 
-class Outputter
+class OutputManager implements OutputManagerInterface
 {
     protected $directoryName;
 

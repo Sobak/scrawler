@@ -18,7 +18,7 @@ use Tests\Utils\PostEntity;
  * @covers \Sobak\Scrawler\Block\ResultWriter\AbstractResultWriter
  * @covers \Sobak\Scrawler\Block\ResultWriter\JsonFileResultWriter
  * @covers \Sobak\Scrawler\Block\ResultWriter\FilenameProvider\IncrementalFilenameProvider
- * @covers \Sobak\Scrawler\Output\Outputter
+ * @covers \Sobak\Scrawler\Output\OutputManager
  * @covers \Sobak\Scrawler\Scrawler
  */
 class IncrementalFilenameProviderTest extends IntegrationTest

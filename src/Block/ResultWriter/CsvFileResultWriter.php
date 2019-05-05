@@ -12,7 +12,7 @@ class CsvFileResultWriter extends FileResultWriter
 
     public function initializeResultWrites(): void
     {
-        $this->fileHandle = $this->outputter->createFileHandle($this->getFilename() . '.csv', 'w');
+        $this->fileHandle = $this->outputManager->createFileHandle($this->getFilename() . '.csv', 'w');
 
         if (isset($this->configuration['insert_bom']) && $this->configuration['insert_bom'] === true) {
             fputs($this->fileHandle, "\xEF\xBB\xBF");

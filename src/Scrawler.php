@@ -17,7 +17,7 @@ use Sobak\Scrawler\Client\Response\StatusCode;
 use Sobak\Scrawler\Configuration\Configuration;
 use Sobak\Scrawler\Configuration\ConfigurationChecker;
 use Sobak\Scrawler\Entity\EntityMapper;
-use Sobak\Scrawler\Output\Outputter;
+use Sobak\Scrawler\Output\OutputManager;
 use Sobak\Scrawler\Output\OutputWriterInterface;
 use Sobak\Scrawler\Support\LogWriter;
 use Sobak\Scrawler\Support\Utils;
@@ -50,7 +50,7 @@ class Scrawler
         $configurationChecker = new ConfigurationChecker();
         $configurationChecker->checkConfiguration($configuration);
 
-        $this->output = new Outputter(
+        $this->output = new OutputManager(
             $outputDirectory,
             Utils::slugify($configuration->getOperationName())
         );
@@ -207,9 +207,9 @@ class Scrawler
                             $resultWriter->setFilename($filename);
                         }
 
-                        // Set Outputter for result writers that require it
+                        // Set OutputManager for result writers that require it
                         if ($resultWriter instanceof OutputWriterInterface) {
-                            $resultWriter->setOutputter($this->output);
+                            $resultWriter->setOutputManager($this->output);
                         }
 
                         if (

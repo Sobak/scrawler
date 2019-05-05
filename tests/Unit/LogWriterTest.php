@@ -4,7 +4,7 @@ namespace Tests\Unit;
 
 use PHPUnit\Framework\TestCase;
 use Psr\Log\LogLevel;
-use Sobak\Scrawler\Output\Outputter;
+use Sobak\Scrawler\Output\OutputManager;
 use Sobak\Scrawler\Support\LogWriter;
 use Tests\Utils\InMemoryLogWriter;
 
@@ -109,8 +109,8 @@ class LogWriterTest extends TestCase
 
     protected function writeLogMessages($verbosity)
     {
-        /** @var Outputter $outputterMock Just to silence the warnings further down the line */
-        $outputterMock = $this->getMockBuilder(Outputter::class)
+        /** @var OutputManager $outputterMock Just to silence the warnings further down the line */
+        $outputterMock = $this->getMockBuilder(OutputManager::class)
             ->disableOriginalConstructor()
             ->getMock();
 

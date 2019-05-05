@@ -7,22 +7,22 @@ namespace Sobak\Scrawler\Output;
 /**
  * Interface OutputWriterInterface
  *
- * This interface can be used for various objects to mark them as using Outputter
- * class for their operations. Scrawler will then inject Outputter object into them.
+ * This interface can be used for various objects to mark them as using OutputManager
+ * class for their operations. Scrawler will then inject OutputManager object into them.
  */
 interface OutputWriterInterface
 {
     /**
-     * Returns the outputter instance.
+     * Returns the output manager instance.
      *
-     * @return Outputter
+     * @return OutputManagerInterface
      */
-    public function getOutputter(): Outputter;
+    public function getOutputManager(): OutputManagerInterface;
 
     /**
-     * Sets the outputter instance.
+     * Sets the output manager instance.
      *
-     * @param Outputter $outputter
+     * @param OutputManagerInterface $outputManager
      */
-    public function setOutputter(Outputter $outputter): void;
+    public function setOutputManager(OutputManagerInterface $outputManager): void;
 }

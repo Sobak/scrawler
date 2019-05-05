@@ -17,7 +17,7 @@ use Tests\Utils\SimpleMatchEntity;
  * @covers \Sobak\Scrawler\Block\LogWriter\TextfileLogWriter
  * @covers \Sobak\Scrawler\Configuration\Configuration
  * @covers \Sobak\Scrawler\Support\LogWriter
- * @covers \Sobak\Scrawler\Output\Outputter
+ * @covers \Sobak\Scrawler\Output\OutputManager
  */
 class TextfileLogWriterTest extends IntegrationTest
 {

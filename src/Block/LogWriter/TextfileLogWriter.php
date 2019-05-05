@@ -4,29 +4,29 @@ declare(strict_types=1);
 
 namespace Sobak\Scrawler\Block\LogWriter;
 
-use Sobak\Scrawler\Output\Outputter;
+use Sobak\Scrawler\Output\OutputManagerInterface;
 use Sobak\Scrawler\Output\OutputWriterInterface;
 
 class TextfileLogWriter extends AbstractLogWriter implements OutputWriterInterface
 {
     protected $filename;
 
-    /** @var Outputter */
-    protected $outputter;
+    /** @var OutputManagerInterface */
+    protected $outputManager;
 
     public function __construct(?string $filename = null)
     {
         $this->filename = $filename ?? 'crawler.log';
     }
 
-    public function getOutputter(): Outputter
+    public function getOutputManager(): OutputManagerInterface
     {
-        return $this->outputter;
+        return $this->outputManager;
     }
 
-    public function setOutputter(Outputter $outputter): void
+    public function setOutputManager(OutputManagerInterface $outputManager): void
     {
-        $this->outputter = $outputter;
+        $this->outputManager = $outputManager;
     }
 
     public function log($level, $message, array $context = array())
@@ -37,6 +37,6 @@ class TextfileLogWriter extends AbstractLogWriter implements OutputWriterInterfa
 
         $line = "[$datetime][$level] $message\n";
 
-        $this->outputter->appendToFile($this->filename, $line);
+        $this->outputManager->appendToFile($this->filename, $line);
     }
 }

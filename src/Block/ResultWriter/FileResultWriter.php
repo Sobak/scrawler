@@ -6,7 +6,7 @@ namespace Sobak\Scrawler\Block\ResultWriter;
 
 use Exception;
 use Sobak\Scrawler\Block\ResultWriter\FilenameProvider\FilenameProviderInterface;
-use Sobak\Scrawler\Output\Outputter;
+use Sobak\Scrawler\Output\OutputManagerInterface;
 use Sobak\Scrawler\Output\OutputWriterInterface;
 
 abstract class FileResultWriter extends AbstractResultWriter implements
@@ -17,8 +17,8 @@ abstract class FileResultWriter extends AbstractResultWriter implements
 
     protected $filename;
 
-    /** @var Outputter */
-    protected $outputter;
+    /** @var OutputManagerInterface */
+    protected $outputManager;
 
     public function __construct(array $configuration = [])
     {
@@ -47,14 +47,14 @@ abstract class FileResultWriter extends AbstractResultWriter implements
         $this->filename = $filename;
     }
 
-    public function getOutputter(): Outputter
+    public function getOutputManager(): OutputManagerInterface
     {
-        return $this->outputter;
+        return $this->outputManager;
     }
 
-    public function setOutputter(Outputter $outputter): void
+    public function setOutputManager(OutputManagerInterface $outputManager): void
     {
-        $this->outputter = $outputter;
+        $this->outputManager = $outputManager;
     }
 
     public function initializeResultWrites(): void
@@ -65,7 +65,7 @@ abstract class FileResultWriter extends AbstractResultWriter implements
 
             $this->logWriter->info("Created {$directory} directory to store result files");
 
-            $this->outputter->createDirectory($directory, true);
+            $this->outputManager->createDirectory($directory, true);
         }
 
         $this->directory = $directory;
@@ -78,7 +78,7 @@ abstract class FileResultWriter extends AbstractResultWriter implements
             $filename = $this->directory . $this->filename;
         }
 
-        $this->outputter->writeToFile($filename, $contents);
+        $this->outputManager->writeToFile($filename, $contents);
 
         return true;
     }

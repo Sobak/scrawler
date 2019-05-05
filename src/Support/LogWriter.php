@@ -6,7 +6,7 @@ namespace Sobak\Scrawler\Support;
 
 use Psr\Log\LoggerInterface;
 use Psr\Log\LogLevel;
-use Sobak\Scrawler\Output\Outputter;
+use Sobak\Scrawler\Output\OutputManagerInterface;
 use Sobak\Scrawler\Output\OutputWriterInterface;
 
 class LogWriter implements LoggerInterface
@@ -14,14 +14,14 @@ class LogWriter implements LoggerInterface
     /** @var array */
     protected $logWriters;
 
-    public function __construct(array $logWriters, Outputter $outputter)
+    public function __construct(array $logWriters, OutputManagerInterface $outputManager)
     {
         $this->logWriters = $logWriters;
 
-        // Set Outputter for log writers that require it
+        // Set OutputManager for log writers that require it
         foreach ($this->logWriters as $logWriter) {
             if ($logWriter['class'] instanceof OutputWriterInterface) {
-                $logWriter['class']->setOutputter($outputter);
+                $logWriter['class']->setOutputManager($outputManager);
             }
         }
     }
