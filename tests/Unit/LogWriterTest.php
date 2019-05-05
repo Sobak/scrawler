@@ -109,13 +109,17 @@ class LogWriterTest extends TestCase
 
     protected function writeLogMessages($verbosity)
     {
-        $outputter = new Outputter(__DIR__, 'test');
+        /** @var Outputter $outputterMock Just to silence the warnings further down the line */
+        $outputterMock = $this->getMockBuilder(Outputter::class)
+            ->disableOriginalConstructor()
+            ->getMock();
+
         $logWriter = new LogWriter([
             [
                 'class' => new InMemoryLogWriter(),
                 'verbosity' => $verbosity,
             ]
-        ], $outputter);
+        ], $outputterMock);
 
         $logWriter->debug('Debug message');
         $logWriter->info('Info message');
