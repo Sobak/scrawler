@@ -17,11 +17,4 @@ class SimpleMatchEntity
     {
         $this->match = $match;
     }
-
-    public function toArray(): array
-    {
-        return [
-            'match' => $this->getMatch(),
-        ];
-    }
 }

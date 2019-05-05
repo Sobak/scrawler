@@ -29,12 +29,4 @@ class PostEntity
     {
         $this->title = $title;
     }
-
-    public function toArray(): array
-    {
-        return [
-            'content' => $this->getContent(),
-            'title' => $this->getTitle(),
-        ];
-    }
 }
