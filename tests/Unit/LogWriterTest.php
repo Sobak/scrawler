@@ -102,6 +102,59 @@ class LogWriterTest extends TestCase
         $this->assertEquals('[EMERGENCY] Emergency message', InMemoryLogWriter::$log[0]);
     }
 
+    public function testLogMethod(): void
+    {
+        /** @var OutputManager $outputterMock Just to silence the warnings further down the line */
+        $outputterMock = $this->getMockBuilder(OutputManager::class)
+            ->disableOriginalConstructor()
+            ->getMock();
+
+        $logWriter = new LogWriter([
+            [
+                'class' => new InMemoryLogWriter(),
+                'verbosity' => LogLevel::EMERGENCY,
+            ]
+        ], $outputterMock);
+
+        $logWriter->log(LogLevel::ALERT, 'Alert message');
+        $logWriter->log(LogLevel::EMERGENCY, 'Emergency message');
+
+        $this->assertCount(1, InMemoryLogWriter::$log);
+        $this->assertEquals('[EMERGENCY] Emergency message', InMemoryLogWriter::$log[0]);
+    }
+
+    public function testMessageInterpolation(): void
+    {
+        /** @var OutputManager $outputterMock Just to silence the warnings further down the line */
+        $outputterMock = $this->getMockBuilder(OutputManager::class)
+            ->disableOriginalConstructor()
+            ->getMock();
+
+        $logWriter = new LogWriter([
+            [
+                'class' => new InMemoryLogWriter(),
+                'verbosity' => LogLevel::DEBUG,
+            ]
+        ], $outputterMock);
+
+        $stringableClass = new class {
+            public function __toString()
+            {
+                return 'four';
+            }
+        };
+
+        $logWriter->debug('Debug message {one} {two} {three} {four}', [
+            'one' => 'one',
+            'two' => 2,
+            'three' => ['ignored'],
+            'four' => $stringableClass,
+        ]);
+
+        $this->assertCount(1, InMemoryLogWriter::$log);
+        $this->assertEquals('[DEBUG] Debug message one 2 {three} four', InMemoryLogWriter::$log[0]);
+    }
+
     protected function writeLogMessages($verbosity)
     {
         /** @var OutputManager $outputterMock Just to silence the warnings further down the line */
