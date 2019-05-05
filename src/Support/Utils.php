@@ -4,25 +4,8 @@ declare(strict_types=1);
 
 namespace Sobak\Scrawler\Support;
 
-use FilesystemIterator;
-use RecursiveDirectoryIterator;
-use RecursiveIteratorIterator;
-
 class Utils
 {
-    public static function removeDirectoryRecursively(string $directoryPath): void
-    {
-        $iterator = new RecursiveIteratorIterator(
-            new RecursiveDirectoryIterator($directoryPath, FilesystemIterator::SKIP_DOTS),
-            RecursiveIteratorIterator::CHILD_FIRST
-        );
-
-        foreach($iterator as $path) {
-            $path->isDir() && !$path->isLink() ? rmdir($path->getPathname()) : unlink($path->getPathname());
-        }
-        rmdir($directoryPath);
-    }
-
     public static function slugify(string $string, string $separator = '-'): string
     {
         // Remove all non-ASCII characters

@@ -4,7 +4,9 @@ declare(strict_types=1);
 
 namespace Sobak\Scrawler\Output;
 
-use Sobak\Scrawler\Support\Utils;
+use FilesystemIterator;
+use RecursiveDirectoryIterator;
+use RecursiveIteratorIterator;
 
 class Outputter
 {
@@ -75,6 +77,19 @@ class Outputter
 
     public function deleteOutput(): void
     {
-        Utils::removeDirectoryRecursively($this->directoryName);
+        $this->removeDirectoryRecursively($this->directoryName);
+    }
+
+    protected function removeDirectoryRecursively($directoryPath)
+    {
+        $iterator = new RecursiveIteratorIterator(
+            new RecursiveDirectoryIterator($directoryPath, FilesystemIterator::SKIP_DOTS),
+            RecursiveIteratorIterator::CHILD_FIRST
+        );
+
+        foreach($iterator as $path) {
+            $path->isDir() && !$path->isLink() ? rmdir($path->getPathname()) : unlink($path->getPathname());
+        }
+        rmdir($directoryPath);
     }
 }
