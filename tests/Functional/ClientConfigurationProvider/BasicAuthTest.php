@@ -12,6 +12,9 @@ use Tests\Functional\ServerBasedTest;
 use Tests\Utils\BasicConfigurationProvider;
 use Tests\Utils\SimpleMatchEntity;
 
+/**
+ * @covers \Sobak\Scrawler\Block\ClientConfigurationProvider\BasicAuthProvider
+ */
 class BasicAuthTest extends ServerBasedTest
 {
     public function testBasicAuth(): void

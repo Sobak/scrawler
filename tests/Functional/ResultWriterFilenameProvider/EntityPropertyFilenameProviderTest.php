@@ -14,6 +14,13 @@ use Tests\Functional\ServerBasedTest;
 use Tests\Utils\BasicConfigurationProvider;
 use Tests\Utils\PostEntity;
 
+/**
+ * @covers \Sobak\Scrawler\Block\ResultWriter\AbstractResultWriter
+ * @covers \Sobak\Scrawler\Block\ResultWriter\JsonFileResultWriter
+ * @covers \Sobak\Scrawler\Block\ResultWriter\FilenameProvider\EntityPropertyFilenameProvider
+ * @covers \Sobak\Scrawler\Output\Outputter
+ * @covers \Sobak\Scrawler\Scrawler
+ */
 class EntityPropertyFilenameProviderTest extends ServerBasedTest
 {
     public function testFilenameProviderForJsonFileResultWriter(): void

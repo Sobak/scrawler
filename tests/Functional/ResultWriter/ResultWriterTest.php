@@ -11,6 +11,14 @@ use Tests\Functional\ServerBasedTest;
 use Tests\Utils\BasicConfigurationProvider;
 use Tests\Utils\SimpleMatchEntity;
 
+/**
+ * @covers \Sobak\Scrawler\Block\Matcher\CssSelectorListMatcher
+ * @covers \Sobak\Scrawler\Block\ResultWriter\AbstractResultWriter
+ * @covers \Sobak\Scrawler\Block\ResultWriter\InMemoryResultWriter
+ * @covers \Sobak\Scrawler\Configuration\Configuration
+ * @covers \Sobak\Scrawler\Configuration\ConfigurationChecker
+ * @covers \Sobak\Scrawler\Configuration\ObjectConfiguration
+ */
 class ResultWriterTest extends ServerBasedTest
 {
     public function testMultipleResultWritersPerEntity(): void

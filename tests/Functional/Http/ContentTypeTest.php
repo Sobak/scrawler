@@ -15,6 +15,10 @@ use Tests\Functional\ServerBasedTest;
 use Tests\Utils\InMemoryLogWriter;
 use Tests\Utils\SimpleMatchEntity;
 
+/**
+ * @covers \Sobak\Scrawler\Client\Response\ContentType
+ * @covers \Sobak\Scrawler\Scrawler
+ */
 class ContentTypeTest extends ServerBasedTest
 {
     public function testCrawlingXmlContent(): void

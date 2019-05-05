@@ -12,6 +12,12 @@ use Tests\Functional\ServerBasedTest;
 use Tests\Utils\BasicConfigurationProvider;
 use Tests\Utils\SimpleMatchEntity;
 
+/**
+ * @covers \Sobak\Scrawler\Block\RobotsParser\AbstractRobotsParser
+ * @covers \Sobak\Scrawler\Block\RobotsParser\DefaultRobotsParser
+ * @covers \Sobak\Scrawler\Block\UrlListProvider\EmptyUrlListProvider
+ * @covers \Sobak\Scrawler\Scrawler
+ */
 class RobotsParserTest extends ServerBasedTest
 {
     public function testRobotsTxtParser(): void

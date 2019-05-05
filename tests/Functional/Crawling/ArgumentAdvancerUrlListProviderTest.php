@@ -14,6 +14,16 @@ use Sobak\Scrawler\Scrawler;
 use Tests\Functional\ServerBasedTest;
 use Tests\Utils\SimpleMatchEntity;
 
+/**
+ * @covers \Sobak\Scrawler\Block\UrlListProvider\AbstractUrlListProvider
+ * @covers \Sobak\Scrawler\Block\UrlListProvider\ArgumentAdvancerUrlListProvider
+ * @covers \Sobak\Scrawler\Client\ClientFactory
+ * @covers \Sobak\Scrawler\Configuration\Configuration
+ * @covers \Sobak\Scrawler\Configuration\ConfigurationChecker
+ * @covers \Sobak\Scrawler\Configuration\ObjectConfiguration
+ * @covers \Sobak\Scrawler\Scrawler
+ * @covers \Sobak\Scrawler\Support\Utils
+ */
 class ArgumentAdvancerUrlListProviderTest extends ServerBasedTest
 {
     public function testWithStopArgument(): void
