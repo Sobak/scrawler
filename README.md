@@ -84,7 +84,6 @@ For the detailed documentation please check the table of contents below.
 - [Entities](docs/entities.md)
 - [Blocks](docs/blocks.md)
 - [Changelog](CHANGELOG.md)
-- [Roadmap](docs/roadmap.md)
 
 If you are already familiar with the basic Scrawler concepts you will probably
 be mostly interested in the _"Blocks"_ chapter. _Block_ in Scrawler is an
