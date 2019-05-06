@@ -4,9 +4,9 @@ namespace Tests\Unit;
 
 use PHPUnit\Framework\TestCase;
 use Psr\Log\LogLevel;
-use Sobak\Scrawler\Output\OutputManager;
 use Sobak\Scrawler\Support\LogWriter;
 use Tests\Utils\InMemoryLogWriter;
+use Tests\Utils\InMemoryOutputManager;
 
 class LogWriterTest extends TestCase
 {
@@ -104,17 +104,12 @@ class LogWriterTest extends TestCase
 
     public function testLogMethod(): void
     {
-        /** @var OutputManager $outputterMock Just to silence the warnings further down the line */
-        $outputterMock = $this->getMockBuilder(OutputManager::class)
-            ->disableOriginalConstructor()
-            ->getMock();
-
         $logWriter = new LogWriter([
             [
                 'class' => new InMemoryLogWriter(),
                 'verbosity' => LogLevel::EMERGENCY,
             ]
-        ], $outputterMock);
+        ], new InMemoryOutputManager('test'));
 
         $logWriter->log(LogLevel::ALERT, 'Alert message');
         $logWriter->log(LogLevel::EMERGENCY, 'Emergency message');
@@ -125,17 +120,12 @@ class LogWriterTest extends TestCase
 
     public function testMessageInterpolation(): void
     {
-        /** @var OutputManager $outputterMock Just to silence the warnings further down the line */
-        $outputterMock = $this->getMockBuilder(OutputManager::class)
-            ->disableOriginalConstructor()
-            ->getMock();
-
         $logWriter = new LogWriter([
             [
                 'class' => new InMemoryLogWriter(),
                 'verbosity' => LogLevel::DEBUG,
             ]
-        ], $outputterMock);
+        ], new InMemoryOutputManager('test'));
 
         $stringableClass = new class {
             public function __toString()
@@ -157,17 +147,12 @@ class LogWriterTest extends TestCase
 
     protected function writeLogMessages($verbosity)
     {
-        /** @var OutputManager $outputterMock Just to silence the warnings further down the line */
-        $outputterMock = $this->getMockBuilder(OutputManager::class)
-            ->disableOriginalConstructor()
-            ->getMock();
-
         $logWriter = new LogWriter([
             [
                 'class' => new InMemoryLogWriter(),
                 'verbosity' => $verbosity,
             ]
-        ], $outputterMock);
+        ], new InMemoryOutputManager('test'));
 
         $logWriter->debug('Debug message');
         $logWriter->info('Info message');
