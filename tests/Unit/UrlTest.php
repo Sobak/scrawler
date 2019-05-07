@@ -10,7 +10,7 @@ class UrlTest extends TestCase
     public function testRelativeProtocolBaseUrl(): void
     {
         $this->expectException(\Exception::class);
-        $this->expectExceptionMessage('First URL must use explicit protocol (http/https)');
+        $this->expectExceptionMessage('First URL must be absolute');
 
         $url = new Url('//example.com/test');
         $url->getUrl();

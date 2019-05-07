@@ -18,7 +18,7 @@ class Url
     {
         $this->url = $this->normalizeUrl($url, $currentUrl);
         $this->currentUrl = $currentUrl;
-        $this->method = $method ? strtoupper($method) : null;
+        $this->method = strtoupper($method);
         $this->rawUrl = $url;
     }
 
@@ -27,9 +27,34 @@ class Url
         return $this->currentUrl;
     }
 
-    public function getDomain(): string
+    public function getDomain(?string $url = null): string
     {
-        $components = parse_url($this->url);
+        return $this->extractDomain($url ?? $this->url);
+    }
+
+    public function getMethod(): string
+    {
+        return $this->method;
+    }
+
+    public function getRawUrl(): string
+    {
+        return $this->rawUrl;
+    }
+
+    public function getUrl(): string
+    {
+        return $this->url;
+    }
+
+    public function __toString(): string
+    {
+        return $this->url;
+    }
+
+    protected function extractDomain(string $url): string
+    {
+        $components = parse_url($url);
         $domain = '';
 
         if (isset($components['scheme']) === false) {
@@ -54,105 +79,54 @@ class Url
         return $domain;
     }
 
-    public function getMethod(): ?string
+    protected function normalizeUrl(string $url, ?string $currentUrl)
     {
-        return $this->method;
-    }
+        if ($currentUrl === null) {
+            $this->checkCurrentUrl($url);
+        }
 
-    public function getRawUrl(): ?string
-    {
-        return $this->rawUrl;
-    }
+        // Resolve URL with relative protocol
+        if (strpos($url, '//') === 0) {
+            $currentScheme = parse_url($currentUrl, PHP_URL_SCHEME);
+            $url = $currentScheme . ':' . $url;
+        }
 
-    public function getUrl(): string
-    {
-        return $this->url;
-    }
-
-    public function __toString(): string
-    {
-        return $this->url;
-    }
-
-    protected function normalizeUrl($url, $currentUrl)
-    {
         $url = $this->removeAnchor(trim($url));
 
         if ($url === '') {
             return $currentUrl;
         }
 
-        // Keep base URL without query string and anchor for future reference
-        if ($currentUrl !== null) {
-            $baseUrl = $this->removeAnchor($this->removeQueryString($currentUrl));
-        } else {
-            $baseUrl = '';
-        }
-
         if ($url[0] === '?') {
-            return $baseUrl . $url;
-        }
-
-        // Resolve URL with relative protocol
-        if (strpos($url, '//') === 0) {
-            if ($currentUrl === null) {
-                throw new \Exception('First URL must use explicit protocol (http/https)');
-            }
-
-            // Return is e.g. "http"
-            $currentScheme = parse_url($currentUrl, PHP_URL_SCHEME);
-
-            $url = $currentScheme . ':' . $url;
-        }
-
-        if ($currentUrl === null && parse_url($url, PHP_URL_SCHEME) === null) {
-            throw new \Exception('First URL must be absolute');
+            return rtrim($this->removeAnchor($this->removeQueryString($currentUrl)), '/') . $url;
         }
 
         // If the URL is absolute, we're done
         if (parse_url($url, PHP_URL_SCHEME) !== null) {
-            // ...unless wrong protocol is set
-            if (in_array(parse_url($url, PHP_URL_SCHEME), ['http', 'https']) === false) {
-                throw new \Exception('Only http and https protocols are supported');
-            }
-
             return $url;
         }
 
-        $baseUrl = rtrim($baseUrl, '/');
-
-        // Resolve absolute path (but relative URL)
-        if ('/' === $url[0]) {
-            return $baseUrl . $url;
-        }
-
-        // Resolve relative path
-        $path = parse_url(substr($currentUrl, strlen($baseUrl)), PHP_URL_PATH);
-        $path = $this->canonicalizePath(substr($path, 0, (int) strrpos($path, '/')) . '/' . $url);
-
-        return $baseUrl . ($path === '' || $path[0] !== '/' ? '/' : '') . $path;
+        return $this->resolveRelativePath($url, $currentUrl);
     }
 
-    protected function canonicalizePath($path)
+    protected function resolveRelativePath(string $url, string $currentUrl): string
     {
-        if ($path === '' || $path === '/') {
-            return $path;
+        if ('/' === $url[0]) {
+            return $this->getDomain($currentUrl) . $url;
         }
 
-        if (substr($path, -1) === '.') {
-            $path .= '/';
+        return rtrim($currentUrl, '/') . '/' . $url;
+    }
+
+    protected function checkCurrentUrl($url): void
+    {
+        if (parse_url($url, PHP_URL_SCHEME) === null) {
+            throw new \Exception('First URL must be absolute');
         }
 
-        $output = [];
-        foreach (explode('/', $path) as $segment) {
-            if ($segment === '..') {
-                array_pop($output);
-            } elseif ($segment !== '.') {
-                $output[] = $segment;
-            }
+        if (in_array(parse_url($url, PHP_URL_SCHEME), ['http', 'https']) === false) {
+            throw new \Exception('Only http and https protocols are supported');
         }
-
-        return implode('/', $output);
     }
 
     protected function removeAnchor(string $url): string
