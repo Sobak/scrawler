@@ -40,4 +40,13 @@ class ClientConfigurationProviderTest extends TestCase
 
         $this->assertEquals($authConfig, $client->getConfig()['auth']);
     }
+
+    public function testNoConfigurationProvider(): void
+    {
+        $scrawler = new Configuration();
+
+        $client = ClientFactory::buildInstance($scrawler->getClientConfigurationProviders());
+
+        $this->assertStringContainsString('Guzzle', $client->getConfig()['headers']['User-Agent']);
+    }
 }
