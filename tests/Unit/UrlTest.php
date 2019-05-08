@@ -97,6 +97,7 @@ class UrlTest extends TestCase
             ['//example.com/test', 'https://example.com', 'https://example.com/test'],
             ['http://example.com/test#anchor', 'http://example.com/test2', 'http://example.com/test'],
             ['http://example.com/index.php?foo=bar&baz=test', null, 'http://example.com/index.php?foo=bar&baz=test'],
+
             ['?foo=bar', 'http://example.com/index.php', 'http://example.com/index.php?foo=bar'],
 
             ['/test', 'http://example.com', 'http://example.com/test'],
@@ -105,6 +106,8 @@ class UrlTest extends TestCase
             ['test', 'http://example.com/', 'http://example.com/test'],
 
             ['', 'http://example.com/index.php?foo=bar', 'http://example.com/index.php?foo=bar'],
+
+            ['test2', 'http://example.com/test', 'http://example.com/test2'],
         ];
     }
 

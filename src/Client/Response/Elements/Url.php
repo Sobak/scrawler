@@ -115,7 +115,28 @@ class Url
             return $this->getDomain($currentUrl) . $url;
         }
 
-        return rtrim($currentUrl, '/') . '/' . $url;
+        $currentUrlSegments = explode('/', rtrim($currentUrl, '/'));
+
+        // If there is no path attatched to the current URL
+        // we only need to append new path to it and return
+        if (count($currentUrlSegments) === 3) {
+            return implode('/', $currentUrlSegments) . '/' . $url;
+        }
+
+        foreach (explode('/', $url) as $pathSegment) {
+            // Three because we need to account for slashes in the protocol
+            if (count($currentUrlSegments) <= 3) {
+                break;
+            }
+
+            array_pop($currentUrlSegments);
+
+            if ($pathSegment !== '..') {
+                $currentUrlSegments[] = $pathSegment;
+            }
+        }
+
+        return implode('/', $currentUrlSegments);
     }
 
     protected function checkCurrentUrl($url): void
