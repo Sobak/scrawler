@@ -3,6 +3,7 @@
 namespace Tests\Unit;
 
 use PHPUnit\Framework\TestCase;
+use Sobak\Scrawler\Block\ClientConfigurationProvider\BasicAuthProvider;
 use Sobak\Scrawler\Block\ClientConfigurationProvider\LiteralProvider;
 use Sobak\Scrawler\Block\ClientConfigurationProvider\ScrawlerUserAgentProvider;
 use Sobak\Scrawler\Client\ClientFactory;
@@ -11,6 +12,16 @@ use Sobak\Scrawler\Scrawler;
 
 class ClientConfigurationProviderTest extends TestCase
 {
+    public function testBasicAuthConfigurationProvider(): void
+    {
+        $scrawler = new Configuration();
+        $scrawler->addClientConfigurationProvider(new BasicAuthProvider('username', 'password'));
+
+        $client = ClientFactory::buildInstance($scrawler->getClientConfigurationProviders());
+
+        $this->assertEquals(['username', 'password', 'basic'], $client->getConfig()['auth']);
+    }
+
     public function testScrawlerUserAgentProvider(): void
     {
         $scrawler = new Configuration();
