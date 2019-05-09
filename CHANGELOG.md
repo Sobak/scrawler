@@ -6,6 +6,7 @@ All notable changes to Scrawler will be documented in this file.
 - Added robots.txt parser block
 - Added support for resolving relative URLs
 - Added CSV file result writer
+- Added `ArrayUrlListProvider`
 - Added `SameDomainUrlListProvider`
 - Added support for writing results into SQLite databases
 - Added literal client configuration provider

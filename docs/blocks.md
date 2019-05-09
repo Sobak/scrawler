@@ -48,5 +48,6 @@ mentioning its potential parameters etc.
     - [DefaultRobotsParser](blocks/robotsparser.md#defaultrobotsparser)
 - [UrlListProvider](blocks/urllistprovider.md)
     - [ArgumentAdvancerUrlListProvider](blocks/urllistprovider.md#argumentadvancerurllistprovider)
+    - [ArrayUrlListProvider](blocks/urllistprovider.md#arrayurllistprovider)
     - [EmptyUrlListProvider](blocks/urllistprovider.md#emptyurllistprovider)
     - [SameDomainUrlListProvider](blocks/urllistprovider.md#samedomainurllistprovider)

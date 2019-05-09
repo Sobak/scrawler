@@ -54,8 +54,16 @@ In the example above Scrawler will head to `http://sobak.pl/page/2` after
 processing the base URL, then it will continue increasing the number until
 server responds with HTTP 404.
 
+## ArrayUrlListProvider
+This URL provider accepts an array of URLs expressed as strings which will be
+then processed by Scrawler. Each URL is normalized against the base URL.
+
+> **Note:** Do not include your base URL in the list, otherwise it will be
+> processed twice.
+
 ## EmptyUrlListProvider
-This URL returns empty list what ultimately makes Scrawler parse base URL only.
+This URL provider returns empty list what ultimately makes Scrawler parse base
+URL only.
 
 ## SameDomainUrlListProvider
 Looks for `href` attributes of `a` tags and returns links with the domain
