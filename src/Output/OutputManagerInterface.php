@@ -5,7 +5,19 @@ namespace Sobak\Scrawler\Output;
 interface OutputManagerInterface
 {
     /**
-     * Returns name of the output directory.
+     * OutputManager constructor.
+     *
+     * Typically it is used to initialize storage space (e.g. create directories)
+     * and perform checks required to ensure further I/O operations will be
+     * successful.
+     *
+     * @param string|null $basePath Base path Scrawler was called at (when using CLI)
+     * @param string $operationName User-provided operation name
+     */
+    public function __construct(string $operationName, ?string $basePath = null);
+
+    /**
+     * Return name of the output directory.
      *
      * @return string
      */

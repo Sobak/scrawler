@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Sobak\Scrawler\Application\Commands;
 
 use Sobak\Scrawler\Configuration\Configuration;
+use Sobak\Scrawler\Output\OutputManager;
 use Sobak\Scrawler\Scrawler;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
@@ -52,6 +53,8 @@ class CrawlCommand extends Command
         if (($configuration instanceof Configuration) === false) {
             throw new \Exception('Application must return the Configuration instance');
         }
+
+//        $outputManager = new OutputManager($outputPath)
 
         $scrawler = new Scrawler($configuration, $outputPath);
 

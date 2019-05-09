@@ -3,6 +3,7 @@
 namespace Tests\Utils;
 
 use Sobak\Scrawler\Output\OutputManagerInterface;
+use Sobak\Scrawler\Support\Utils;
 
 class InMemoryOutputManager implements OutputManagerInterface
 {
@@ -10,9 +11,9 @@ class InMemoryOutputManager implements OutputManagerInterface
 
     protected $directoryName;
 
-    public function __construct(string $directoryName)
+    public function __construct(string $operationName, ?string $basePath = null)
     {
-        $this->directoryName = $directoryName;
+        $this->directoryName = Utils::slugify($operationName);
 
         $this->deleteOutput();
     }
@@ -20,6 +21,11 @@ class InMemoryOutputManager implements OutputManagerInterface
     public function getDirectoryName(): string
     {
         return $this->directoryName;
+    }
+
+    public function setDirectoryName(string $directoryName): void
+    {
+        $this->directoryName = $directoryName;
     }
 
     public function appendToFile($filename, $contents): void

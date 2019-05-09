@@ -7,13 +7,15 @@ namespace Sobak\Scrawler\Output;
 use FilesystemIterator;
 use RecursiveDirectoryIterator;
 use RecursiveIteratorIterator;
+use Sobak\Scrawler\Support\Utils;
 
 class OutputManager implements OutputManagerInterface
 {
     protected $directoryName;
 
-    public function __construct(string $basePath, string $directoryName)
+    public function __construct(string $operationName, ?string $basePath = null)
     {
+        $directoryName = Utils::slugify($operationName);
         $this->directoryName = $basePath  . '/' . trim($directoryName, '/') . '/';
 
         if (is_file($basePath) || is_file($this->directoryName)) {
@@ -35,6 +37,11 @@ class OutputManager implements OutputManagerInterface
     public function getDirectoryName(): string
     {
         return $this->directoryName;
+    }
+
+    public function setDirectoryName(string $directoryName): void
+    {
+        $this->directoryName = $directoryName;
     }
 
     public function appendToFile($filename, $contents): void

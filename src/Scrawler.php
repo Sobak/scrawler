@@ -18,6 +18,7 @@ use Sobak\Scrawler\Configuration\Configuration;
 use Sobak\Scrawler\Configuration\ConfigurationChecker;
 use Sobak\Scrawler\Entity\EntityMapper;
 use Sobak\Scrawler\Output\OutputManager;
+use Sobak\Scrawler\Output\OutputManagerInterface;
 use Sobak\Scrawler\Output\OutputWriterInterface;
 use Sobak\Scrawler\Support\LogWriter;
 use Sobak\Scrawler\Support\Utils;
@@ -45,7 +46,7 @@ class Scrawler
 
     protected $visitedUrls = [];
 
-    public function __construct(Configuration $configuration, string $outputDirectory)
+    public function __construct(Configuration $configuration, OutputManagerInterface $outputManager)
     {
         $configurationChecker = new ConfigurationChecker();
         $configurationChecker->checkConfiguration($configuration);
