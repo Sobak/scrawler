@@ -10,6 +10,8 @@ use Sobak\Scrawler\Block\ResultWriter\ResultWriterInterface;
 
 class ObjectConfiguration
 {
+    protected static $matchedObjects;
+
     protected $entityMappings = [];
 
     /** @var MatcherInterface[] */
@@ -78,5 +80,15 @@ class ObjectConfiguration
     public function isOnce(): bool
     {
         return $this->once;
+    }
+
+    public function markAsMatched(): void
+    {
+        self::$matchedObjects[] = spl_object_id($this);
+    }
+
+    public function wasOnceMatched(): bool
+    {
+        return in_array(spl_object_id($this), self::$matchedObjects);
     }
 }

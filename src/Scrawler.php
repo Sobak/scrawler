@@ -39,8 +39,6 @@ class Scrawler
 
     protected $logWriter;
 
-    protected $onceMatchedObjects = [];
-
     protected $output;
 
     protected $visitedUrls = [];
@@ -156,15 +154,11 @@ class Scrawler
         }
 
         foreach ($this->configuration->getObjectDefinitions() as $objectListName => $objectDefinition) {
-            if ($objectDefinition->isOnce()) {
-                $objectId = spl_object_id($objectDefinition);
-
-                if (in_array($objectId, $this->onceMatchedObjects)) {
-                    continue;
-                }
-
-                $this->onceMatchedObjects[] = $objectId;
+            if ($objectDefinition->isOnce() && $objectDefinition->wasOnceMatched()) {
+                continue;
             }
+
+            $objectDefinition->markAsMatched();
 
             $objectDefinition->getMatcher()->setCrawler(new Crawler($responseBody));
             $matchesList = $objectDefinition->getMatcher()->match();
