@@ -21,7 +21,14 @@ class Utils
         // Replace all separator characters and whitespace by a single separator
         $slug = preg_replace('!['.preg_quote($separator).'\s]+!u', $separator, $slug);
 
-        return trim($slug, $separator);
+        $slug = trim($slug, $separator);
+
+        // Last restort for slugs which turned out to be empty (having no ASCII characters)
+        if (empty($slug)) {
+            return uniqid();
+        }
+
+        return $slug;
     }
 
     public static function trimWhitespace(string $string): string

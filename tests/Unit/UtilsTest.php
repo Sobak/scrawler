@@ -18,6 +18,11 @@ class UtilsTest extends TestCase
         $this->assertEquals($slug, Utils::slugify($string, $separator));
     }
 
+    public function testSlugifyHelperWithNonAsciiOnly(): void
+    {
+        $this->assertEquals(13, strlen(Utils::slugify('żółć')));
+    }
+
     public static function slugifyTestDataProvider(): array
     {
         return [
