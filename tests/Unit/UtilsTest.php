@@ -23,6 +23,12 @@ class UtilsTest extends TestCase
         $this->assertEquals(13, strlen(Utils::slugify('żółć')));
     }
 
+    public function testTrimWhitespaceHelper(): void
+    {
+        $this->assertEquals('test', Utils::trimWhitespace(" \t\n\rtest  \0\x0B"));
+        $this->assertEquals('test', Utils::trimWhitespace(" test		"));
+    }
+
     public static function slugifyTestDataProvider(): array
     {
         return [
