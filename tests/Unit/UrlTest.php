@@ -99,6 +99,7 @@ class UrlTest extends TestCase
             ['http://example.com/index.php?foo=bar&baz=test', null, 'http://example.com/index.php?foo=bar&baz=test'],
 
             ['?foo=bar', 'http://example.com/index.php', 'http://example.com/index.php?foo=bar'],
+            ['?page=2', 'http://example.com/blog.php?page=1&id=3', 'http://example.com/blog.php?page=2'],
 
             ['/test', 'http://example.com', 'http://example.com/test'],
             ['/test', 'http://example.com/', 'http://example.com/test'],
