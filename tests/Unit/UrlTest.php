@@ -95,6 +95,7 @@ class UrlTest extends TestCase
             // [url, currentUrl, expectedUrl]
             ['http://example.com', 'http://example.com', 'http://example.com'],
             ['//example.com/test', 'https://example.com', 'https://example.com/test'],
+            ['//example.com/test/', 'https://example.com', 'https://example.com/test/'],
             ['http://example.com/test#anchor', 'http://example.com/test2', 'http://example.com/test'],
             ['http://example.com/index.php?foo=bar&baz=test', null, 'http://example.com/index.php?foo=bar&baz=test'],
 
@@ -104,11 +105,27 @@ class UrlTest extends TestCase
             ['/test', 'http://example.com', 'http://example.com/test'],
             ['/test', 'http://example.com/', 'http://example.com/test'],
             ['test', 'http://example.com', 'http://example.com/test'],
+            ['test/', 'http://example.com', 'http://example.com/test/'],
             ['test', 'http://example.com/', 'http://example.com/test'],
 
             ['', 'http://example.com/index.php?foo=bar', 'http://example.com/index.php?foo=bar'],
 
             ['test2', 'http://example.com/test', 'http://example.com/test2'],
+            ['..', 'http://example.com/subpage', 'http://example.com/'],
+            ['..', 'http://example.com/subpage/', 'http://example.com/'],
+            ['../hello/', 'http://example.com/subpage', 'http://example.com/hello/'],
+            ['../dir2/hello.html', 'http://example.com/dir1/index.html', 'http://example.com/dir2/hello.html'],
+            ['../dir2/hello.html', 'http://example.com/dir1', 'http://example.com/dir2/hello.html'],
+            ['..//home', 'http://example.com/test', 'http://example.com/home'],
+            ['../../../home', 'http://example.com/contact', 'http://example.com/home'],
+            ['.../home/', 'http://example.com/contact', 'http://example.com/.../home/'],
+            ['/', 'http://example.com', 'http://example.com/'],
+            ['/', 'http://example.com/', 'http://example.com/'],
+            ['/', 'http://example.com/test/', 'http://example.com/'],
+            ['./john', 'http://example.com/user', 'http://example.com/john'],
+            ['/./john/doe/', 'http://example.com/user', 'http://example.com/john/doe/'],
+            ['/../site2', 'http://example.com', 'http://example.com/site2'],
+            ['/../site2/', 'http://example.com/', 'http://example.com/site2/'],
         ];
     }
 

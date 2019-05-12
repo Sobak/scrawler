@@ -109,10 +109,12 @@ class Url
         return $this->resolveRelativePath($url, $currentUrl);
     }
 
-    protected function resolveRelativePath(string $url, string $currentUrl): string
+    protected function resolveRelativePath(string $path, string $currentUrl): string
     {
-        if ('/' === $url[0]) {
-            return $this->getDomain($currentUrl) . $url;
+        if ($path[0] === '/') {
+            // URL starts from the root domain but we cannonicalize the path
+            // to get rid of potential dots (. or ..) meaning nothing here
+            return $this->getDomain($currentUrl) . '/' . $this->cannonicalizePath($path);
         }
 
         $currentUrlSegments = explode('/', rtrim($currentUrl, '/'));
@@ -120,23 +122,46 @@ class Url
         // If there is no path attatched to the current URL
         // we only need to append new path to it and return
         if (count($currentUrlSegments) === 3) {
-            return implode('/', $currentUrlSegments) . '/' . $url;
+            return implode('/', $currentUrlSegments) . '/' . $path;
         }
 
-        foreach (explode('/', $url) as $pathSegment) {
-            // Three because we need to account for slashes in the protocol
-            if (count($currentUrlSegments) <= 3) {
-                break;
-            }
+        $currentUrlPath = ltrim((string) parse_url($currentUrl, PHP_URL_PATH), '/');
 
-            array_pop($currentUrlSegments);
+        // If the current URL does not end with a slash it means it is a file name
+        // and that name needs to be dropped and further replaced with new path
+        if (substr($currentUrlPath, -1) !== '/') {
+            $currentUrlPath = implode('/', explode('/', $currentUrlPath, -1));
+        }
 
-            if ($pathSegment !== '..') {
-                $currentUrlSegments[] = $pathSegment;
+        $cannonicalizedPath = $this->cannonicalizePath($currentUrlPath . '/' . $path);
+
+        return $this->getDomain($currentUrl) . '/' . $cannonicalizedPath;
+    }
+
+    public function cannonicalizePath(string $path): string
+    {
+        $segments = explode('/', $path);
+        $result = [];
+
+        foreach ($segments as $segment) {
+            switch ($segment) {
+                case '':
+                case '.':
+                    break;
+
+                case '..':
+                    array_pop($result);
+                    break;
+
+                default:
+                    $result[] = $segment;
+                    break;
             }
         }
 
-        return implode('/', $currentUrlSegments);
+        $path = implode('/', $result) . (substr($path, -1) === '/' ? '/' : '');
+
+        return $path === '/' ? '' : $path;
     }
 
     protected function checkCurrentUrl($url): void

@@ -51,9 +51,6 @@ All notable changes to Scrawler will be documented in this file.
 - Removed `InMemoryResultWriter` from the blocks list - now it is only available
   during development to run tests
 
-### Known issues
-- Relative URLs with paths using `..` are not yet supported
-
 ## [0.2.0] - 2019-04-13
 ### Added
 - Added basic capabilities of handling non-200 responses
