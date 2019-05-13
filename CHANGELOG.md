@@ -34,7 +34,8 @@ All notable changes to Scrawler will be documented in this file.
   result writer
 - The `simple_annotations` options for the database result writer is now `false`
   by default. Previously it had to be specified explicitly.
-- Only HTTP and HTTPS protocols are now explicitly allowed
+- Only HTTP and HTTPS protocols are now explicitly allowed, URLs with other
+  protocols will be silently ignored now
 - Improved performance of CSS selector matchers
 - Improved handling of networking errors
 - Improved logs readability

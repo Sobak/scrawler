@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Sobak\Scrawler\Client\Response\Elements;
 
+use Sobak\Scrawler\Client\UnsupportedProtocolException;
+
 class Url
 {
     protected $currentUrl;
@@ -61,6 +63,8 @@ class Url
             throw new \Exception('Cannot get domain from protocol-relative URL');
         }
 
+        $this->checkUrlProtocol($url);
+
         $domain .= $components['scheme'] . '://';
 
         if (isset($components['user'])) {
@@ -82,8 +86,12 @@ class Url
     protected function normalizeUrl(string $url, ?string $currentUrl)
     {
         if ($currentUrl === null) {
-            $this->checkCurrentUrl($url);
+            if (parse_url($url, PHP_URL_SCHEME) === null) {
+                throw new \Exception('First URL must be absolute');
+            }
         }
+
+        $this->checkUrlProtocol($url);
 
         // Resolve URL with relative protocol
         if (strpos($url, '//') === 0) {
@@ -164,14 +172,12 @@ class Url
         return $path === '/' ? '' : $path;
     }
 
-    protected function checkCurrentUrl($url): void
+    protected function checkUrlProtocol(string $url): void
     {
-        if (parse_url($url, PHP_URL_SCHEME) === null) {
-            throw new \Exception('First URL must be absolute');
-        }
+        $scheme = parse_url($url, PHP_URL_SCHEME);
 
-        if (in_array(parse_url($url, PHP_URL_SCHEME), ['http', 'https']) === false) {
-            throw new \Exception('Only http and https protocols are supported');
+        if (empty($scheme) === false && in_array($scheme, ['http', 'https']) === false) {
+            throw new UnsupportedProtocolException('Only http and https protocols are supported');
         }
     }
 

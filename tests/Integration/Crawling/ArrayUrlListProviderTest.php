@@ -27,8 +27,10 @@ class ArrayUrlListProviderTest extends IntegrationTest
     public function testArrayUrlListProvider(): void
     {
         $urls = [
+            'file:///home/.config/testfile',
             'page-2.html',
-            'page-4.html'
+            'page-4.html',
+            '',
         ];
 
         $config = (new Configuration())

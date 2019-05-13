@@ -57,6 +57,8 @@ server responds with HTTP 404.
 ## ArrayUrlListProvider
 This URL provider accepts an array of URLs expressed as strings which will be
 then processed by Scrawler. Each URL is normalized against the base URL.
+Empty lines and unsupported URLs, e.g. with protocol other than HTTP(S)
+will be silently ignored.
 
 > **Note:** Do not include your base URL in the list, otherwise it will be
 > processed twice.
@@ -69,4 +71,5 @@ URL only.
 Looks for `href` attributes of `a` tags and returns links with the domain
 matching domain of current operation's base URL. Gathered URLs are normalized
 (resolving relative paths, protocols, removing anchors etc) before the domain
-comparison is made.
+comparison is made. Any unsupported URLs, e.g. with protocol other than HTTP(S),
+will be silently ignored.

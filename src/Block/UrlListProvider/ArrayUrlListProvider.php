@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Sobak\Scrawler\Block\UrlListProvider;
 
 use Sobak\Scrawler\Client\Response\Elements\Url;
+use Sobak\Scrawler\Client\UnsupportedProtocolException;
 
 class ArrayUrlListProvider extends AbstractUrlListProvider
 {
@@ -19,8 +20,12 @@ class ArrayUrlListProvider extends AbstractUrlListProvider
     {
         $currentUrl = $this->currentUrl->getUrl();
 
-        return array_map(function (string $url) use ($currentUrl) {
-            return new Url($url, $currentUrl);
-        }, $this->urls);
+        return array_filter(array_map(function (string $url) use ($currentUrl) {
+            try {
+                return new Url($url, $currentUrl);
+            } catch (UnsupportedProtocolException $exception) {
+                return null;
+            }
+        }, $this->urls));
     }
 }

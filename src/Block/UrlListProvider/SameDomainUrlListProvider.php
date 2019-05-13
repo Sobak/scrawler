@@ -6,6 +6,7 @@ namespace Sobak\Scrawler\Block\UrlListProvider;
 
 use DOMElement;
 use Sobak\Scrawler\Client\Response\Elements\Url;
+use Sobak\Scrawler\Client\UnsupportedProtocolException;
 use Symfony\Component\DomCrawler\Crawler;
 
 class SameDomainUrlListProvider extends AbstractUrlListProvider
@@ -21,7 +22,11 @@ class SameDomainUrlListProvider extends AbstractUrlListProvider
         $responseCrawler = new Crawler($this->response->getBody()->getContents());
         $linkTags = $responseCrawler->filter('a')->getIterator()->getArrayCopy();
         $urls = array_map(function (DOMElement $link) use ($currentUrl) {
-            return $link->hasAttribute('href') ? new Url($link->getAttribute('href'), $currentUrl) : null;
+            try {
+                return $link->hasAttribute('href') ? new Url($link->getAttribute('href'), $currentUrl) : null;
+            } catch (UnsupportedProtocolException $exception) {
+                return null;
+            }
         }, $linkTags);
 
         return array_filter($urls, function (?Url $url) use ($baseDomain) {

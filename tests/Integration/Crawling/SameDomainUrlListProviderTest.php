@@ -46,4 +46,27 @@ class SameDomainUrlListProviderTest extends IntegrationTest
         $this->assertCount(7, InMemoryResultWriter::$results);
         $this->assertCount(7, array_unique(array_column(InMemoryResultWriter::$results, 'match')));
     }
+
+    public function testUrlListProviderWithInvalidProtocol(): void
+    {
+        $config = (new Configuration())
+            ->setOperationName('test')
+            ->setBaseUrl(IntegrationTest::getHostUrl() . '/invalid-urls.html')
+            ->addUrlListProvider(new SameDomainUrlListProvider())
+            ->addObjectDefinition('message', new CssSelectorListMatcher('div.message'), function (ObjectConfiguration $object) {
+                $object
+                    ->addFieldDefinition('match', new CssSelectorHtmlMatcher('span.content'))
+                    ->addEntityMapping(SimpleMatchEntity::class)
+                    ->addResultWriter(SimpleMatchEntity::class, new InMemoryResultWriter())
+                ;
+            })
+        ;
+
+        $scrawler = new Scrawler($config, __DIR__ . '/output');
+        $scrawler->run();
+
+        $this->assertCount(2, InMemoryResultWriter::$results);
+        $this->assertEquals('Some message', InMemoryResultWriter::$results[0]['match']);
+        $this->assertEquals('Fifth message', InMemoryResultWriter::$results[1]['match']);
+    }
 }
