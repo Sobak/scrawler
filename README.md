@@ -99,14 +99,14 @@ examples for many of the available block types).
 > of blocks. Use the documentation linked above and obviously read the
 > code.
 
-## Don't be a dick
+## Just be polite
 Before you start tinkering with a library, please remember: some people do not want
 their websites to be scrapped by bots. With growing percentage of bandwidth being
 caused by bots it might not only be considered problematic from the business
 standpoint but also expensive to handle all that traffic. Please respect that.
 Even though Scrawler provides implementations for some blocks, which might be useful
-to mimic the actual internet user, you should not use them to bypass security
-measures taken by website owners.
+to mimic the actual internet user, you should not use them to bypass anti-scrapping
+measures taken by some of the website owners.
 
 > **Note:** For the testing purposes you can freely crawl [my website](http://sobak.pl),
 > _excluding_ its subdomains. Just please leave the default user agent.
