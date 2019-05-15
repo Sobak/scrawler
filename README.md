@@ -83,6 +83,7 @@ For the detailed documentation please check the table of contents below.
 - [Configuration](docs/configuration.md)
 - [Entities](docs/entities.md)
 - [Blocks](docs/blocks.md)
+- [Cookbook](docs/cookbook.md)
 - [Changelog](CHANGELOG.md)
 
 If you are already familiar with the basic Scrawler concepts you will probably

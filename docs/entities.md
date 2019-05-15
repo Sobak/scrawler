@@ -103,8 +103,8 @@ property in your entity and attempt to use it, though.
 > **Note:** you can mix the trick shown above with adding multiple entity mappings
 > for single Scrawler's object (as defined in _Getting started_ chapter) to create
 > powerful configuration and have same scrapped data written to multiple destinations
-> with varying fields. For example, you could omit some getters from one entity and
-> have less detailed information written to text file than database. Sky is the limit!
+> with varying fields. Take a look at the [Cookbook](cookbook.md) section for real-life
+> examples.
 
 Finally, your entities may sometimes need additional mapping metadata. This is a case
 e.g. when using database result writer. The Doctrine library which is used under the
