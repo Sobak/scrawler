@@ -1,0 +1,17 @@
+language: php
+
+php:
+  - 7.2
+  - 7.3
+
+cache:
+  directories:
+    - $HOME/.composer/cache
+
+before_script:
+  - phpenv config-rm xdebug.ini
+  - composer install --no-interaction --prefer-dist
+
+script:
+  - vendor/bin/phpunit
+  - vendor/bin/phpstan analyse src --level 4
