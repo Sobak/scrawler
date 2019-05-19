@@ -54,8 +54,14 @@ composer tests
 ```
 
 Functional tests will run PHP server process (the crawler will then connect to)
-on a port `9394`. Make sure to keep it open or change the value in `phpunit.xml`
-before you run the tests.
+on a port `9394`. Make sure to keep it open or change the value using the
+`TEST_SERVER_PORT` environment variable.
+
+If you experience unexpected test failures make sure that the PHP's dev server
+used by the integration tests suite had enough time to start. You can change
+the default wait time by setting the `TEST_SERVER_WAIT` environment variable
+to a desired number of milliseconds.
+
 
 **Happy tinkering**, I appreciate your help!
 
