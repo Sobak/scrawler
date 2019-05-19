@@ -2,6 +2,8 @@
 All notable changes to Scrawler will be documented in this file.
 
 ## [Unreleased]
+
+## [0.3.0] - 2019-05-19
 ### Added
 - Added robots.txt parser block
 - Added support for resolving relative URLs
@@ -100,5 +102,6 @@ All notable changes to Scrawler will be documented in this file.
 ## 0.1.0 - 2019-03-04
 Initial release of Scrawler.
 
+[0.3.0]: https://github.com/Sobak/scrawler/compare/v0.2.0...v0.3.0
 [0.2.0]: https://github.com/Sobak/scrawler/compare/v0.1.0...v0.2.0
 [Unreleased]: https://github.com/Sobak/scrawler/compare/v0.2.0...develop
