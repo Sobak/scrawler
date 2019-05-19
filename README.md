@@ -1,4 +1,9 @@
 # Scrawler
+
+[![Packagist](https://img.shields.io/packagist/v/sobak/scrawler.svg?style=flat-square)](https://packagist.org/packages/sobak/scrawler)
+[![Travis build](https://img.shields.io/travis/Sobak/scrawler.svg?style=flat-square)](https://travis-ci.org/Sobak/scrawler)
+[![Test Coverage](https://api.codeclimate.com/v1/badges/87612b6a62c95287a108/test_coverage)](https://codeclimate.com/github/Sobak/scrawler/test_coverage)
+
 Scrawler is a declarative, scriptable web robot (crawler) and scrapper which
 you can easily configure to parse any website and process the information into
 the desired format.
