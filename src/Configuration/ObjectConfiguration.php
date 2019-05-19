@@ -10,7 +10,7 @@ use Sobak\Scrawler\Block\ResultWriter\ResultWriterInterface;
 
 class ObjectConfiguration
 {
-    protected static $matchedObjects;
+    protected static $matchedObjects = [];
 
     protected $entityMappings = [];
 
