@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Sobak\Scrawler\Block\UrlListProvider;
 
-use GuzzleHttp\Psr7\Response;
+use Psr\Http\Message\ResponseInterface;
 use Sobak\Scrawler\Client\Response\Elements\Url;
 
 interface UrlListProviderInterface
@@ -33,7 +33,7 @@ interface UrlListProviderInterface
     /**
      * Sets the current response as a contex for finding new urls.
      *
-     * @param Response $response
+     * @param ResponseInterface $response
      */
-    public function setResponse(Response $response): void;
+    public function setResponse(ResponseInterface $response): void;
 }

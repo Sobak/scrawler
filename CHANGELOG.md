@@ -2,6 +2,9 @@
 All notable changes to Scrawler will be documented in this file.
 
 ## [Unreleased]
+### Changed
+- Changed URL list providers to typehint the PSR-7 response interface instead
+  of Guzzle's response
 
 ## [0.3.0] - 2019-05-19
 ### Added
